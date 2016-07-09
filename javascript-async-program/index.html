@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>JQuery异步编程 &middot; Kesco Lin</title>
+        <meta name="description" content="">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.16-DEV" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://kescoode.comcss/normalize.css">
+        <link rel="stylesheet" href="http://kescoode.comcss/highlight.css">
+        <link rel="stylesheet" href="http://kescoode.comcss/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-75600240-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="Kesco的编码世界" href="http://kescoode.com">Kesco的编码世界</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://kescoode.comindex.xml"><i class="fa fa-rss"></i></a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kesco">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="主页" href="http://kescoode.com/">主页</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="项目" href="http://kescoode.com/works/">项目</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="关于" href="http://kescoode.com/about/">关于</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">JQuery异步编程</h1>
+    
+    <p class="post-date">
+        <span>发布于 <time datetime="2014-03-02" itemprop="datePublished">2014年03月02</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="http://schema.org/Person">
+            <span itemprop="name">
+                <a href="http://kescoode.com" itemprop="url" rel="author">Kesco Lin</a>
+            </span>
+        </span>
+    </p>
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    
+
+<p>JavaScript异步编程通常的方法是指定一个回调函数，当操作结束之后，自动执行回调函数。但是这样有个不好的一点，也就是容易造成回调函数嵌套，比如下面一个搞笑的情况：</p>
+
+<pre><code>              ......
+			   ......
+                ......
+                           }
+                         }
+                       }
+                     }
+                   }
+                 }
+               }
+......
+......
+</code></pre>
+
+<p>为了避免这种情况的出现，业界现在有几种编程范式。如CommonJS提出的Promise模式，就是个不错的解决方案。jQuery的deferred对象就是jQuery的Promise范式回调函数解决方案。</p>
+
+<h2 id="deferred对象与传统回调函数的对比:35c3dc2859e3f9afd72a997b35722946">deferred对象与传统回调函数的对比</h2>
+
+<p>这里用AJAX请求做示列，传统写法：</p>
+
+<pre><code class="language-javascript">$.ajax({
+　　　　url: &quot;test.html&quot;,
+　　　　success: function(){
+　　　　　　alert(&quot;哈哈，成功了！&quot;);
+　　　　},
+　　　　error:function(){
+　　　　　　alert(&quot;出错啦！&quot;);
+　　　　}
+　　});
+</code></pre>
+
+<p>deferred对象写法：</p>
+
+<pre><code class="language-javascript">$.ajax(&quot;test.html&quot;)
+　　.done(function(){ alert(&quot;哈哈，成功了！&quot;); })
+　　.fail(function(){ alert(&quot;出错啦！&quot;); });
+</code></pre>
+
+<p>这里，实际上<code>.done</code>方法相当与<code>success</code>方法，<code>.fail</code>方法相当于<code>error</code>方法。从这里可以看出，deferred对象对于整个代码结构来说会更清晰明了，同时更可以采用链式写法，<code>$.ajax('test.html').done(...).fail(...).done(...)</code>，操作起来是非常方便的。</p>
+
+<h2 id="同时为多个异步操作指定回调函数:35c3dc2859e3f9afd72a997b35722946">同时为多个异步操作指定回调函数</h2>
+
+<p>jQuery提供<code>$.when</code>方法来为多个事件指定一个回调函数，写法如下：</p>
+
+<pre><code class="language-javascript">$.when($.ajax(&quot;test1.html&quot;), $.ajax(&quot;test2.html&quot;))
+　　.done(function(){ alert(&quot;哈哈，成功了！&quot;); })
+　　.fail(function(){ alert(&quot;出错啦！&quot;); });
+</code></pre>
+
+<p>当两个请求都成功后会执行<code>.done</code>方法，失败则会执行<code>.fail</code>方法，实际上，<code>$.when</code>返回的就是一个deferred对象。</p>
+
+<h2 id="deferred对象方法:35c3dc2859e3f9afd72a997b35722946">Deferred对象方法</h2>
+
+<p>初步了解deferred对象的操作后，我们可以看下deferred包含的一些方法：</p>
+
+<ol>
+<li><code>$.Deferred</code>生成一个deferred对象。</li>
+<li><code>deferred.done</code>指定操作成功时的回调函数</li>
+<li><code>deferred.fail</code>指定操作失败时的回调函数</li>
+<li><code>deferred.promise</code>没有参数时，返回一个新的deferred对象，该对象的运行状态无法被改变；接受参数时，作用为在参数对象上部署deferred接口。</li>
+<li><code>deferred.resolve</code>手动改变deferred对象的运行状态为&rdquo;已完成&rdquo;，从而立即触发<code>.done</code>方法。</li>
+<li><code>deferred.reject</code>这个方法与<code>deferred.resolve</code>正好相反，调用后将deferred对象的运行状态变为&rdquo;已失败&rdquo;，从而立即触发<code>.fail</code>方法。</li>
+<li><code>$.when</code>为多个操作指定回调函数。</li>
+<li><code>deferred.then</code>有时为了省事，可以把<code>.done</code>和<code>.fail</code>合在一起写，这就是<code>.then</code>方法。</li>
+<li><code>deferred.always</code>这个方法也是用来指定回调函数的，它的作用是，不管调用的是<code>deferred.resolve</code>还是<code>deferred.reject</code>，最后总是执行。</li>
+</ol>
+
+<h2 id="自定义的回调函数:35c3dc2859e3f9afd72a997b35722946">自定义的回调函数</h2>
+
+<p>有了上面的deferred方法后，我们可以这样定义自己的异步操作：</p>
+
+<pre><code class="language-javascript">var wait = function(dtd){
+　　　　var dtd = $.Deferred(); //在函数内部，新建一个Deferred对象
+　　　　var tasks = function(){
+　　　　　　alert(&quot;执行完毕！&quot;);
+　　　　　　dtd.resolve(); // 改变Deferred对象的执行状态
+　　　　};
+
+　　　　setTimeout(tasks,5000);
+　　　　return dtd.promise(); // 返回promise对象
+　　};
+　　$.when(wait())
+　　.done(function(){ alert(&quot;哈哈，成功了！&quot;); })
+　　.fail(function(){ alert(&quot;出错啦！&quot;); });
+</code></pre>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    
+        <p class="post-tags">
+            <span>Tagged:</span>
+            
+                 <a href="http://kescoode.com/tags/javascript/">JavaScript</a>
+            
+        </p>
+    
+</footer>
+
+        
+    <div class="comments">
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'kescoodecom';
+    var disqus_identifier = 'http:\/\/kescoode.com\/javascript-async-program\/';
+    var disqus_title = 'JQuery异步编程';
+    var disqus_url = 'http:\/\/kescoode.com\/javascript-async-program\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="Kesco的编码世界" href="http://kescoode.com">Kesco的编码世界</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2016 / Powered by <a href="http://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="http://kescoode.comjs/jquery-1.11.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+        <script src="http://kescoode.comjs/jquery.fitvids.js"></script>
+        <script src="http://kescoode.comjs/scripts.js"></script>
+    </body>
+</html>
+

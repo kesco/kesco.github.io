@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>小试RxJava &middot; Kesco Lin</title>
+        <meta name="description" content="">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.16-DEV" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://kescoode.comcss/normalize.css">
+        <link rel="stylesheet" href="http://kescoode.comcss/highlight.css">
+        <link rel="stylesheet" href="http://kescoode.comcss/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-75600240-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="Kesco的编码世界" href="http://kescoode.com">Kesco的编码世界</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://kescoode.comindex.xml"><i class="fa fa-rss"></i></a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kesco">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="主页" href="http://kescoode.com/">主页</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="项目" href="http://kescoode.com/works/">项目</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="关于" href="http://kescoode.com/about/">关于</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">小试RxJava</h1>
+    
+    <p class="post-date">
+        <span>发布于 <time datetime="2015-09-23" itemprop="datePublished">2015年09月23</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="http://schema.org/Person">
+            <span itemprop="name">
+                <a href="http://kescoode.com" itemprop="url" rel="author">Kesco Lin</a>
+            </span>
+        </span>
+    </p>
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    
+
+<p>RxJava是NetFlix推出的<a href="http://reactivex.io">Reactive Extensions</a>(简写为Rx)框架的Java语言实现。<a href="http://reactivex.io">Reactive Extensions</a>实际是以现在非常火的响应式编程范式的为基础的一种变体，基于响应式编程加入了一些函数式编程的元素在里面。</p>
+
+<p>Rx系列发展到现在，基本覆盖了所有主流编程语言，包括C#、Java和JavaScript等等。在Android平台上，也有很多出名的公司基于RxJava开发了许多衍生库，并在其App中大量使用，据我了解有：Square(Jake Wharton大神出版的<a href="https://github.com/JakeWharton/RxBinding">RxBinding</a>)、Trello(推出了<a href="https://github.com/trello/RxLifecycle">RxLifecycle</a>)和国内的大众点评。</p>
+
+<p>在这篇文档，主要是写下RxJava的用法。</p>
+
+<h2 id="基本概念:cfa8a1707a74560bca456d9e617ff266">基本概念</h2>
+
+<p>官方对Rx的表述是：</p>
+
+<blockquote>
+<p>Rx是一个函数库，让开发者可以利用可观察序列和LINQ风格查询操作符来编写异步和基于事件的程序，使用Rx，开发者可以用Observables表示异步数据流，用LINQ操作符查询异步数据流， 用Schedulers参数化异步数据流的并发处理，Rx可以这样定义：Rx = Observables + LINQ + Schedulers。</p>
+</blockquote>
+
+<p>而Rx的响应式编程概念以我的理解，我觉得可以简单的概括为“观察者模式+管道操作符”，而实际上，RxJava的操作过程就是： &ldquo;Observable -&gt; Operators -&gt; Subscriber&rdquo;。显而易见的，<code>Observable</code>为模型中的目标对象，<code>Subscriber</code>为观察者，而<code>Operators</code>负责目标对象发出的信息给观察者们的分发，也就是管道。其中<code>Operators</code>是Rx最关键的一部分，<code>Operators</code>不仅可以分发信息，而且可以对信息数据进行各种处理，甚至可以把信息回馈到另外的目标对象中。这样做，可以完成<code>Subscriber</code>和<code>Observable</code>的解耦。</p>
+
+<h2 id="使用方法:cfa8a1707a74560bca456d9e617ff266">使用方法</h2>
+
+<p>根据上面的表述，RxJava的使用方法非常简单，也就是我们定义好工作目标Observable和观察者Subscriber，然后把他们组合在一起就可以了，如果有必要对中间的流程进行处理，则在中间加入相应的Operators。</p>
+
+<p>不过，首先我们要在项目中引入RxJava库。</p>
+
+<h3 id="在android工程中引入rxjava:cfa8a1707a74560bca456d9e617ff266">在Android工程中引入RxJava</h3>
+
+<p>随着ADT停止更新，现在绝大部分Android开发都是使用Android Studio或者Intellij Idea了，这两者都是基于Gradle来构建Android工程的，那么我们可以直接引入RxJava Maven Repo即可在项目中使用RxJava了：</p>
+
+<pre><code class="language-groovy">dependencies {
+    compile 'io.reactivex:rxjava:1.0.14'
+}
+</code></pre>
+
+<p>另外，虽然RxJava最低支持到Java 6，但是总所周知，Java是个纯面向对象语言，它并没有支持函数式编程，也只有在Java 8的时候，Java 8引入几个函数式编程元素(Lambda表达式、默认方法和函数式引用)。而Rx是个函数式编程框架库，在Java 7之前使用的话，代码看起来会非常别扭，所以最好是在Java 8的环境中使用。不过Android现在官方支持只到Java 7，没支持Java 8，要想在Android中使用Java 8，则必须加入第三方插件。</p>
+
+<h3 id="最简单的模式:cfa8a1707a74560bca456d9e617ff266">最简单的模式</h3>
+
+<blockquote>
+<p>Observable -&gt; Subscriber</p>
+</blockquote>
+
+<p>是最为简单模型，这里我们假设从接收到的网络请求中获取到一串用户列表，我们要把用户列表显示到页面上，用RxJava可以这样写：</p>
+
+<pre><code class="language-java">List&lt;User&gt; users; /* 获取到的用户列表 */
+UserAdapter adapter; /* 页面Adapter */
+
+/* 中间环节忽略 */
+
+/* 创建observable */
+Observable&lt;List&lt;User&gt;&gt; observable = Observable.create(new Observable.OnSubscribe&lt;List&lt;User&gt;&gt;() {
+    @Override
+    public void call(Subscriber&lt;List&lt;User&gt;&gt; subscriber) {
+        subscriber.onNext(users);
+        subscriber.onCompleted();
+    }
+});
+
+/* 创建subscriber */
+Subscriber&lt;List&lt;User&gt;&gt; subscriber = new Subscriber&lt;List&lt;User&gt;&gt;() {
+    @Override
+    public void onCompleted() {
+	Log.d(&quot;test&quot;, &quot;completed!&quot;);
+    }
+
+    @Override
+    public void onError(Throwable e) {
+	Log.d(&quot;test&quot;, &quot;error!&quot;);
+    }
+    @Override
+    public void onNext(List&lt;User&gt; args) {
+        adapter.setDataSet(args);
+    }
+};
+
+// 订阅
+observable.subscribe(subscriber);
+</code></pre>
+
+<p>值得注意的一点就是如果Observable没有被Subscriber订阅的话，Observable的内部代码是不会被执行的，这有个好处就是提供了一个控制手段给我们，来控制何时执行这个事件。</p>
+
+<p>实际上，这样一个简单的流程，写了这么多行代码，所以RxJava提供了比较简便的方法：</p>
+
+<p>比如，Observable可以这样写：</p>
+
+<pre><code class="language-java">// 创建observable
+Observable&lt;List&lt;User&gt;&gt; observable = Observable.just(user);
+</code></pre>
+
+<p><code>Observable.just()</code>是RxJava提供的一个语法糖，主要是用简单的传递数据。在RxJava中，共有这几种创建Observable的方法：</p>
+
+<ul>
+<li><code>just( )</code>， 将一个或多个对象转换成发射这个或这些对象的一个Observable</li>
+<li><code>from( )</code>，将一个Iterable, 一个Future, 或者一个数组转换成一个Observable</li>
+<li><code>repeat( )</code>， 创建一个重复发射指定数据或数据序列的Observable</li>
+<li><code>repeatWhen( )</code>，创建一个重复发射指定数据或数据序列的Observable，它依赖于另一个Observable发射的数据</li>
+<li><code>create( )</code>，使用一个函数从头创建一个Observable</li>
+<li><code>defer( )</code>，只有当订阅者订阅才创建Observable；为每个订阅创建一个新的Observable</li>
+<li><code>range( )</code>，创建一个发射指定范围的整数序列的Observable</li>
+<li><code>interval( )</code>，创建一个按照给定的时间间隔发射整数序列的Observable</li>
+<li><code>timer( )</code>，创建一个在给定的延时之后发射单个数据的Observable</li>
+<li><code>empty( )</code>，创建一个什么都不做直接通知完成的Observable</li>
+<li><code>error( )</code>，创建一个什么都不做直接通知错误的Observable</li>
+<li><code>never( )</code>，创建一个不发射任何数据的Observable</li>
+</ul>
+
+<p>方法虽然很多，但是在以页面展示的功能需求中，我们还是只用了这几个方法：<code>create</code>、<code>repeat</code>、<code>repeatWhen</code>和<code>defer</code>，所以只要掌握这几种用法就可以了，其余的需要的时候才查文档。关于创建Observable的文档在<a href="http://reactivex.io/documentation/operators.html#creating">这</a>。</p>
+
+<p>同样，如果我们不关心subscriber是否结束（onComplete())或者发生错误(onError()),subscriber的代码可以简化为：</p>
+
+<pre><code class="language-java">// 创建subscriber
+Action1&lt;List&lt;User&gt;&gt; subscriber = new Action1&lt;List&lt;User&gt;&gt;() {
+    @Override
+    public void call(List&lt;User&gt; args) {
+        adapter.setDataSet(args);
+    }
+};
+</code></pre>
+
+<p>我们直接把创建和订阅连接起来，完整的代码如下：</p>
+
+<pre><code class="language-java">Observable.just(users).subscribe(new Action1&lt;List&lt;User&gt;&gt;() {
+    @Override
+    public void call(List&lt;User&gt; args) {
+        adapter.setDataSet(args);
+    }
+});
+</code></pre>
+
+<p>这样看起来已经更简洁了，但是如果使用Java 8的话，代码会更加好看：</p>
+
+<pre><code class="language-java">Observable.just(users).subscribe(args -&gt; adapter.setDataSet(args));
+</code></pre>
+
+<h3 id="加入operators:cfa8a1707a74560bca456d9e617ff266">加入Operators</h3>
+
+<p>很多时候，我们需要针对处理过的事件做出响应，而不仅仅是Observable产生的原始事件。最明显的例子就是网络请求回来的数据往往是JSON数据，我们还要对此进行序列化成相应的业务操作才可以传递给前台，这里就需要引入operator来处理JSON数据。</p>
+
+<p>所以之前一节的代码实际上缺少解析JSON的部分，完整的步骤应该先获取JSON，再序列化然后传给页面，所以Observable传递的应该为JSON数据，而subscriber接收的却是业务对象，中间必须加入Operator处理序列化，代码如下：</p>
+
+<pre><code class="language-java">Observable.just(json).map(new Func1&lt;JSONObject, List&lt;User&gt;&gt;() {
+    @Override
+    public String call(JSONObject json) {
+        return User.constructionFrom(json);
+    }
+}).subscribe(args -&gt; adapter.setDataSet(args));
+</code></pre>
+
+<p>这里使用了名为<code>map</code>operator，它的作用很简单，就是接收一个事件，并返回处理后的事件。Func1的第一个泛型参数表示输入类型，第二个泛型参数表示返回类型。</p>
+
+<p>同样，使用Java 8的语法会更加简洁：</p>
+
+<pre><code class="language-java">Observable.just(json)
+        .map(json -&gt; User.constructionFrom(json))
+        .subscribe(args -&gt; adapter.setDataSet(args));
+</code></pre>
+
+<p>RxJava中的Operator一共有二十几个，而且自己也可以自定义Operators，这正式RxJava比一般的异步框架优秀的地方，由于自带的Operators数量过多，这里就不一一讲述了，需要的可以查下<a href="http://reactivex.io/documentation/operators.html">文档</a>。</p>
+
+<h3 id="任务订阅:cfa8a1707a74560bca456d9e617ff266">任务订阅</h3>
+
+<p>前面缺少了RxJava的一个细节，就是实际上执行Observable.subscribe()时，它会返回一个Subscrition,它代表了Observable和Subscriber之间的关系。我们可以通过Subscrition解除Observable和Subscriber之间的订阅关系，并立即停止执行整个订阅链，比如要取消上述显示用户列表操作，我们可以这样做：</p>
+
+<pre><code class="language-java">Subscription subscription = Observable.just(json)
+        .map(json -&gt; User.constructionFrom(json))
+        .subscribe(args -&gt; adapter.setDataSet(args));
+subscription.unsubscribe();
+Log.d(&quot;test&quot;, &quot;isSubscribed = &quot; + subscription.isUnsubscribed());
+</code></pre>
+
+<h3 id="多线程操作:cfa8a1707a74560bca456d9e617ff266">多线程操作</h3>
+
+<p>Android的多线程机制是UI渲染跑在Main Thread上的，也就是说主线程不能阻塞，不然App就会出现卡顿，所以我们一般都把业务逻辑处理放在后台线程进行。在RxJava中，你可以通过subscribeOn()来指定Observer的运行线程，通过observeOn()指定Subscriber的运行线程。这两个方法都是operator，因此它们可以像所有operator那样作用于任何的Observable。比如上面的例子，我们可以把JSON解析放在后台线程，然后在Main Thread中更新用户信息：</p>
+
+<pre><code class="language-java">Observable.just(json)
+        .map(json -&gt; User.constructionFrom(json))
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())     /* 这里用了RxAndroid */
+        .subscribe(args -&gt; adapter.setDataSet(args));
+</code></pre>
+
+<p>值得注意的是RxJava自带的<code>Schedulers.io</code>和<code>Schedulers.compute</code>两种异步多线程Scheduler开启的线程的级别都是与Main Thread一样的，这样后台线程占用的资源大的话，主线程还是会卡的，所以最好还是自己自定义一个Scheduler。</p>
+
+<h3 id="mvp:cfa8a1707a74560bca456d9e617ff266">MVP</h3>
+
+<p>RxJava中的Observable、Operators和Subcribers是各自独立的，所以我们可以很容易的针对不同场景复用不同部分的代码。</p>
+
+<p>下面就是自己写的一个Demo中显示系统所有APP INFO的代码(Kotlin)的简单示范：</p>
+
+<p>Model层，负责获取系统内安装的所有App数据:</p>
+
+<pre><code class="language-kotlin">interface AvailableAppModel {
+    fun data(): Observable&lt;List&lt;AppInfo&gt;&gt;
+}
+
+class AvailableAppModelImpl(val ctx: Context) : AvailableAppModel {
+
+    override fun data(): Observable&lt;List&lt;AppInfo&gt;&gt; {
+        return Observable.create { subscriber -&gt;
+            val packs = ctx.packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES)
+            val apps = ArrayList&lt;AppInfo&gt;()
+            for (pack in packs) {
+                if (pack.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM == 0) {
+                    apps.add(genAppInfo(ctx, pack))
+                }
+            }
+            subscriber.onNext(apps)
+            subscriber.onCompleted()
+        }
+    }
+}
+</code></pre>
+
+<p>Presenter层，负责传递数据到View层，而传递用的就是RxJava，其中Model层的数据请求放在后台线程执行:</p>
+
+<pre><code class="language-kotlin">interface AvailableAppPresenter {
+    fun bindView(view: AvailableAppView)
+    fun bindModel(model: AvailableAppModel)
+    fun init(args: Bundle?)
+}
+
+class AvailableAppPresenterImpl(val ctx: Context) : AvailableAppPresenter {
+    private var appView: AvailableAppView? = null
+    private var appModel: AvailableAppModel? = null
+
+    override fun bindView(view: AvailableAppView) {
+        appView = view
+    }
+
+    override fun bindModel(model: AvailableAppModel) {
+        appModel = model
+    }
+
+    override fun init(args: Bundle?) {
+        appModel!!.data()
+                .subscribeOn(AndroidRxPlugin.workerThread)
+                .observeOn(AndroidRxPlugin.mainThread)
+                .subscribe(appView!!.renderData())    /* 只有订阅了Subscriber才执行获取数据请求 */
+    }
+}
+</code></pre>
+
+<p>View层:</p>
+
+<pre><code class="language-kotlin">public class MainActivity : AppCompatActivity(), AvailableAppView {
+
+    val rvApps: RecyclerView by bindViewById(R.id.rv_apps)
+    var adapter: AppAdapter? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        rvApps.layoutManager = LinearLayoutManager(this)
+        adapter = AppAdapter(this)
+        rvApps.adapter = adapter
+
+        val presenter = AvailableAppPresenterImpl(this)
+        val model = AvailableAppModelImpl(this)
+        presenter.bindView(this)
+        presenter.bindModel(model)
+        presenter.init(savedInstanceState)
+    }
+
+    override fun renderData(): Subscriber&lt;List&lt;AppInfo&gt;&gt; = Subscribers.create { l -&gt; adapter!!.applist = l }
+}
+</code></pre>
+
+<p>总体来说，RxJava是非常不错的，响应式编程的概念的引入起码解决了Android回调不美观的问题。不过响应式编程和函数式编程的概念可能一时比较难接受，还需要段时间来适应。</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    
+        <p class="post-tags">
+            <span>Tagged:</span>
+            
+                 <a href="http://kescoode.com/tags/android/">Android</a>
+            
+                 <a href="http://kescoode.com/tags/rxjava/">RxJava</a>
+            
+        </p>
+    
+</footer>
+
+        
+    <div class="comments">
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'kescoodecom';
+    var disqus_identifier = 'http:\/\/kescoode.com\/try-rxjava\/';
+    var disqus_title = '小试RxJava';
+    var disqus_url = 'http:\/\/kescoode.com\/try-rxjava\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="Kesco的编码世界" href="http://kescoode.com">Kesco的编码世界</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2016 / Powered by <a href="http://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="http://kescoode.comjs/jquery-1.11.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+        <script src="http://kescoode.comjs/jquery.fitvids.js"></script>
+        <script src="http://kescoode.comjs/scripts.js"></script>
+    </body>
+</html>
+

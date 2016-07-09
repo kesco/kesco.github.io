@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on Kesco的编码世界</title>
+    <link>http://kescoode.com/tags/projects/</link>
+    <description>Recent content in Projects on Kesco的编码世界</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>Copyright (c) 2015. All rights reserved.</copyright>
+    <lastBuildDate>Sat, 09 Jul 2016 21:10:22 +0800</lastBuildDate>
+    <atom:link href="http://kescoode.com/tags/projects/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>个人作品</title>
+      <link>http://kescoode.com/works/</link>
+      <pubDate>Sat, 09 Jul 2016 21:10:22 +0800</pubDate>
+      
+      <guid>http://kescoode.com/works/</guid>
+      <description>
+
+&lt;h2 id=&#34;android:5581952c111a7bf1180b42c7df1ca3f2&#34;&gt;Android&lt;/h2&gt;
+
+&lt;h3 id=&#34;slideback-xposed-0:5581952c111a7bf1180b42c7df1ca3f2&#34;&gt;&lt;a href=&#34;http://github.com/kesco/SlideBack-Xposed&#34;&gt;SlideBack-Xposed&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;SlideBack－Xposed是一个给Android应用加入拖拽手势关闭Activity页面功能的Xposed插件。&lt;/p&gt;
+
+&lt;p&gt;目前支持5.0～5.1的AOSP系统（4.X系列没有机器测试过）。其中Xposed Injection代码是用Java写的，其余代码都是使用Kotlin编写，其中提供拖拽手势功能的是使用了我另外用Kotlin写的一个拖拽手势库&lt;a href=&#34;http://github.com/kesco/SlideBack&#34;&gt;SlideBack&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;项目地址：&lt;a href=&#34;http://github.com/kesco/SlideBack-Xposed&#34;&gt;http://github.com/kesco/SlideBack-Xposed&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://7mnom1.com1.z0.glb.clouddn.com/slideback.gif&#34; alt=&#34;Demo&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

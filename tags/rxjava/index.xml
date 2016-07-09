@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rxjava on Kesco的编码世界</title>
+    <link>http://kescoode.com/tags/rxjava/</link>
+    <description>Recent content in Rxjava on Kesco的编码世界</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>Copyright (c) 2015. All rights reserved.</copyright>
+    <lastBuildDate>Wed, 23 Sep 2015 13:55:08 +0800</lastBuildDate>
+    <atom:link href="http://kescoode.com/tags/rxjava/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>小试RxJava</title>
+      <link>http://kescoode.com/try-rxjava/</link>
+      <pubDate>Wed, 23 Sep 2015 13:55:08 +0800</pubDate>
+      
+      <guid>http://kescoode.com/try-rxjava/</guid>
+      <description>
+
+&lt;p&gt;RxJava是NetFlix推出的&lt;a href=&#34;http://reactivex.io&#34;&gt;Reactive Extensions&lt;/a&gt;(简写为Rx)框架的Java语言实现。&lt;a href=&#34;http://reactivex.io&#34;&gt;Reactive Extensions&lt;/a&gt;实际是以现在非常火的响应式编程范式的为基础的一种变体，基于响应式编程加入了一些函数式编程的元素在里面。&lt;/p&gt;
+
+&lt;p&gt;Rx系列发展到现在，基本覆盖了所有主流编程语言，包括C#、Java和JavaScript等等。在Android平台上，也有很多出名的公司基于RxJava开发了许多衍生库，并在其App中大量使用，据我了解有：Square(Jake Wharton大神出版的&lt;a href=&#34;https://github.com/JakeWharton/RxBinding&#34;&gt;RxBinding&lt;/a&gt;)、Trello(推出了&lt;a href=&#34;https://github.com/trello/RxLifecycle&#34;&gt;RxLifecycle&lt;/a&gt;)和国内的大众点评。&lt;/p&gt;
+
+&lt;p&gt;在这篇文档，主要是写下RxJava的用法。&lt;/p&gt;
+
+&lt;h2 id=&#34;基本概念:cfa8a1707a74560bca456d9e617ff266&#34;&gt;基本概念&lt;/h2&gt;
+
+&lt;p&gt;官方对Rx的表述是：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Rx是一个函数库，让开发者可以利用可观察序列和LINQ风格查询操作符来编写异步和基于事件的程序，使用Rx，开发者可以用Observables表示异步数据流，用LINQ操作符查询异步数据流， 用Schedulers参数化异步数据流的并发处理，Rx可以这样定义：Rx = Observables + LINQ + Schedulers。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;而Rx的响应式编程概念以我的理解，我觉得可以简单的概括为“观察者模式+管道操作符”，而实际上，RxJava的操作过程就是： &amp;ldquo;Observable -&amp;gt; Operators -&amp;gt; Subscriber&amp;rdquo;。显而易见的，&lt;code&gt;Observable&lt;/code&gt;为模型中的目标对象，&lt;code&gt;Subscriber&lt;/code&gt;为观察者，而&lt;code&gt;Operators&lt;/code&gt;负责目标对象发出的信息给观察者们的分发，也就是管道。其中&lt;code&gt;Operators&lt;/code&gt;是Rx最关键的一部分，&lt;code&gt;Operators&lt;/code&gt;不仅可以分发信息，而且可以对信息数据进行各种处理，甚至可以把信息回馈到另外的目标对象中。这样做，可以完成&lt;code&gt;Subscriber&lt;/code&gt;和&lt;code&gt;Observable&lt;/code&gt;的解耦。&lt;/p&gt;
+
+&lt;h2 id=&#34;使用方法:cfa8a1707a74560bca456d9e617ff266&#34;&gt;使用方法&lt;/h2&gt;
+
+&lt;p&gt;根据上面的表述，RxJava的使用方法非常简单，也就是我们定义好工作目标Observable和观察者Subscriber，然后把他们组合在一起就可以了，如果有必要对中间的流程进行处理，则在中间加入相应的Operators。&lt;/p&gt;
+
+&lt;p&gt;不过，首先我们要在项目中引入RxJava库。&lt;/p&gt;
+
+&lt;h3 id=&#34;在android工程中引入rxjava:cfa8a1707a74560bca456d9e617ff266&#34;&gt;在Android工程中引入RxJava&lt;/h3&gt;
+
+&lt;p&gt;随着ADT停止更新，现在绝大部分Android开发都是使用Android Studio或者Intellij Idea了，这两者都是基于Gradle来构建Android工程的，那么我们可以直接引入RxJava Maven Repo即可在项目中使用RxJava了：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-groovy&#34;&gt;dependencies {
+    compile &#39;io.reactivex:rxjava:1.0.14&#39;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;另外，虽然RxJava最低支持到Java 6，但是总所周知，Java是个纯面向对象语言，它并没有支持函数式编程，也只有在Java 8的时候，Java 8引入几个函数式编程元素(Lambda表达式、默认方法和函数式引用)。而Rx是个函数式编程框架库，在Java 7之前使用的话，代码看起来会非常别扭，所以最好是在Java 8的环境中使用。不过Android现在官方支持只到Java 7，没支持Java 8，要想在Android中使用Java 8，则必须加入第三方插件。&lt;/p&gt;
+
+&lt;h3 id=&#34;最简单的模式:cfa8a1707a74560bca456d9e617ff266&#34;&gt;最简单的模式&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Observable -&amp;gt; Subscriber&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;是最为简单模型，这里我们假设从接收到的网络请求中获取到一串用户列表，我们要把用户列表显示到页面上，用RxJava可以这样写：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;List&amp;lt;User&amp;gt; users; /* 获取到的用户列表 */
+UserAdapter adapter; /* 页面Adapter */
+
+/* 中间环节忽略 */
+
+/* 创建observable */
+Observable&amp;lt;List&amp;lt;User&amp;gt;&amp;gt; observable = Observable.create(new Observable.OnSubscribe&amp;lt;List&amp;lt;User&amp;gt;&amp;gt;() {
+    @Override
+    public void call(Subscriber&amp;lt;List&amp;lt;User&amp;gt;&amp;gt; subscriber) {
+        subscriber.onNext(users);
+        subscriber.onCompleted();
+    }
+});
+
+/* 创建subscriber */
+Subscriber&amp;lt;List&amp;lt;User&amp;gt;&amp;gt; subscriber = new Subscriber&amp;lt;List&amp;lt;User&amp;gt;&amp;gt;() {
+    @Override
+    public void onCompleted() {
+	Log.d(&amp;quot;test&amp;quot;, &amp;quot;completed!&amp;quot;);
+    }
+
+    @Override
+    public void onError(Throwable e) {
+	Log.d(&amp;quot;test&amp;quot;, &amp;quot;error!&amp;quot;);
+    }
+    @Override
+    public void onNext(List&amp;lt;User&amp;gt; args) {
+        adapter.setDataSet(args);
+    }
+};
+
+// 订阅
+observable.subscribe(subscriber);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;值得注意的一点就是如果Observable没有被Subscriber订阅的话，Observable的内部代码是不会被执行的，这有个好处就是提供了一个控制手段给我们，来控制何时执行这个事件。&lt;/p&gt;
+
+&lt;p&gt;实际上，这样一个简单的流程，写了这么多行代码，所以RxJava提供了比较简便的方法：&lt;/p&gt;
+
+&lt;p&gt;比如，Observable可以这样写：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;// 创建observable
+Observable&amp;lt;List&amp;lt;User&amp;gt;&amp;gt; observable = Observable.just(user);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;Observable.just()&lt;/code&gt;是RxJava提供的一个语法糖，主要是用简单的传递数据。在RxJava中，共有这几种创建Observable的方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;just( )&lt;/code&gt;， 将一个或多个对象转换成发射这个或这些对象的一个Observable&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;from( )&lt;/code&gt;，将一个Iterable, 一个Future, 或者一个数组转换成一个Observable&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;repeat( )&lt;/code&gt;， 创建一个重复发射指定数据或数据序列的Observable&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;repeatWhen( )&lt;/code&gt;，创建一个重复发射指定数据或数据序列的Observable，它依赖于另一个Observable发射的数据&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;create( )&lt;/code&gt;，使用一个函数从头创建一个Observable&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;defer( )&lt;/code&gt;，只有当订阅者订阅才创建Observable；为每个订阅创建一个新的Observable&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;range( )&lt;/code&gt;，创建一个发射指定范围的整数序列的Observable&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;interval( )&lt;/code&gt;，创建一个按照给定的时间间隔发射整数序列的Observable&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;timer( )&lt;/code&gt;，创建一个在给定的延时之后发射单个数据的Observable&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;empty( )&lt;/code&gt;，创建一个什么都不做直接通知完成的Observable&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;error( )&lt;/code&gt;，创建一个什么都不做直接通知错误的Observable&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;never( )&lt;/code&gt;，创建一个不发射任何数据的Observable&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;方法虽然很多，但是在以页面展示的功能需求中，我们还是只用了这几个方法：&lt;code&gt;create&lt;/code&gt;、&lt;code&gt;repeat&lt;/code&gt;、&lt;code&gt;repeatWhen&lt;/code&gt;和&lt;code&gt;defer&lt;/code&gt;，所以只要掌握这几种用法就可以了，其余的需要的时候才查文档。关于创建Observable的文档在&lt;a href=&#34;http://reactivex.io/documentation/operators.html#creating&#34;&gt;这&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;同样，如果我们不关心subscriber是否结束（onComplete())或者发生错误(onError()),subscriber的代码可以简化为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;// 创建subscriber
+Action1&amp;lt;List&amp;lt;User&amp;gt;&amp;gt; subscriber = new Action1&amp;lt;List&amp;lt;User&amp;gt;&amp;gt;() {
+    @Override
+    public void call(List&amp;lt;User&amp;gt; args) {
+        adapter.setDataSet(args);
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们直接把创建和订阅连接起来，完整的代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Observable.just(users).subscribe(new Action1&amp;lt;List&amp;lt;User&amp;gt;&amp;gt;() {
+    @Override
+    public void call(List&amp;lt;User&amp;gt; args) {
+        adapter.setDataSet(args);
+    }
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样看起来已经更简洁了，但是如果使用Java 8的话，代码会更加好看：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Observable.just(users).subscribe(args -&amp;gt; adapter.setDataSet(args));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;加入operators:cfa8a1707a74560bca456d9e617ff266&#34;&gt;加入Operators&lt;/h3&gt;
+
+&lt;p&gt;很多时候，我们需要针对处理过的事件做出响应，而不仅仅是Observable产生的原始事件。最明显的例子就是网络请求回来的数据往往是JSON数据，我们还要对此进行序列化成相应的业务操作才可以传递给前台，这里就需要引入operator来处理JSON数据。&lt;/p&gt;
+
+&lt;p&gt;所以之前一节的代码实际上缺少解析JSON的部分，完整的步骤应该先获取JSON，再序列化然后传给页面，所以Observable传递的应该为JSON数据，而subscriber接收的却是业务对象，中间必须加入Operator处理序列化，代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Observable.just(json).map(new Func1&amp;lt;JSONObject, List&amp;lt;User&amp;gt;&amp;gt;() {
+    @Override
+    public String call(JSONObject json) {
+        return User.constructionFrom(json);
+    }
+}).subscribe(args -&amp;gt; adapter.setDataSet(args));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里使用了名为&lt;code&gt;map&lt;/code&gt;operator，它的作用很简单，就是接收一个事件，并返回处理后的事件。Func1的第一个泛型参数表示输入类型，第二个泛型参数表示返回类型。&lt;/p&gt;
+
+&lt;p&gt;同样，使用Java 8的语法会更加简洁：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Observable.just(json)
+        .map(json -&amp;gt; User.constructionFrom(json))
+        .subscribe(args -&amp;gt; adapter.setDataSet(args));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;RxJava中的Operator一共有二十几个，而且自己也可以自定义Operators，这正式RxJava比一般的异步框架优秀的地方，由于自带的Operators数量过多，这里就不一一讲述了，需要的可以查下&lt;a href=&#34;http://reactivex.io/documentation/operators.html&#34;&gt;文档&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h3 id=&#34;任务订阅:cfa8a1707a74560bca456d9e617ff266&#34;&gt;任务订阅&lt;/h3&gt;
+
+&lt;p&gt;前面缺少了RxJava的一个细节，就是实际上执行Observable.subscribe()时，它会返回一个Subscrition,它代表了Observable和Subscriber之间的关系。我们可以通过Subscrition解除Observable和Subscriber之间的订阅关系，并立即停止执行整个订阅链，比如要取消上述显示用户列表操作，我们可以这样做：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Subscription subscription = Observable.just(json)
+        .map(json -&amp;gt; User.constructionFrom(json))
+        .subscribe(args -&amp;gt; adapter.setDataSet(args));
+subscription.unsubscribe();
+Log.d(&amp;quot;test&amp;quot;, &amp;quot;isSubscribed = &amp;quot; + subscription.isUnsubscribed());
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;多线程操作:cfa8a1707a74560bca456d9e617ff266&#34;&gt;多线程操作&lt;/h3&gt;
+
+&lt;p&gt;Android的多线程机制是UI渲染跑在Main Thread上的，也就是说主线程不能阻塞，不然App就会出现卡顿，所以我们一般都把业务逻辑处理放在后台线程进行。在RxJava中，你可以通过subscribeOn()来指定Observer的运行线程，通过observeOn()指定Subscriber的运行线程。这两个方法都是operator，因此它们可以像所有operator那样作用于任何的Observable。比如上面的例子，我们可以把JSON解析放在后台线程，然后在Main Thread中更新用户信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Observable.just(json)
+        .map(json -&amp;gt; User.constructionFrom(json))
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())     /* 这里用了RxAndroid */
+        .subscribe(args -&amp;gt; adapter.setDataSet(args));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;值得注意的是RxJava自带的&lt;code&gt;Schedulers.io&lt;/code&gt;和&lt;code&gt;Schedulers.compute&lt;/code&gt;两种异步多线程Scheduler开启的线程的级别都是与Main Thread一样的，这样后台线程占用的资源大的话，主线程还是会卡的，所以最好还是自己自定义一个Scheduler。&lt;/p&gt;
+
+&lt;h3 id=&#34;mvp:cfa8a1707a74560bca456d9e617ff266&#34;&gt;MVP&lt;/h3&gt;
+
+&lt;p&gt;RxJava中的Observable、Operators和Subcribers是各自独立的，所以我们可以很容易的针对不同场景复用不同部分的代码。&lt;/p&gt;
+
+&lt;p&gt;下面就是自己写的一个Demo中显示系统所有APP INFO的代码(Kotlin)的简单示范：&lt;/p&gt;
+
+&lt;p&gt;Model层，负责获取系统内安装的所有App数据:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;interface AvailableAppModel {
+    fun data(): Observable&amp;lt;List&amp;lt;AppInfo&amp;gt;&amp;gt;
+}
+
+class AvailableAppModelImpl(val ctx: Context) : AvailableAppModel {
+
+    override fun data(): Observable&amp;lt;List&amp;lt;AppInfo&amp;gt;&amp;gt; {
+        return Observable.create { subscriber -&amp;gt;
+            val packs = ctx.packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES)
+            val apps = ArrayList&amp;lt;AppInfo&amp;gt;()
+            for (pack in packs) {
+                if (pack.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM == 0) {
+                    apps.add(genAppInfo(ctx, pack))
+                }
+            }
+            subscriber.onNext(apps)
+            subscriber.onCompleted()
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Presenter层，负责传递数据到View层，而传递用的就是RxJava，其中Model层的数据请求放在后台线程执行:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;interface AvailableAppPresenter {
+    fun bindView(view: AvailableAppView)
+    fun bindModel(model: AvailableAppModel)
+    fun init(args: Bundle?)
+}
+
+class AvailableAppPresenterImpl(val ctx: Context) : AvailableAppPresenter {
+    private var appView: AvailableAppView? = null
+    private var appModel: AvailableAppModel? = null
+
+    override fun bindView(view: AvailableAppView) {
+        appView = view
+    }
+
+    override fun bindModel(model: AvailableAppModel) {
+        appModel = model
+    }
+
+    override fun init(args: Bundle?) {
+        appModel!!.data()
+                .subscribeOn(AndroidRxPlugin.workerThread)
+                .observeOn(AndroidRxPlugin.mainThread)
+                .subscribe(appView!!.renderData())    /* 只有订阅了Subscriber才执行获取数据请求 */
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;View层:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-kotlin&#34;&gt;public class MainActivity : AppCompatActivity(), AvailableAppView {
+
+    val rvApps: RecyclerView by bindViewById(R.id.rv_apps)
+    var adapter: AppAdapter? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        rvApps.layoutManager = LinearLayoutManager(this)
+        adapter = AppAdapter(this)
+        rvApps.adapter = adapter
+
+        val presenter = AvailableAppPresenterImpl(this)
+        val model = AvailableAppModelImpl(this)
+        presenter.bindView(this)
+        presenter.bindModel(model)
+        presenter.init(savedInstanceState)
+    }
+
+    override fun renderData(): Subscriber&amp;lt;List&amp;lt;AppInfo&amp;gt;&amp;gt; = Subscribers.create { l -&amp;gt; adapter!!.applist = l }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;总体来说，RxJava是非常不错的，响应式编程的概念的引入起码解决了Android回调不美观的问题。不过响应式编程和函数式编程的概念可能一时比较难接受，还需要段时间来适应。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>用Travis CI给Android项目部署Github Release &middot; Kesco Lin</title>
+        <meta name="description" content="">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.16-DEV" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://kescoode.comcss/normalize.css">
+        <link rel="stylesheet" href="http://kescoode.comcss/highlight.css">
+        <link rel="stylesheet" href="http://kescoode.comcss/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-75600240-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="Kesco的编码世界" href="http://kescoode.com">Kesco的编码世界</a>
+                            </h1>
+                        
+                        <a class="button-square" href="http://kescoode.comindex.xml"><i class="fa fa-rss"></i></a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kesco">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                        
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="主页" href="http://kescoode.com/">主页</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="项目" href="http://kescoode.com/works/">项目</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="关于" href="http://kescoode.com/about/">关于</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container" itemscope="" itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">用Travis CI给Android项目部署Github Release</h1>
+    
+    <p class="post-date">
+        <span>发布于 <time datetime="2015-10-15" itemprop="datePublished">2015年10月15</time></span>
+        <span>by</span>
+        <span itemscope="" itemprop="author" itemtype="http://schema.org/Person">
+            <span itemprop="name">
+                <a href="http://kescoode.com" itemprop="url" rel="author">Kesco Lin</a>
+            </span>
+        </span>
+    </p>
+</header>
+
+        <div class="post-content clearfix" itemprop="articleBody">
+    
+
+    
+
+<p>时至今日，互联网软件的开发和发布，已经形成了一套标准流程，其中一个重要部分就是持续集成(CI)。</p>
+
+<p>平时我工作中CI用得比较多的地方是按照git tag做应用渠道分发打包。最近写了一个拖拽手势Xposed插件<a href="https://github.com/kesco/SlideBack-Xposed">SlideBack-Xposed</a>，除了<a href="http://repo.xposed.info/module/com.kesco.xposed.slideback">Xposed Module Repo</a>外，我需要一个提供APK对外下载的地方。由于Google Play审核机制收紧了，单纯Xposed插件收录比较麻烦，而我又不想放到国内渠道上，于是我把注意力放到Github Release上。</p>
+
+<p>Github Release是Github推出的一个帮助开发者发布Repo最终软件包给用户的功能。Github Release是根据其Repo的Git标签来排序的，而且目前Github还没有限制Github Release的存储大小，不需担心空间不够用，所以一般情况下，已经可以了。同时，我们利用Travis CI来自动根据我们打的Git Tag来构建APK并Push到自己的Github Release上。</p>
+
+<h2 id="启用travis-ci:b639d5b4b149239dd3c7938b0bc65222">启用Travis CI</h2>
+
+<p>Travis CI是比较流行的开源持续构建平台，与Github结合比较紧密，对Github上的开源Repo是免费的，私有Repo收费（Circle CI也不错，而且对Github私有Repo也是免费的）。我们首先在Travis CI上打开对自己项目的Hook开关，那么当你每次Commit Push的时候，CI就会自动运行了。</p>
+
+<p><img src="http://7mnom1.com1.z0.glb.clouddn.com/travis-enable-project.png" alt="travis-enable-project" /></p>
+
+<h2 id="基础构建脚本:b639d5b4b149239dd3c7938b0bc65222">基础构建脚本</h2>
+
+<p>Travis CI使用YAML文件作为构建脚本，以最简单Android项目构建APK为例，只需在项目根目录创建<code>.travis.yml</code>文件：</p>
+
+<pre><code class="language-yaml">language: android
+android:
+  components:
+    - build-tools-22.0.1
+    - android-23
+    - extra-android-m2repository
+    - extra-android-support
+script:
+  - ./gradlew assembleRelease
+</code></pre>
+
+<p>然后<code>git add . &amp;&amp; git commit &amp;&amp; git push</code>即可。这里解释下，<code>.travis.yml</code>几个关键的Tag：</p>
+
+<ol>
+<li>因为Repo是Android项目，所以构建语言<code>language</code>选择<code>android</code>。</li>
+<li>选择了Android项目后，就在<code>android</code>中的<code>components</code>的tag中设置Android项目需要的依赖。</li>
+<li>Travis CI编译Android实际上也是调用项目中的构建脚本的。现在大部分Android项目都是用Gradle构建的，如果是要打Release版本的APK包，在<code>script</code>加入<code>./gradlew assembleRelease</code>就行了。</li>
+</ol>
+
+<p>不过，实际上，单纯在CI上面打包，其实是没什么用处的，因为Travis CI每次任务完成之后，就会把所有生成的文件清掉，所以我们要把生成的APK传到Github Release上。</p>
+
+<h2 id="发布github-release:b639d5b4b149239dd3c7938b0bc65222">发布Github Release</h2>
+
+<p>Travis CI默认支持发布到Github Release上，不需要配置别的脚本，相应的<code>YAML</code>配置Tag是这样的：</p>
+
+<pre><code class="language-yaml">deploy:
+  provider: releases
+  api_key: &quot;GITHUB OAUTH TOKEN&quot;
+  file: &quot;FILE TO UPLOAD&quot;
+  skip_cleanup: true
+  on:
+    tags: true
+</code></pre>
+
+<p>值得注意的一点就是<code>skip_cleanup</code>这个Tag要设置为<code>True</code>，不这样做的话，Travis CI在部署之前就会清空生成的APK文件，那样你就什么都得不到了。<code>api_key</code>是部署到Github Release的凭证，需要开发者自己生成。如果不想那么麻烦的话，可以使用Travis CI提供的<code>travis</code>命令行工具。</p>
+
+<p><code>travis</code>是用Ruby写的，安装需要系统配有Ruby 1.9以上版本：</p>
+
+<pre><code class="language-shell">gem install travis -v 1.8.0 --no-rdoc --no-ri
+</code></pre>
+
+<p>安装完成后，在根目录执行：</p>
+
+<pre><code class="language-shell">travis setup releases
+</code></pre>
+
+<p>按照相应的提示，就可以生成相应的部署配置了。完整的<code>.travis.yml</code>文件如下：</p>
+
+<pre><code class="language-yaml">language: android
+android:
+  components:
+    - build-tools-22.0.1
+    - android-23
+    - extra-android-m2repository
+    - extra-android-support
+script:
+  - ./gradlew assembleRelease
+deploy:
+  provider: releases
+  api_key:
+    secure: [生成的token]
+  file: app/build/outputs/apk/app-release.apk
+  skip_cleanup: true
+  on:
+    tags: true
+</code></pre>
+
+<p>这样，以后在你Repo打git tag并把它Push到Github上后，Travis CI就会自动帮你构建一个Github Release了。</p>
+
+<p><img src="http://7mnom1.com1.z0.glb.clouddn.com/slideback-github-release.png" alt="slideback-github-release" /></p>
+
+<p>等等，难道这样就结束了吗？当然不了，这只是单纯把APK发送到Github Release上去。但是构建APK过程中还有很多问题，比如你在CI构建Release版本的APK的时候，要用到自己签名的密钥，对吧。我们当然不能把密钥的信息公开，那么该怎么做呢？</p>
+
+<h2 id="隐藏签名密钥信息:b639d5b4b149239dd3c7938b0bc65222">隐藏签名密钥信息</h2>
+
+<p>Travis CI是通过Android项目中的build.gradle的信息来构建apk的，自然我们通过配置build.gradle脚本来签名apk也是很正常的事。但是在公开项目中暴露签名密钥信息是不安全的，有个简单的方法是，让gradle在CI构建的时候从CI的环境变量中读取密钥信息，这样可以降低点风险。</p>
+
+<p>首先，我们先在<code>build.gradle</code>配置签名选项文件：</p>
+
+<pre><code class="language-groovy">android {
+    signingConfigs {
+        release {
+            storeFile file(&quot;.kesco.keystore&quot;)
+            storePassword System.getenv(&quot;KEYSTORE_PASS&quot;)
+            keyAlias System.getenv(&quot;ALIAS_NAME&quot;)
+            keyPassword System.getenv(&quot;ALIAS_PASS&quot;)
+        }
+    }
+}
+</code></pre>
+
+<p>像这样的话，gradle在签名的时候会自动从系统读取<code>KEYSTORE_PASS</code>、<code>ALIAS_NAME</code>和<code>ALIAS_PASS</code>三个环境变量。</p>
+
+<p>然后我们在Travis CI上设置<code>KEYSTORE_PASS</code>、<code>ALIAS_NAME</code>和<code>ALIAS_PASS</code>这三个环境变量：</p>
+
+<p><img src="http://7mnom1.com1.z0.glb.clouddn.com/travis-env.png" alt="" /></p>
+
+<p>另外，Travis CI在构建Android项目时，默认使用Oracle JDK，但是当我设置CI的环境变量后，构建会报错，所以就把JDK换为OpenJDK了：</p>
+
+<pre><code class="language-yaml">jdk: openjdk7
+</code></pre>
+
+<p>如果还想更保密点的话，可以将签名密钥keystore文件加密一下，等CI启动的时候再解密，这样会安全些。</p>
+
+<p>以上就是我折腾<a href="https://github.com/kesco/SlideBack-Xposed">SlideBack-Xposed</a>项目时总结出来的经验，下面是我项目中完整的<code>.travis.yml</code>文件：</p>
+
+<pre><code class="language-yaml">language: android
+jdk: openjdk7
+android:
+  components:
+    - build-tools-22.0.1
+    - android-23
+    - extra-android-m2repository
+    - extra-android-support
+git:
+  submodules: false
+before_install:
+  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  - git submodule init &amp;&amp; git submodule update
+script:
+  - ./gradlew assembleRelease
+before_deploy:
+  - mv app/build/outputs/apk/app-release.apk app/build/outputs/apk/slideback.apk
+deploy:
+  provider: releases
+  api_key:
+    secure: [Github Token]
+  file: app/build/outputs/apk/slideback.apk
+  skip_cleanup: true
+  on:
+    tags: true
+</code></pre>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    
+        <p class="post-tags">
+            <span>Tagged:</span>
+            
+                 <a href="http://kescoode.com/tags/android/">Android</a>
+            
+                 <a href="http://kescoode.com/tags/github/">Github</a>
+            
+                 <a href="http://kescoode.com/tags/travis-ci/">Travis CI</a>
+            
+        </p>
+    
+</footer>
+
+        
+    <div class="comments">
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'kescoodecom';
+    var disqus_identifier = 'http:\/\/kescoode.com\/travis-ci-android-github-release\/';
+    var disqus_title = '用Travis CI给Android项目部署Github Release';
+    var disqus_url = 'http:\/\/kescoode.com\/travis-ci-android-github-release\/';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="Kesco的编码世界" href="http://kescoode.com">Kesco的编码世界</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2016 / Powered by <a href="http://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="http://kescoode.comjs/jquery-1.11.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+        <script src="http://kescoode.comjs/jquery.fitvids.js"></script>
+        <script src="http://kescoode.comjs/scripts.js"></script>
+    </body>
+</html>
+
