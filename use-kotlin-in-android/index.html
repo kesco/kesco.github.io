@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html prefix="og: http://ogp.me/ns#">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -17,7 +17,17 @@ var b: String?">
         <meta name="generator" content="Hugo 0.18.1" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        <meta property="og:title" content="用Kotlin编写Android应用">
+<meta property="og:description" content="最近，Kotlin在外面比较火，外面的呼声也很大。我也是今年4月份看到Jake Wharton的这篇文章后才开始关注的。后来，因为工作项目中，引用了ikew0ng巨巨的SwipBackLayout拖拽关闭页面库，而作者本人又不继续维护了，所以我试着用Kotlin参考SwipBackLayout，自己撸了一个轮子SlideBack，发现用Kotlin来开发Android还是比较舒服的。
+最近，开发团队内技术分享，我做了个简单的PPT，就是简单介绍下Kotlin的。
+语法 Kotlin的语法非常简洁，熟悉Java的开发者可以快速上手。而且JetBrain系的IDE上还可以一键把已有的Java代码转换成Kotlin代码(不得不说一键傻瓜式操作系列真的非常人性化=_=)，有点像Groovy，开发者可以一开始以Java的风格写Kotlin代码，然后慢慢转成Kotlin自己的风格。详细的语法可参考Kotlin官方教程，这里做个简短介绍。
+声明对象 Kotlin的一切变量都是对象，所以没有Java那样的基本类型。Kotlin声明对象有两种类型：
+ 可变对象  var x = 5 // 类型推断为`Int`型 var b: String = &quot;Hello&quot; // String型   不可变对象，Kotlin没有final关键字，而且不存在静态变量  val x = 5 // 不可变`Int`型变量 x &#43;= 1 // 编译器会报错  从代码片段可以看出，Kotlin不需要在每行结束加分号。
+区分非空类型 在Kotlin中，nullable对象和nullable对象是严格区分的，甚至在编译期解决了不少潜在的空指针问题。声明变量时，对变量的类型都是默认非空的，如果要允许变量为空，必须在定义类型后面加个?：
+var a: String = &quot;hello&quot; // a字符串不可为空 var b: String? = &quot;hello&quot; // b字符串可以为空 a = null // 编译器会报错 b = null // OK!!!  而且，在对有可能为空的对象进行操作时，编译器会提示Warning。同时，Kotlin提供类似Ruby和CoffeeScript的语法糖：
+var b: String?">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://kescoode.com/use-kotlin-in-android/">
         <link rel="stylesheet" href="http://kescoode.com/dist/styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -56,6 +66,10 @@ ga('send', 'pageview');
                         
                         
                         
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" title="Email" href="mailto:kesco915@gmail.com">
+                                <i class="fa fa-envelope"></i>
+                            </a>
                         
                     </div>
 
@@ -438,21 +452,24 @@ println(&quot;$name id is $id&quot;)
 
         
     <div class="comments">
-        <div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'kescoodecom';
-    var disqus_identifier = 'http:\/\/kescoode.com\/use-kotlin-in-android\/';
-    var disqus_title = '用Kotlin编写Android应用';
-    var disqus_url = 'http:\/\/kescoode.com\/use-kotlin-in-android\/';
+      
+      <div class="ds-thread" data-thread-key="/use-kotlin-in-android/" data-title="用Kotlin编写Android应用" data-url="http://kescoode.com/use-kotlin-in-android/"></div>
+      
 
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+      <script type="text/javascript">
+        var duoshuoQuery = {short_name:""};
+
+        (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+      </script>
+      
     </div>
 
     </article>

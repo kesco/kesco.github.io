@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html prefix="og: http://ogp.me/ns#">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -14,7 +14,14 @@ let g:vimwiki_menu = &#39;&#39; &quot; 不在菜单栏上显示Vimwiki let g:vim
         <meta name="generator" content="Hugo 0.18.1" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        <meta property="og:title" content="用Vimwiki写笔记">
+<meta property="og:description" content="以前试过很多种笔记应用，如EverNote、为知和OneNote等等，始终用得不习惯。比如说OneNote和EverNote在Mac上无法很好的显示代码(马克飞象不算)，为知的App在我自己MBP上不稳定，运行的像个Demo一样，老是Crush。接着，因为公司的API文档用Gitbook写的，自己也因此用上Gitbook来写笔记。本以为这样就可以了，谁知道Gitbook后来不开发PC端Client了，只保留Web端的，所以最后我转到了Vimwiki上。
+而且Vimwiki依赖于Vim，恰好解决了编辑器的问题，我本来就是Vim党^-^。通过私有Git仓库，同步笔记，笔记是纯文本的，转换也比较方便。
+安装和配置Vim Vimwiki使用Vim的第三方插件管理器非常方便，我平常使用Vim-plug来管理插件，感觉比Vundle好用点(UI做得漂亮点):
+Plug &#39;vimwiki/vimwiki&#39; &quot; VimWiki  安装完后，要对Vimwiki设置下:
+let g:vimwiki_menu = &#39;&#39; &quot; 不在菜单栏上显示Vimwiki let g:vimwiki_use_mouse = 1 &quot; 使用鼠标 let g:vimwiki_diary_months = { \ 1: &#39;一月&#39;, 2: &#39;二月&#39;, 3: &#39;三月&#39;, 4: &#39;四月&#39;, 5: &#39;五月&#39;, 6: &#39;六月&#39;, \ 7: &#39;七月&#39;, 8: &#39;八月&#39;, 9: &#39;九月&#39;, 10: &#39;十月&#39;, 11: &#39;十一月&#39;, 12: &#39;十二月&#39; \ } &quot; 设置日期显示文字 autocmd FileType vimwiki setlocal wrap &quot; 折行 let g:vimwiki_valid_html_tags = &#39;b,i,s,u,sub,sup,kbd,br,hr,img&#39; &quot; 设置可以在笔记中使用的Html Tag let develop_notes = {} &quot; 个人开发笔记 let develop_notes.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://kescoode.com/use-vimwiki/">
         <link rel="stylesheet" href="http://kescoode.com/dist/styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -53,6 +60,10 @@ ga('send', 'pageview');
                         
                         
                         
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" title="Email" href="mailto:kesco915@gmail.com">
+                                <i class="fa fa-envelope"></i>
+                            </a>
                         
                     </div>
 
@@ -231,21 +242,24 @@ http://ktmud.com/  外部URL会被自动转换成链接
 
         
     <div class="comments">
-        <div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'kescoodecom';
-    var disqus_identifier = 'http:\/\/kescoode.com\/use-vimwiki\/';
-    var disqus_title = '用Vimwiki写笔记';
-    var disqus_url = 'http:\/\/kescoode.com\/use-vimwiki\/';
+      
+      <div class="ds-thread" data-thread-key="/use-vimwiki/" data-title="用Vimwiki写笔记" data-url="http://kescoode.com/use-vimwiki/"></div>
+      
 
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+      <script type="text/javascript">
+        var duoshuoQuery = {short_name:""};
+
+        (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+      </script>
+      
     </div>
 
     </article>

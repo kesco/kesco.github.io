@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html prefix="og: http://ogp.me/ns#">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -26,7 +26,26 @@ JSON的设计目标是它应当是尽可能小的，可移植的，文本化的�
         <meta name="generator" content="Hugo 0.18.1" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        <meta property="og:title" content="JSON技术规格翻译">
+<meta property="og:description" content="最近做毕业设计，学校需要每人附一篇英文文档翻译，平时因为做数据通讯的时候用JSON做交换数据结构很多，所以干脆就翻译JSON RFC文档好了。下面是译文：
+关于本文 本文讲述关于互联网通讯的信息，并不是准确形式上的标准。你可以随意传播这份文档。
+版权提示 Copyright &copy; The Internet Society (2006)
+摘要 JavaScript Object Notation (JSON)是一个轻量级的，基于文本的，跨语言的数据交换格式。它衍生自ECMAScript编程语言标准（ECMAScript Programming Language Standard）。JSON定义了一组用于表示结构化数据的可移植的格式化规则。
+1. 简介 JavaScript Object Notation (JSON)是一种序列化结构化数据的文本格式。它派生自ECMAScript Programming Language Standard, Third Edition [ECMA]定义的JavaScript对象字面量。
+JSON包含4种基础数据类型（字符串，数字，布尔和null）和两种结构类型（对象和数组）。
+JSON字符串是一个由零或者多个Unicode字符组成的序列。
+JSON对象是一个由零或者多个键值对组成的无序集合，其中键值对键名是字符串类型，值则可以是字符串，数字，布尔，null，对象或数组类型。
+JSON数组是一个由零或者多个值组成的有序序列。
+术语“对象”和“数组”的叫法来源于JavaScript的习惯叫法。
+JSON的设计目标是它应当是尽可能小的，可移植的，文本化的，并且可以作为JavaScript的一个子集。
+1.1 语法约定 本文中的”MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”,”SHOULD NOT”, “RECOMMENDED”, “MAY”, 和 “OPTIONAL” 关键字意思遵循[RFC2119]中的定义。
+本文中的语法规则遵循[RFC4234]中的定义。
+2. JSON语法规则 一个JSON文本是一串标记序列。JSON序列包括含6种结构字符，字符串，数字和3个字面量。
+一个JSON文本可以是对象或者数字的一个序列化字符串。
+ JSON-text = object / array  下面是6种结构字符：
+ begin-array = ws %x5B ws ; [ 左中括号 begin-object = ws %x7B ws ; { 左大括号 end-array = ws %x5D ws ; ] 右中括号 end-object = ws %x7D ws ; } 右大扩号 name-separator = ws %x3A ws ; : 冒号 value-separator = ws %x2C ws ; , 逗号  所有的六种数据结构字符都允许在前面添加空白字符。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://kescoode.com/json-translate/">
         <link rel="stylesheet" href="http://kescoode.com/dist/styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -65,6 +84,10 @@ ga('send', 'pageview');
                         
                         
                         
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" title="Email" href="mailto:kesco915@gmail.com">
+                                <i class="fa fa-envelope"></i>
+                            </a>
                         
                     </div>
 
@@ -450,21 +473,24 @@ ga('send', 'pageview');
 
         
     <div class="comments">
-        <div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'kescoodecom';
-    var disqus_identifier = 'http:\/\/kescoode.com\/json-translate\/';
-    var disqus_title = 'JSON技术规格翻译';
-    var disqus_url = 'http:\/\/kescoode.com\/json-translate\/';
+      
+      <div class="ds-thread" data-thread-key="/json-translate/" data-title="JSON技术规格翻译" data-url="http://kescoode.com/json-translate/"></div>
+      
 
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+      <script type="text/javascript">
+        var duoshuoQuery = {short_name:""};
+
+        (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+      </script>
+      
     </div>
 
     </article>

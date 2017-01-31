@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html prefix="og: http://ogp.me/ns#">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -18,7 +18,18 @@ deploy: provider: releases api_key: &quot;GITHUB OAUTH TOKEN&quot; file: &quot;F
         <meta name="generator" content="Hugo 0.18.1" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        <meta property="og:title" content="用Travis CI给Android项目部署Github Release">
+<meta property="og:description" content="时至今日，互联网软件的开发和发布，已经形成了一套标准流程，其中一个重要部分就是持续集成(CI)。
+平时我工作中CI用得比较多的地方是按照git tag做应用渠道分发打包。最近写了一个拖拽手势Xposed插件SlideBack-Xposed，除了Xposed Module Repo外，我需要一个提供APK对外下载的地方。由于Google Play审核机制收紧了，单纯Xposed插件收录比较麻烦，而我又不想放到国内渠道上，于是我把注意力放到Github Release上。
+Github Release是Github推出的一个帮助开发者发布Repo最终软件包给用户的功能。Github Release是根据其Repo的Git标签来排序的，而且目前Github还没有限制Github Release的存储大小，不需担心空间不够用，所以一般情况下，已经可以了。同时，我们利用Travis CI来自动根据我们打的Git Tag来构建APK并Push到自己的Github Release上。
+启用Travis CI Travis CI是比较流行的开源持续构建平台，与Github结合比较紧密，对Github上的开源Repo是免费的，私有Repo收费（Circle CI也不错，而且对Github私有Repo也是免费的）。我们首先在Travis CI上打开对自己项目的Hook开关，那么当你每次Commit Push的时候，CI就会自动运行了。
+基础构建脚本 Travis CI使用YAML文件作为构建脚本，以最简单Android项目构建APK为例，只需在项目根目录创建.travis.yml文件：
+language: android android: components: - build-tools-22.0.1 - android-23 - extra-android-m2repository - extra-android-support script: - ./gradlew assembleRelease  然后git add . &amp;&amp; git commit &amp;&amp; git push即可。这里解释下，.travis.yml几个关键的Tag：
+ 因为Repo是Android项目，所以构建语言language选择android。 选择了Android项目后，就在android中的components的tag中设置Android项目需要的依赖。 Travis CI编译Android实际上也是调用项目中的构建脚本的。现在大部分Android项目都是用Gradle构建的，如果是要打Release版本的APK包，在script加入./gradlew assembleRelease就行了。  不过，实际上，单纯在CI上面打包，其实是没什么用处的，因为Travis CI每次任务完成之后，就会把所有生成的文件清掉，所以我们要把生成的APK传到Github Release上。
+发布Github Release Travis CI默认支持发布到Github Release上，不需要配置别的脚本，相应的YAML配置Tag是这样的：
+deploy: provider: releases api_key: &quot;GITHUB OAUTH TOKEN&quot; file: &quot;FILE TO UPLOAD&quot; skip_cleanup: true on: tags: true  值得注意的一点就是skip_cleanup这个Tag要设置为True，不这样做的话，Travis CI在部署之前就会清空生成的APK文件，那样你就什么都得不到了。api_key是部署到Github Release的凭证，需要开发者自己生成。如果不想那么麻烦的话，可以使用Travis CI提供的travis命令行工具。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://kescoode.com/travis-ci-android-github-release/">
         <link rel="stylesheet" href="http://kescoode.com/dist/styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -57,6 +68,10 @@ ga('send', 'pageview');
                         
                         
                         
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" title="Email" href="mailto:kesco915@gmail.com">
+                                <i class="fa fa-envelope"></i>
+                            </a>
                         
                     </div>
 
@@ -297,21 +312,24 @@ deploy:
 
         
     <div class="comments">
-        <div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'kescoodecom';
-    var disqus_identifier = 'http:\/\/kescoode.com\/travis-ci-android-github-release\/';
-    var disqus_title = '用Travis CI给Android项目部署Github Release';
-    var disqus_url = 'http:\/\/kescoode.com\/travis-ci-android-github-release\/';
+      
+      <div class="ds-thread" data-thread-key="/travis-ci-android-github-release/" data-title="用Travis CI给Android项目部署Github Release" data-url="http://kescoode.com/travis-ci-android-github-release/"></div>
+      
 
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+      <script type="text/javascript">
+        var duoshuoQuery = {short_name:""};
+
+        (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+      </script>
+      
     </div>
 
     </article>
