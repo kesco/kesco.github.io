@@ -2,12 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://kescoode.com/</loc>
-    <lastmod>2016-07-09T21:10:22+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://kescoode.com/works/</loc>
     <lastmod>2016-07-09T21:10:22+08:00</lastmod>
   </url>
@@ -75,6 +69,101 @@
   <url>
     <loc>http://kescoode.com/hello-world/</loc>
     <lastmod>2013-09-16T16:02:06+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kescoode.com/tags/about/</loc>
+    <lastmod>2016-07-09T21:00:10+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kescoode.com/tags/android/</loc>
+    <lastmod>2015-10-15T14:29:53+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kescoode.com/tags/c&#43;&#43;/</loc>
+    <lastmod>2016-01-05T18:02:06+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kescoode.com/tags/cmake/</loc>
+    <lastmod>2016-01-05T18:02:06+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kescoode.com/tags/github/</loc>
+    <lastmod>2015-10-15T14:29:53+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kescoode.com/tags/javascript/</loc>
+    <lastmod>2014-03-02T20:48:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kescoode.com/tags/json/</loc>
+    <lastmod>2014-04-24T20:56:35+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kescoode.com/</loc>
+    <lastmod>2016-07-09T21:10:22+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kescoode.com/tags/kotlin/</loc>
+    <lastmod>2015-08-26T17:16:13+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kescoode.com/tags/life/</loc>
+    <lastmod>2015-12-26T20:54:41+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kescoode.com/post/</loc>
+    <lastmod>2016-01-05T18:02:06+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kescoode.com/tags/projects/</loc>
+    <lastmod>2016-07-09T21:10:22+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kescoode.com/tags/rxjava/</loc>
+    <lastmod>2015-09-23T13:55:08+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kescoode.com/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kescoode.com/tags/travis-ci/</loc>
+    <lastmod>2015-10-15T14:29:53+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kescoode.com/tags/vim/</loc>
+    <lastmod>2015-06-01T22:13:04+08:00</lastmod>
+    <priority>0</priority>
   </url>
   
 </urlset>

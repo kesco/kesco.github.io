@@ -2,12 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Life on Kesco的编码世界</title>
-    <link>http://kescoode.com/tags/life/</link>
+    <link>http://kescoode.com/tags/life/index.xml</link>
     <description>Recent content in Life on Kesco的编码世界</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>Copyright (c) 2015. All rights reserved.</copyright>
-    <lastBuildDate>Sat, 26 Dec 2015 20:54:41 +0800</lastBuildDate>
     <atom:link href="http://kescoode.com/tags/life/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -20,13 +19,13 @@
 
 &lt;p&gt;岁数越来越大，感觉时间过得越来越快。不知不觉，从深大毕业，进入金蝶工作已经一年多了。工作匆匆忙忙，很多事发生都没来得及体会就溜过去了，实在有必要写一写，整理记录下过去一年发生过的事。&lt;/p&gt;
 
-&lt;h2 id=&#34;部门拆分-好友离职:6396a17d5d38ac61429fe7aaa16821ef&#34;&gt;部门拆分，好友离职&lt;/h2&gt;
+&lt;h2 id=&#34;部门拆分-好友离职&#34;&gt;部门拆分，好友离职&lt;/h2&gt;
 
 &lt;p&gt;现在云之家终于独立成金蝶的一个子公司了，对于我们这些底层开发人员来说，其实没什么两样，待遇内部职称都没变，唯一体会的到的好处是年终分两次发了，一半随六月工资发，一半随十二月工资发。&lt;/p&gt;
 
 &lt;p&gt;去年和我一同进来的几个应届生也在6月份拿完半年终就走了，文彪去创业了，伟豪回去广州多玩。虽然工作中这现象很正常，但是就有点像毕业各奔东西一样，有点失落，可能刚进职场就是这样吧。最近年底了，队长也准备离职去写Python了，没想到去年四个应届就只剩我一个，虽然我准备做完手头的项目也打算离职了。&lt;/p&gt;
 
-&lt;h2 id=&#34;技术成长:6396a17d5d38ac61429fe7aaa16821ef&#34;&gt;技术成长&lt;/h2&gt;
+&lt;h2 id=&#34;技术成长&#34;&gt;技术成长&lt;/h2&gt;
 
 &lt;p&gt;金蝶是一家传统软件企业，虽然目前正积极往互联网方向转，但是在技术的运用上还是比较保守的（就不说组内我们吐槽的认证协议还是用OAuth 1.0a了）。不过，做为一个大公司，代码水平和架构都是非常不错的，虽没什么新颖的技术，但是对于加强编程基本功来说还是很有益的。&lt;/p&gt;
 
@@ -34,7 +33,7 @@
 
 &lt;p&gt;知识点方面，因为工作需要，经常接触到HTTP、Oauth和POP3协议那些内容，终于把大学里缺失的部分补回来了。&lt;/p&gt;
 
-&lt;h2 id=&#34;读书:6396a17d5d38ac61429fe7aaa16821ef&#34;&gt;读书&lt;/h2&gt;
+&lt;h2 id=&#34;读书&#34;&gt;读书&lt;/h2&gt;
 
 &lt;p&gt;这一年里，由于搬家麻烦，我买纸质书少了，买了个iPad Air 2来看电子书，大部分电子书我都是通过多看iPad App来看的，多看的应用做得确实不错。&lt;/p&gt;
 
@@ -52,13 +51,13 @@
 
 &lt;p&gt;现在看书主要都是对某一个问题或者目标有针对性的去看了，不像以前那样全部浏览过一遍，这样比较有效率一点吧，不过电子书做笔记比较麻烦，重复查看的时候不太方便，这点还是比不上纸质书啊。&lt;/p&gt;
 
-&lt;h2 id=&#34;搬家的折腾:6396a17d5d38ac61429fe7aaa16821ef&#34;&gt;搬家的折腾&lt;/h2&gt;
+&lt;h2 id=&#34;搬家的折腾&#34;&gt;搬家的折腾&lt;/h2&gt;
 
 &lt;p&gt;这一年一共搬了三次家，三次家……6月底因为舍友工作变化，和大学几个好朋友分租了，然后10月房东要卖房又搬到姐姐家暂住，最近才搬出来。每一次搬家都累成狗，我终于体验到离家打工的辛苦。&lt;/p&gt;
 
 &lt;p&gt;然后，就是还没有找到女朋友……&lt;/p&gt;
 
-&lt;h2 id=&#34;2016年新冀望:6396a17d5d38ac61429fe7aaa16821ef&#34;&gt;2016年新冀望&lt;/h2&gt;
+&lt;h2 id=&#34;2016年新冀望&#34;&gt;2016年新冀望&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;多读书，不要太限制在技术方面&lt;/li&gt;
@@ -78,7 +77,7 @@
 
 &lt;p&gt;自从买了这个&lt;a href=&#34;http://kescoode.com&#34;&gt;kescoode&lt;/a&gt;域名，已经快有三年了。从最开始的WordPress，到Hexo，再到大学舍友写的一个静态博客Builder，博客程序换了一轮又一轮。最近，因为保存博文的那个移动硬盘坏了，以前写过的东西都没有了，加上我舍友毕业之后就不再维护那个生成器项目，所以我把博客最终迁移到Ghost来。&lt;/p&gt;
 
-&lt;h2 id=&#34;为什么用了ghost:c2b2574381e56fc6137f9463a71f9533&#34;&gt;为什么用了Ghost&lt;/h2&gt;
+&lt;h2 id=&#34;为什么用了ghost&#34;&gt;为什么用了Ghost&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;比WorkPress简单(从方面来说，这也是个不足之处，好在够用)。&lt;/li&gt;
@@ -86,7 +85,7 @@
 &lt;li&gt;用Node.js写的，我会Node.js，但是不会PHP，所以这点比WorkPress好。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;ghost的不足:c2b2574381e56fc6137f9463a71f9533&#34;&gt;Ghost的不足&lt;/h2&gt;
+&lt;h2 id=&#34;ghost的不足&#34;&gt;Ghost的不足&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;后台功能与WordPress相比还是太弱，很多改动都要改源码。&lt;/li&gt;

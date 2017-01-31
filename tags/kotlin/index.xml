@@ -2,12 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kotlin on Kesco的编码世界</title>
-    <link>http://kescoode.com/tags/kotlin/</link>
+    <link>http://kescoode.com/tags/kotlin/index.xml</link>
     <description>Recent content in Kotlin on Kesco的编码世界</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>Copyright (c) 2015. All rights reserved.</copyright>
-    <lastBuildDate>Wed, 26 Aug 2015 17:16:13 +0800</lastBuildDate>
     <atom:link href="http://kescoode.com/tags/kotlin/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -22,11 +21,11 @@
 
 &lt;p&gt;最近，开发团队内技术分享，我做了个简单的&lt;a href=&#34;http://kesco.github.io/kotlin_intrudction&#34;&gt;PPT&lt;/a&gt;，就是简单介绍下Kotlin的。&lt;/p&gt;
 
-&lt;h2 id=&#34;语法:264dc76c17987165debdd663a9ab017a&#34;&gt;语法&lt;/h2&gt;
+&lt;h2 id=&#34;语法&#34;&gt;语法&lt;/h2&gt;
 
 &lt;p&gt;Kotlin的语法非常简洁，熟悉Java的开发者可以快速上手。而且JetBrain系的IDE上还可以一键把已有的Java代码转换成Kotlin代码(不得不说一键傻瓜式操作系列真的非常人性化=_=)，有点像Groovy，开发者可以一开始以Java的风格写Kotlin代码，然后慢慢转成Kotlin自己的风格。详细的语法可参考&lt;a href=&#34;http://kotlinlang.org/docs/reference/&#34;&gt;Kotlin官方教程&lt;/a&gt;，这里做个简短介绍。&lt;/p&gt;
 
-&lt;h3 id=&#34;声明对象:264dc76c17987165debdd663a9ab017a&#34;&gt;声明对象&lt;/h3&gt;
+&lt;h3 id=&#34;声明对象&#34;&gt;声明对象&lt;/h3&gt;
 
 &lt;p&gt;Kotlin的一切变量都是对象，所以没有Java那样的基本类型。Kotlin声明对象有两种类型：&lt;/p&gt;
 
@@ -48,7 +47,7 @@ x += 1                          // 编译器会报错
 
 &lt;p&gt;从代码片段可以看出，Kotlin不需要在每行结束加分号。&lt;/p&gt;
 
-&lt;h3 id=&#34;区分非空类型:264dc76c17987165debdd663a9ab017a&#34;&gt;区分非空类型&lt;/h3&gt;
+&lt;h3 id=&#34;区分非空类型&#34;&gt;区分非空类型&lt;/h3&gt;
 
 &lt;p&gt;在Kotlin中，nullable对象和nullable对象是严格区分的，甚至在编译期解决了不少潜在的空指针问题。声明变量时，对变量的类型都是默认非空的，如果要允许变量为空，必须在定义类型后面加个&lt;code&gt;?&lt;/code&gt;：&lt;/p&gt;
 
@@ -64,7 +63,7 @@ b = null                        // OK!!!
 b?.length()                     // 如果b不为空对象，则取b的长度
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;智能类型转换:264dc76c17987165debdd663a9ab017a&#34;&gt;智能类型转换&lt;/h3&gt;
+&lt;h3 id=&#34;智能类型转换&#34;&gt;智能类型转换&lt;/h3&gt;
 
 &lt;p&gt;在Kotlin中，进行强制类型转换可以使用&lt;code&gt;as&lt;/code&gt;关键字，但有可能会抛出异常：&lt;/p&gt;
 
@@ -82,9 +81,9 @@ b?.length()                     // 如果b不为空对象，则取b的长度
 val d: String? = c as? String
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;流程控制:264dc76c17987165debdd663a9ab017a&#34;&gt;流程控制&lt;/h3&gt;
+&lt;h3 id=&#34;流程控制&#34;&gt;流程控制&lt;/h3&gt;
 
-&lt;h4 id=&#34;if:264dc76c17987165debdd663a9ab017a&#34;&gt;&lt;code&gt;if&lt;/code&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;if&#34;&gt;&lt;code&gt;if&lt;/code&gt;&lt;/h4&gt;
 
 &lt;p&gt;Kotlin的&lt;code&gt;if&lt;/code&gt;表达式与Java的一样，只是Kotlin中没有三目表达式，所以&lt;code&gt;if&lt;/code&gt;和&lt;code&gt;else&lt;/code&gt;可以这样写：&lt;/p&gt;
 
@@ -93,7 +92,7 @@ val b = 2
 val max = if (a &amp;gt; b) a else b   // 类似Java的: int max = a &amp;gt; b?a:b;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;when:264dc76c17987165debdd663a9ab017a&#34;&gt;&lt;code&gt;when&lt;/code&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;when&#34;&gt;&lt;code&gt;when&lt;/code&gt;&lt;/h4&gt;
 
 &lt;p&gt;Kotlin用&lt;code&gt;When&lt;/code&gt;表达式来替代Java的&lt;code&gt;Switch&lt;/code&gt;：&lt;/p&gt;
 
@@ -106,7 +105,7 @@ val max = if (a &amp;gt; b) a else b   // 类似Java的: int max = a &amp;gt; b?
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;for:264dc76c17987165debdd663a9ab017a&#34;&gt;&lt;code&gt;for&lt;/code&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;for&#34;&gt;&lt;code&gt;for&lt;/code&gt;&lt;/h4&gt;
 
 &lt;p&gt;Kotlin的&lt;code&gt;for&lt;/code&gt;表达式和Java的&lt;code&gt;foreach&lt;/code&gt;一致。&lt;/p&gt;
 
@@ -114,7 +113,7 @@ val max = if (a &amp;gt; b) a else b   // 类似Java的: int max = a &amp;gt; b?
   print(array[i])
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;while:264dc76c17987165debdd663a9ab017a&#34;&gt;&lt;code&gt;while&lt;/code&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;while&#34;&gt;&lt;code&gt;while&lt;/code&gt;&lt;/h4&gt;
 
 &lt;p&gt;&lt;code&gt;while&lt;/code&gt;表达式和Java的一样。&lt;/p&gt;
 
@@ -127,7 +126,7 @@ do {
 } while (y != null)     // 与Java不同
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;函数:264dc76c17987165debdd663a9ab017a&#34;&gt;函数&lt;/h3&gt;
+&lt;h3 id=&#34;函数&#34;&gt;函数&lt;/h3&gt;
 
 &lt;p&gt;与Java不同的是，Kotlin的函数是一等成员，不需要在类内定义，是可以脱离类存在的，而且Kotlin是不支持类静态方法的。&lt;/p&gt;
 
@@ -149,7 +148,7 @@ fun add(a: Int, b: Int):Int{
 
 &lt;p&gt;在这种情况下，函数默认返回最后计算的结果。&lt;/p&gt;
 
-&lt;h4 id=&#34;扩展类的函数:264dc76c17987165debdd663a9ab017a&#34;&gt;扩展类的函数&lt;/h4&gt;
+&lt;h4 id=&#34;扩展类的函数&#34;&gt;扩展类的函数&lt;/h4&gt;
 
 &lt;p&gt;通常开发中，我们往往要对提供的API类进行扩展，增加一些方法，如果是Java的话，要想这样做，则声明一个继承该API的子类。Kotlin采取了C#的办法，可以直接扩展类的方法：&lt;/p&gt;
 
@@ -167,7 +166,7 @@ fun add(a: Int, b: Int):Int{
 
 &lt;p&gt;这样，在旧的手机上，APP就可以用自定义的&lt;code&gt;setBackground&lt;/code&gt;的Wrapper，而在高版本的手机上APP会调用原生的&lt;code&gt;setBackground&lt;/code&gt;方法。&lt;/p&gt;
 
-&lt;h4 id=&#34;lambda表达式:264dc76c17987165debdd663a9ab017a&#34;&gt;Lambda表达式&lt;/h4&gt;
+&lt;h4 id=&#34;lambda表达式&#34;&gt;Lambda表达式&lt;/h4&gt;
 
 &lt;p&gt;Kotlin引入了Lambda表达式，而且Kotlin的Lambda表达式支持Android平台：&lt;/p&gt;
 
@@ -177,7 +176,7 @@ fun add(a: Int, b: Int):Int{
 &lt;p&gt;这样，我们就可以不用写那么多监听器对象了。
 ]&lt;/p&gt;
 
-&lt;h3 id=&#34;类:264dc76c17987165debdd663a9ab017a&#34;&gt;类&lt;/h3&gt;
+&lt;h3 id=&#34;类&#34;&gt;类&lt;/h3&gt;
 
 &lt;p&gt;Kotlin的类是这样声明的：&lt;/p&gt;
 
@@ -230,7 +229,7 @@ val user = User(1, &amp;quot;Kesco&amp;quot;)
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;getter和setter:264dc76c17987165debdd663a9ab017a&#34;&gt;Getter和Setter&lt;/h4&gt;
+&lt;h4 id=&#34;getter和setter&#34;&gt;Getter和Setter&lt;/h4&gt;
 
 &lt;p&gt;Kotlin的Setter和Getter编码风格与C#类似：&lt;/p&gt;
 
@@ -244,7 +243,7 @@ val user = User(1, &amp;quot;Kesco&amp;quot;)
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;data-class:264dc76c17987165debdd663a9ab017a&#34;&gt;Data Class&lt;/h4&gt;
+&lt;h4 id=&#34;data-class&#34;&gt;Data Class&lt;/h4&gt;
 
 &lt;p&gt;Kotlin的类可以申明&lt;code&gt;data&lt;/code&gt;关键字，相当与专用与存储数据的Pojo类：&lt;/p&gt;
 
@@ -258,7 +257,7 @@ val (id, name) = jane
 println(&amp;quot;$name id is $id&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;内部类:264dc76c17987165debdd663a9ab017a&#34;&gt;内部类&lt;/h4&gt;
+&lt;h4 id=&#34;内部类&#34;&gt;内部类&lt;/h4&gt;
 
 &lt;p&gt;Kotlin同样支持内部类，但是Kotlin的内部类是默认不带有外部类的引用的，也就是说默认的Kotlin内部类都是静态的。要想内部类带有外部类的引用，要在内部类声明上加入&lt;code&gt;inner&lt;/code&gt;关键字：&lt;/p&gt;
 
@@ -269,7 +268,7 @@ println(&amp;quot;$name id is $id&amp;quot;)
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;接口:264dc76c17987165debdd663a9ab017a&#34;&gt;接口&lt;/h3&gt;
+&lt;h3 id=&#34;接口&#34;&gt;接口&lt;/h3&gt;
 
 &lt;p&gt;Kotlin的接口和Java的类似，而且还支持Java 8的默认方法：&lt;/p&gt;
 
@@ -281,7 +280,7 @@ println(&amp;quot;$name id is $id&amp;quot;)
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;android工程中配置kotlin:264dc76c17987165debdd663a9ab017a&#34;&gt;Android工程中配置Kotlin&lt;/h2&gt;
+&lt;h2 id=&#34;android工程中配置kotlin&#34;&gt;Android工程中配置Kotlin&lt;/h2&gt;
 
 &lt;p&gt;在Android项目中使用Kotlin非常简单，而且Kotlin可以和Java混编，所以完全部分功能用Kotlin开发，部分功能用Java开发。&lt;/p&gt;
 

@@ -4,17 +4,20 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>CMake解决动态链接库RPATH错误问题 &middot; Kesco Lin</title>
-        <meta name="description" content="">
+        <meta name="description" content="最近在做C&#43;&#43;开发，在MBP上用Cmake构建项目的时候，发现make install之后生成的执行文件会运行出错：
+dyld: Library not loaded: @rpath/libadk.dylib Referenced from: /Users/kesco/Documents/workspaces/cpp/apue_practise/build/bin/./thread Reason: image not found [1] 52362 trace trap ./thread  提示我，动态链接库(libadk.dylib也是工程内的一个子项目)找不着。这就奇怪了，因为我make install安装的时候，是把动态链接库和执行文件都放在同一个目录下的。为啥会找不着呢，而之前在Windows下是没问题的，后来查了下Cmake的文档，原来是Cmake版本的问题=_&#43;。
+如果你的CMakeList.txt上写的cmake_minium_required为2.6的话，会报下面异常：
+.... CMake Warning (dev): Policy CMP0042 is not set: MACOSX_RPATH is enabled by default. Run &quot;cmake --help-policy CMP0042&quot; for policy details. Use the cmake_policy command to set the policy and suppress this warning. MACOSX_RPATH is not specified for the following targets: cjson iniparser stemmer word2vec This warning is for project developers.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.16-DEV" />
+        <meta name="generator" content="Hugo 0.18.1" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="http://kescoode.com/css/normalize.css">
-        <link rel="stylesheet" href="http://kescoode.com/css/highlight.css">
-        <link rel="stylesheet" href="http://kescoode.com/css/style.css">
+        
+        <link rel="stylesheet" href="http://kescoode.com/dist/styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        
     </head>
     <body>
         
@@ -41,9 +44,11 @@ ga('send', 'pageview');
                         <a class="button-square" href="http://kescoode.com/index.xml"><i class="fa fa-rss"></i></a>
                         
                         
+                        
                             <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kesco">
                                 <i class="fa fa-github-alt"></i>
                             </a>
+                        
                         
                         
                         
@@ -79,7 +84,7 @@ ga('send', 'pageview');
     <p class="post-date">
         <span>发布于 <time datetime="2016-01-05" itemprop="datePublished">2016年01月05</time></span>
         <span>by</span>
-        <span itemscope="" itemprop="author" itemtype="http://schema.org/Person">
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
             <span itemprop="name">
                 <a href="http://kescoode.com" itemprop="url" rel="author">Kesco Lin</a>
             </span>
@@ -143,7 +148,7 @@ add_subdirectory(thread)
 
 <p>重新用<code>cmake</code>生成MakeFile构建就不会报错了。不过，<code>RPATH</code>是啥呢？以前写C++的时候都是在Windows上开着VS来的，没遇到过这样的问题，现在遇到了，自然要查清楚。</p>
 
-<h2 id="什么是rpath:f0efe6952c0937671014fd6e01982033">什么是RPATH?</h2>
+<h2 id="什么是rpath">什么是RPATH?</h2>
 
 <p>在Linux环境下，使用动态链接的程序在运行时会自动链接<code>ld.so</code>这个库(OS X上是<code>dyld</code>)，然后通过<code>ld.so</code>来查找链接其它的库。而<code>RPATH</code>就是编译的时候链接到执行文件的链接库路径。OS X在<code>RPATH</code>的设置上和Linux还是有点出入的，OS X的<code>RPATH</code>采用的是绝对路径。</p>
 
@@ -153,11 +158,11 @@ add_subdirectory(thread)
 3. <code>/etc/ld.so.conf</code>，系统对<code>ld.so</code>的路径配置文件。
 4. <code>/usr/lib</code>、<code>/lib</code>和<code>/usr/local/lib</code>，系统默认路径。</p>
 
-<h2 id="cmake和rpath:f0efe6952c0937671014fd6e01982033">Cmake和RPATH</h2>
+<h2 id="cmake和rpath">Cmake和RPATH</h2>
 
 <p>在分发程序的时候，执行文件使用的链接库在系统内不一定会有，或者自带了的版本不对，一般都会在程序文件夹内都会附带相应的链接库，所以最好还是把<code>RPATH</code>加上。Cmake对RPATH提供了很多选项支持，我们一般只关注这几个变量就好了：<code>CMAKE_SKIP_BUILD_RPATH</code>、<code>CMAKE_BUILD_WITH_INSTALL_RPATH</code>、<code>CMAKE_INSTALL_RPATH</code>和<code>CMAKE_INSTALL_RPATH_USE_LINK_PATH</code>。</p>
 
-<h3 id="默认rpath设置:f0efe6952c0937671014fd6e01982033">默认RPATH设置</h3>
+<h3 id="默认rpath设置">默认RPATH设置</h3>
 
 <pre><code class="language-cmake">set(CMAKE_SKIP_BUILD_RPATH FALSE)                 # 编译时加上RPATH
 set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)         # 编译时RPATH不使用安装的RPATH
@@ -167,7 +172,7 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)      # 安装的执行文件不加�
 
 <p>Cmake在默认情况下，<code>make install</code>会把安装的执行文件的<code>RPATH</code>删掉的，所以就会出现上面我执行安装好的执行文件报错的问题。</p>
 
-<h3 id="加上完整的rpath:f0efe6952c0937671014fd6e01982033">加上完整的RPATH</h3>
+<h3 id="加上完整的rpath">加上完整的RPATH</h3>
 
 <p>Cmake的默认设置我们肯定是不能使用的，我们需要一个安装的时候也要带上<code>RPATH</code>的设置。</p>
 
@@ -194,12 +199,39 @@ endif(&quot;${isSystemDir}&quot; STREQUAL &quot;-1&quot;)
         <p class="post-tags">
             <span>Tagged:</span>
             
-                 <a href="http://kescoode.com/tags/c/">C&#43;&#43;</a>
             
-                 <a href="http://kescoode.com/tags/cmake/">CMake</a>
+                <a href="http://kescoode.com/tags/c&#43;&#43;/">C&#43;&#43;</a>, 
+            
+                <a href="http://kescoode.com/tags/cmake/">CMake</a>
             
         </p>
     
+
+    <div class="share">
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=CMake%e8%a7%a3%e5%86%b3%e5%8a%a8%e6%80%81%e9%93%be%e6%8e%a5%e5%ba%93RPATH%e9%94%99%e8%af%af%e9%97%ae%e9%a2%98&url=http%3a%2f%2fkescoode.com%2fcmake-rpath-problem%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
+
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkescoode.com%2fcmake-rpath-problem%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
+
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fkescoode.com%2fcmake-rpath-problem%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+    </div>
 </footer>
 
         
@@ -239,7 +271,7 @@ endif(&quot;${isSystemDir}&quot; STREQUAL &quot;-1&quot;)
                 </div>
 
                 <p class="footer-copyright">
-                    <span>&copy; 2016 / Powered by <a href="http://gohugo.io/">Hugo</a></span>
+                    <span>&copy; 2016 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
                 </p>
                 <p class="footer-copyright">
                     <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
@@ -249,7 +281,7 @@ endif(&quot;${isSystemDir}&quot; STREQUAL &quot;-1&quot;)
         </footer>
 
         <script src="http://kescoode.com/js/jquery-1.11.3.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
         <script src="http://kescoode.com/js/jquery.fitvids.js"></script>
         <script src="http://kescoode.com/js/scripts.js"></script>
     </body>

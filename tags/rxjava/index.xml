@@ -2,12 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rxjava on Kesco的编码世界</title>
-    <link>http://kescoode.com/tags/rxjava/</link>
+    <link>http://kescoode.com/tags/rxjava/index.xml</link>
     <description>Recent content in Rxjava on Kesco的编码世界</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>Copyright (c) 2015. All rights reserved.</copyright>
-    <lastBuildDate>Wed, 23 Sep 2015 13:55:08 +0800</lastBuildDate>
     <atom:link href="http://kescoode.com/tags/rxjava/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -24,7 +23,7 @@
 
 &lt;p&gt;在这篇文档，主要是写下RxJava的用法。&lt;/p&gt;
 
-&lt;h2 id=&#34;基本概念:cfa8a1707a74560bca456d9e617ff266&#34;&gt;基本概念&lt;/h2&gt;
+&lt;h2 id=&#34;基本概念&#34;&gt;基本概念&lt;/h2&gt;
 
 &lt;p&gt;官方对Rx的表述是：&lt;/p&gt;
 
@@ -34,13 +33,13 @@
 
 &lt;p&gt;而Rx的响应式编程概念以我的理解，我觉得可以简单的概括为“观察者模式+管道操作符”，而实际上，RxJava的操作过程就是： &amp;ldquo;Observable -&amp;gt; Operators -&amp;gt; Subscriber&amp;rdquo;。显而易见的，&lt;code&gt;Observable&lt;/code&gt;为模型中的目标对象，&lt;code&gt;Subscriber&lt;/code&gt;为观察者，而&lt;code&gt;Operators&lt;/code&gt;负责目标对象发出的信息给观察者们的分发，也就是管道。其中&lt;code&gt;Operators&lt;/code&gt;是Rx最关键的一部分，&lt;code&gt;Operators&lt;/code&gt;不仅可以分发信息，而且可以对信息数据进行各种处理，甚至可以把信息回馈到另外的目标对象中。这样做，可以完成&lt;code&gt;Subscriber&lt;/code&gt;和&lt;code&gt;Observable&lt;/code&gt;的解耦。&lt;/p&gt;
 
-&lt;h2 id=&#34;使用方法:cfa8a1707a74560bca456d9e617ff266&#34;&gt;使用方法&lt;/h2&gt;
+&lt;h2 id=&#34;使用方法&#34;&gt;使用方法&lt;/h2&gt;
 
 &lt;p&gt;根据上面的表述，RxJava的使用方法非常简单，也就是我们定义好工作目标Observable和观察者Subscriber，然后把他们组合在一起就可以了，如果有必要对中间的流程进行处理，则在中间加入相应的Operators。&lt;/p&gt;
 
 &lt;p&gt;不过，首先我们要在项目中引入RxJava库。&lt;/p&gt;
 
-&lt;h3 id=&#34;在android工程中引入rxjava:cfa8a1707a74560bca456d9e617ff266&#34;&gt;在Android工程中引入RxJava&lt;/h3&gt;
+&lt;h3 id=&#34;在android工程中引入rxjava&#34;&gt;在Android工程中引入RxJava&lt;/h3&gt;
 
 &lt;p&gt;随着ADT停止更新，现在绝大部分Android开发都是使用Android Studio或者Intellij Idea了，这两者都是基于Gradle来构建Android工程的，那么我们可以直接引入RxJava Maven Repo即可在项目中使用RxJava了：&lt;/p&gt;
 
@@ -51,7 +50,7 @@
 
 &lt;p&gt;另外，虽然RxJava最低支持到Java 6，但是总所周知，Java是个纯面向对象语言，它并没有支持函数式编程，也只有在Java 8的时候，Java 8引入几个函数式编程元素(Lambda表达式、默认方法和函数式引用)。而Rx是个函数式编程框架库，在Java 7之前使用的话，代码看起来会非常别扭，所以最好是在Java 8的环境中使用。不过Android现在官方支持只到Java 7，没支持Java 8，要想在Android中使用Java 8，则必须加入第三方插件。&lt;/p&gt;
 
-&lt;h3 id=&#34;最简单的模式:cfa8a1707a74560bca456d9e617ff266&#34;&gt;最简单的模式&lt;/h3&gt;
+&lt;h3 id=&#34;最简单的模式&#34;&gt;最简单的模式&lt;/h3&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Observable -&amp;gt; Subscriber&lt;/p&gt;
@@ -149,7 +148,7 @@ Action1&amp;lt;List&amp;lt;User&amp;gt;&amp;gt; subscriber = new Action1&amp;lt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Observable.just(users).subscribe(args -&amp;gt; adapter.setDataSet(args));
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;加入operators:cfa8a1707a74560bca456d9e617ff266&#34;&gt;加入Operators&lt;/h3&gt;
+&lt;h3 id=&#34;加入operators&#34;&gt;加入Operators&lt;/h3&gt;
 
 &lt;p&gt;很多时候，我们需要针对处理过的事件做出响应，而不仅仅是Observable产生的原始事件。最明显的例子就是网络请求回来的数据往往是JSON数据，我们还要对此进行序列化成相应的业务操作才可以传递给前台，这里就需要引入operator来处理JSON数据。&lt;/p&gt;
 
@@ -174,7 +173,7 @@ Action1&amp;lt;List&amp;lt;User&amp;gt;&amp;gt; subscriber = new Action1&amp;lt;
 
 &lt;p&gt;RxJava中的Operator一共有二十几个，而且自己也可以自定义Operators，这正式RxJava比一般的异步框架优秀的地方，由于自带的Operators数量过多，这里就不一一讲述了，需要的可以查下&lt;a href=&#34;http://reactivex.io/documentation/operators.html&#34;&gt;文档&lt;/a&gt;。&lt;/p&gt;
 
-&lt;h3 id=&#34;任务订阅:cfa8a1707a74560bca456d9e617ff266&#34;&gt;任务订阅&lt;/h3&gt;
+&lt;h3 id=&#34;任务订阅&#34;&gt;任务订阅&lt;/h3&gt;
 
 &lt;p&gt;前面缺少了RxJava的一个细节，就是实际上执行Observable.subscribe()时，它会返回一个Subscrition,它代表了Observable和Subscriber之间的关系。我们可以通过Subscrition解除Observable和Subscriber之间的订阅关系，并立即停止执行整个订阅链，比如要取消上述显示用户列表操作，我们可以这样做：&lt;/p&gt;
 
@@ -185,7 +184,7 @@ subscription.unsubscribe();
 Log.d(&amp;quot;test&amp;quot;, &amp;quot;isSubscribed = &amp;quot; + subscription.isUnsubscribed());
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;多线程操作:cfa8a1707a74560bca456d9e617ff266&#34;&gt;多线程操作&lt;/h3&gt;
+&lt;h3 id=&#34;多线程操作&#34;&gt;多线程操作&lt;/h3&gt;
 
 &lt;p&gt;Android的多线程机制是UI渲染跑在Main Thread上的，也就是说主线程不能阻塞，不然App就会出现卡顿，所以我们一般都把业务逻辑处理放在后台线程进行。在RxJava中，你可以通过subscribeOn()来指定Observer的运行线程，通过observeOn()指定Subscriber的运行线程。这两个方法都是operator，因此它们可以像所有operator那样作用于任何的Observable。比如上面的例子，我们可以把JSON解析放在后台线程，然后在Main Thread中更新用户信息：&lt;/p&gt;
 
@@ -198,7 +197,7 @@ Log.d(&amp;quot;test&amp;quot;, &amp;quot;isSubscribed = &amp;quot; + subscripti
 
 &lt;p&gt;值得注意的是RxJava自带的&lt;code&gt;Schedulers.io&lt;/code&gt;和&lt;code&gt;Schedulers.compute&lt;/code&gt;两种异步多线程Scheduler开启的线程的级别都是与Main Thread一样的，这样后台线程占用的资源大的话，主线程还是会卡的，所以最好还是自己自定义一个Scheduler。&lt;/p&gt;
 
-&lt;h3 id=&#34;mvp:cfa8a1707a74560bca456d9e617ff266&#34;&gt;MVP&lt;/h3&gt;
+&lt;h3 id=&#34;mvp&#34;&gt;MVP&lt;/h3&gt;
 
 &lt;p&gt;RxJava中的Observable、Operators和Subcribers是各自独立的，所以我们可以很容易的针对不同场景复用不同部分的代码。&lt;/p&gt;
 

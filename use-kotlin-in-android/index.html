@@ -4,17 +4,24 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>用Kotlin编写Android应用 &middot; Kesco Lin</title>
-        <meta name="description" content="">
+        <meta name="description" content="最近，Kotlin在外面比较火，外面的呼声也很大。我也是今年4月份看到Jake Wharton的这篇文章后才开始关注的。后来，因为工作项目中，引用了ikew0ng巨巨的SwipBackLayout拖拽关闭页面库，而作者本人又不继续维护了，所以我试着用Kotlin参考SwipBackLayout，自己撸了一个轮子SlideBack，发现用Kotlin来开发Android还是比较舒服的。
+最近，开发团队内技术分享，我做了个简单的PPT，就是简单介绍下Kotlin的。
+语法 Kotlin的语法非常简洁，熟悉Java的开发者可以快速上手。而且JetBrain系的IDE上还可以一键把已有的Java代码转换成Kotlin代码(不得不说一键傻瓜式操作系列真的非常人性化=_=)，有点像Groovy，开发者可以一开始以Java的风格写Kotlin代码，然后慢慢转成Kotlin自己的风格。详细的语法可参考Kotlin官方教程，这里做个简短介绍。
+声明对象 Kotlin的一切变量都是对象，所以没有Java那样的基本类型。Kotlin声明对象有两种类型：
+ 可变对象  var x = 5 // 类型推断为`Int`型 var b: String = &quot;Hello&quot; // String型   不可变对象，Kotlin没有final关键字，而且不存在静态变量  val x = 5 // 不可变`Int`型变量 x &#43;= 1 // 编译器会报错  从代码片段可以看出，Kotlin不需要在每行结束加分号。
+区分非空类型 在Kotlin中，nullable对象和nullable对象是严格区分的，甚至在编译期解决了不少潜在的空指针问题。声明变量时，对变量的类型都是默认非空的，如果要允许变量为空，必须在定义类型后面加个?：
+var a: String = &quot;hello&quot; // a字符串不可为空 var b: String? = &quot;hello&quot; // b字符串可以为空 a = null // 编译器会报错 b = null // OK!!!  而且，在对有可能为空的对象进行操作时，编译器会提示Warning。同时，Kotlin提供类似Ruby和CoffeeScript的语法糖：
+var b: String?">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.16-DEV" />
+        <meta name="generator" content="Hugo 0.18.1" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="http://kescoode.com/css/normalize.css">
-        <link rel="stylesheet" href="http://kescoode.com/css/highlight.css">
-        <link rel="stylesheet" href="http://kescoode.com/css/style.css">
+        
+        <link rel="stylesheet" href="http://kescoode.com/dist/styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        
     </head>
     <body>
         
@@ -41,9 +48,11 @@ ga('send', 'pageview');
                         <a class="button-square" href="http://kescoode.com/index.xml"><i class="fa fa-rss"></i></a>
                         
                         
+                        
                             <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kesco">
                                 <i class="fa fa-github-alt"></i>
                             </a>
+                        
                         
                         
                         
@@ -79,7 +88,7 @@ ga('send', 'pageview');
     <p class="post-date">
         <span>发布于 <time datetime="2015-08-26" itemprop="datePublished">2015年08月26</time></span>
         <span>by</span>
-        <span itemscope="" itemprop="author" itemtype="http://schema.org/Person">
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
             <span itemprop="name">
                 <a href="http://kescoode.com" itemprop="url" rel="author">Kesco Lin</a>
             </span>
@@ -96,11 +105,11 @@ ga('send', 'pageview');
 
 <p>最近，开发团队内技术分享，我做了个简单的<a href="http://kesco.github.io/kotlin_intrudction">PPT</a>，就是简单介绍下Kotlin的。</p>
 
-<h2 id="语法:264dc76c17987165debdd663a9ab017a">语法</h2>
+<h2 id="语法">语法</h2>
 
 <p>Kotlin的语法非常简洁，熟悉Java的开发者可以快速上手。而且JetBrain系的IDE上还可以一键把已有的Java代码转换成Kotlin代码(不得不说一键傻瓜式操作系列真的非常人性化=_=)，有点像Groovy，开发者可以一开始以Java的风格写Kotlin代码，然后慢慢转成Kotlin自己的风格。详细的语法可参考<a href="http://kotlinlang.org/docs/reference/">Kotlin官方教程</a>，这里做个简短介绍。</p>
 
-<h3 id="声明对象:264dc76c17987165debdd663a9ab017a">声明对象</h3>
+<h3 id="声明对象">声明对象</h3>
 
 <p>Kotlin的一切变量都是对象，所以没有Java那样的基本类型。Kotlin声明对象有两种类型：</p>
 
@@ -122,7 +131,7 @@ x += 1                          // 编译器会报错
 
 <p>从代码片段可以看出，Kotlin不需要在每行结束加分号。</p>
 
-<h3 id="区分非空类型:264dc76c17987165debdd663a9ab017a">区分非空类型</h3>
+<h3 id="区分非空类型">区分非空类型</h3>
 
 <p>在Kotlin中，nullable对象和nullable对象是严格区分的，甚至在编译期解决了不少潜在的空指针问题。声明变量时，对变量的类型都是默认非空的，如果要允许变量为空，必须在定义类型后面加个<code>?</code>：</p>
 
@@ -138,7 +147,7 @@ b = null                        // OK!!!
 b?.length()                     // 如果b不为空对象，则取b的长度
 </code></pre>
 
-<h3 id="智能类型转换:264dc76c17987165debdd663a9ab017a">智能类型转换</h3>
+<h3 id="智能类型转换">智能类型转换</h3>
 
 <p>在Kotlin中，进行强制类型转换可以使用<code>as</code>关键字，但有可能会抛出异常：</p>
 
@@ -156,9 +165,9 @@ b?.length()                     // 如果b不为空对象，则取b的长度
 val d: String? = c as? String
 </code></pre>
 
-<h3 id="流程控制:264dc76c17987165debdd663a9ab017a">流程控制</h3>
+<h3 id="流程控制">流程控制</h3>
 
-<h4 id="if:264dc76c17987165debdd663a9ab017a"><code>if</code></h4>
+<h4 id="if"><code>if</code></h4>
 
 <p>Kotlin的<code>if</code>表达式与Java的一样，只是Kotlin中没有三目表达式，所以<code>if</code>和<code>else</code>可以这样写：</p>
 
@@ -167,7 +176,7 @@ val b = 2
 val max = if (a &gt; b) a else b   // 类似Java的: int max = a &gt; b?a:b;
 </code></pre>
 
-<h4 id="when:264dc76c17987165debdd663a9ab017a"><code>when</code></h4>
+<h4 id="when"><code>when</code></h4>
 
 <p>Kotlin用<code>When</code>表达式来替代Java的<code>Switch</code>：</p>
 
@@ -180,7 +189,7 @@ val max = if (a &gt; b) a else b   // 类似Java的: int max = a &gt; b?a:b;
 }
 </code></pre>
 
-<h4 id="for:264dc76c17987165debdd663a9ab017a"><code>for</code></h4>
+<h4 id="for"><code>for</code></h4>
 
 <p>Kotlin的<code>for</code>表达式和Java的<code>foreach</code>一致。</p>
 
@@ -188,7 +197,7 @@ val max = if (a &gt; b) a else b   // 类似Java的: int max = a &gt; b?a:b;
   print(array[i])
 </code></pre>
 
-<h4 id="while:264dc76c17987165debdd663a9ab017a"><code>while</code></h4>
+<h4 id="while"><code>while</code></h4>
 
 <p><code>while</code>表达式和Java的一样。</p>
 
@@ -201,7 +210,7 @@ do {
 } while (y != null)     // 与Java不同
 </code></pre>
 
-<h3 id="函数:264dc76c17987165debdd663a9ab017a">函数</h3>
+<h3 id="函数">函数</h3>
 
 <p>与Java不同的是，Kotlin的函数是一等成员，不需要在类内定义，是可以脱离类存在的，而且Kotlin是不支持类静态方法的。</p>
 
@@ -223,7 +232,7 @@ fun add(a: Int, b: Int):Int{
 
 <p>在这种情况下，函数默认返回最后计算的结果。</p>
 
-<h4 id="扩展类的函数:264dc76c17987165debdd663a9ab017a">扩展类的函数</h4>
+<h4 id="扩展类的函数">扩展类的函数</h4>
 
 <p>通常开发中，我们往往要对提供的API类进行扩展，增加一些方法，如果是Java的话，要想这样做，则声明一个继承该API的子类。Kotlin采取了C#的办法，可以直接扩展类的方法：</p>
 
@@ -241,7 +250,7 @@ fun add(a: Int, b: Int):Int{
 
 <p>这样，在旧的手机上，APP就可以用自定义的<code>setBackground</code>的Wrapper，而在高版本的手机上APP会调用原生的<code>setBackground</code>方法。</p>
 
-<h4 id="lambda表达式:264dc76c17987165debdd663a9ab017a">Lambda表达式</h4>
+<h4 id="lambda表达式">Lambda表达式</h4>
 
 <p>Kotlin引入了Lambda表达式，而且Kotlin的Lambda表达式支持Android平台：</p>
 
@@ -251,7 +260,7 @@ fun add(a: Int, b: Int):Int{
 <p>这样，我们就可以不用写那么多监听器对象了。
 ]</p>
 
-<h3 id="类:264dc76c17987165debdd663a9ab017a">类</h3>
+<h3 id="类">类</h3>
 
 <p>Kotlin的类是这样声明的：</p>
 
@@ -304,7 +313,7 @@ val user = User(1, &quot;Kesco&quot;)
 }
 </code></pre>
 
-<h4 id="getter和setter:264dc76c17987165debdd663a9ab017a">Getter和Setter</h4>
+<h4 id="getter和setter">Getter和Setter</h4>
 
 <p>Kotlin的Setter和Getter编码风格与C#类似：</p>
 
@@ -318,7 +327,7 @@ val user = User(1, &quot;Kesco&quot;)
 }
 </code></pre>
 
-<h4 id="data-class:264dc76c17987165debdd663a9ab017a">Data Class</h4>
+<h4 id="data-class">Data Class</h4>
 
 <p>Kotlin的类可以申明<code>data</code>关键字，相当与专用与存储数据的Pojo类：</p>
 
@@ -332,7 +341,7 @@ val (id, name) = jane
 println(&quot;$name id is $id&quot;)
 </code></pre>
 
-<h4 id="内部类:264dc76c17987165debdd663a9ab017a">内部类</h4>
+<h4 id="内部类">内部类</h4>
 
 <p>Kotlin同样支持内部类，但是Kotlin的内部类是默认不带有外部类的引用的，也就是说默认的Kotlin内部类都是静态的。要想内部类带有外部类的引用，要在内部类声明上加入<code>inner</code>关键字：</p>
 
@@ -343,7 +352,7 @@ println(&quot;$name id is $id&quot;)
 }
 </code></pre>
 
-<h3 id="接口:264dc76c17987165debdd663a9ab017a">接口</h3>
+<h3 id="接口">接口</h3>
 
 <p>Kotlin的接口和Java的类似，而且还支持Java 8的默认方法：</p>
 
@@ -355,7 +364,7 @@ println(&quot;$name id is $id&quot;)
 }
 </code></pre>
 
-<h2 id="android工程中配置kotlin:264dc76c17987165debdd663a9ab017a">Android工程中配置Kotlin</h2>
+<h2 id="android工程中配置kotlin">Android工程中配置Kotlin</h2>
 
 <p>在Android项目中使用Kotlin非常简单，而且Kotlin可以和Java混编，所以完全部分功能用Kotlin开发，部分功能用Java开发。</p>
 
@@ -392,12 +401,39 @@ println(&quot;$name id is $id&quot;)
         <p class="post-tags">
             <span>Tagged:</span>
             
-                 <a href="http://kescoode.com/tags/android/">Android</a>
             
-                 <a href="http://kescoode.com/tags/kotlin/">Kotlin</a>
+                <a href="http://kescoode.com/tags/android/">Android</a>, 
+            
+                <a href="http://kescoode.com/tags/kotlin/">Kotlin</a>
             
         </p>
     
+
+    <div class="share">
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=%e7%94%a8Kotlin%e7%bc%96%e5%86%99Android%e5%ba%94%e7%94%a8&url=http%3a%2f%2fkescoode.com%2fuse-kotlin-in-android%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
+
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkescoode.com%2fuse-kotlin-in-android%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
+
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fkescoode.com%2fuse-kotlin-in-android%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+    </div>
 </footer>
 
         
@@ -437,7 +473,7 @@ println(&quot;$name id is $id&quot;)
                 </div>
 
                 <p class="footer-copyright">
-                    <span>&copy; 2016 / Powered by <a href="http://gohugo.io/">Hugo</a></span>
+                    <span>&copy; 2016 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
                 </p>
                 <p class="footer-copyright">
                     <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
@@ -447,7 +483,7 @@ println(&quot;$name id is $id&quot;)
         </footer>
 
         <script src="http://kescoode.com/js/jquery-1.11.3.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
         <script src="http://kescoode.com/js/jquery.fitvids.js"></script>
         <script src="http://kescoode.com/js/scripts.js"></script>
     </body>

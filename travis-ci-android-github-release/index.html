@@ -4,17 +4,25 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>用Travis CI给Android项目部署Github Release &middot; Kesco Lin</title>
-        <meta name="description" content="">
+        <meta name="description" content="时至今日，互联网软件的开发和发布，已经形成了一套标准流程，其中一个重要部分就是持续集成(CI)。
+平时我工作中CI用得比较多的地方是按照git tag做应用渠道分发打包。最近写了一个拖拽手势Xposed插件SlideBack-Xposed，除了Xposed Module Repo外，我需要一个提供APK对外下载的地方。由于Google Play审核机制收紧了，单纯Xposed插件收录比较麻烦，而我又不想放到国内渠道上，于是我把注意力放到Github Release上。
+Github Release是Github推出的一个帮助开发者发布Repo最终软件包给用户的功能。Github Release是根据其Repo的Git标签来排序的，而且目前Github还没有限制Github Release的存储大小，不需担心空间不够用，所以一般情况下，已经可以了。同时，我们利用Travis CI来自动根据我们打的Git Tag来构建APK并Push到自己的Github Release上。
+启用Travis CI Travis CI是比较流行的开源持续构建平台，与Github结合比较紧密，对Github上的开源Repo是免费的，私有Repo收费（Circle CI也不错，而且对Github私有Repo也是免费的）。我们首先在Travis CI上打开对自己项目的Hook开关，那么当你每次Commit Push的时候，CI就会自动运行了。
+基础构建脚本 Travis CI使用YAML文件作为构建脚本，以最简单Android项目构建APK为例，只需在项目根目录创建.travis.yml文件：
+language: android android: components: - build-tools-22.0.1 - android-23 - extra-android-m2repository - extra-android-support script: - ./gradlew assembleRelease  然后git add . &amp;&amp; git commit &amp;&amp; git push即可。这里解释下，.travis.yml几个关键的Tag：
+ 因为Repo是Android项目，所以构建语言language选择android。 选择了Android项目后，就在android中的components的tag中设置Android项目需要的依赖。 Travis CI编译Android实际上也是调用项目中的构建脚本的。现在大部分Android项目都是用Gradle构建的，如果是要打Release版本的APK包，在script加入./gradlew assembleRelease就行了。  不过，实际上，单纯在CI上面打包，其实是没什么用处的，因为Travis CI每次任务完成之后，就会把所有生成的文件清掉，所以我们要把生成的APK传到Github Release上。
+发布Github Release Travis CI默认支持发布到Github Release上，不需要配置别的脚本，相应的YAML配置Tag是这样的：
+deploy: provider: releases api_key: &quot;GITHUB OAUTH TOKEN&quot; file: &quot;FILE TO UPLOAD&quot; skip_cleanup: true on: tags: true  值得注意的一点就是skip_cleanup这个Tag要设置为True，不这样做的话，Travis CI在部署之前就会清空生成的APK文件，那样你就什么都得不到了。api_key是部署到Github Release的凭证，需要开发者自己生成。如果不想那么麻烦的话，可以使用Travis CI提供的travis命令行工具。">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.16-DEV" />
+        <meta name="generator" content="Hugo 0.18.1" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="http://kescoode.com/css/normalize.css">
-        <link rel="stylesheet" href="http://kescoode.com/css/highlight.css">
-        <link rel="stylesheet" href="http://kescoode.com/css/style.css">
+        
+        <link rel="stylesheet" href="http://kescoode.com/dist/styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        
     </head>
     <body>
         
@@ -41,9 +49,11 @@ ga('send', 'pageview');
                         <a class="button-square" href="http://kescoode.com/index.xml"><i class="fa fa-rss"></i></a>
                         
                         
+                        
                             <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kesco">
                                 <i class="fa fa-github-alt"></i>
                             </a>
+                        
                         
                         
                         
@@ -79,7 +89,7 @@ ga('send', 'pageview');
     <p class="post-date">
         <span>发布于 <time datetime="2015-10-15" itemprop="datePublished">2015年10月15</time></span>
         <span>by</span>
-        <span itemscope="" itemprop="author" itemtype="http://schema.org/Person">
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
             <span itemprop="name">
                 <a href="http://kescoode.com" itemprop="url" rel="author">Kesco Lin</a>
             </span>
@@ -98,13 +108,13 @@ ga('send', 'pageview');
 
 <p>Github Release是Github推出的一个帮助开发者发布Repo最终软件包给用户的功能。Github Release是根据其Repo的Git标签来排序的，而且目前Github还没有限制Github Release的存储大小，不需担心空间不够用，所以一般情况下，已经可以了。同时，我们利用Travis CI来自动根据我们打的Git Tag来构建APK并Push到自己的Github Release上。</p>
 
-<h2 id="启用travis-ci:b639d5b4b149239dd3c7938b0bc65222">启用Travis CI</h2>
+<h2 id="启用travis-ci">启用Travis CI</h2>
 
 <p>Travis CI是比较流行的开源持续构建平台，与Github结合比较紧密，对Github上的开源Repo是免费的，私有Repo收费（Circle CI也不错，而且对Github私有Repo也是免费的）。我们首先在Travis CI上打开对自己项目的Hook开关，那么当你每次Commit Push的时候，CI就会自动运行了。</p>
 
 <p><img src="http://7mnom1.com1.z0.glb.clouddn.com/travis-enable-project.png" alt="travis-enable-project" /></p>
 
-<h2 id="基础构建脚本:b639d5b4b149239dd3c7938b0bc65222">基础构建脚本</h2>
+<h2 id="基础构建脚本">基础构建脚本</h2>
 
 <p>Travis CI使用YAML文件作为构建脚本，以最简单Android项目构建APK为例，只需在项目根目录创建<code>.travis.yml</code>文件：</p>
 
@@ -129,7 +139,7 @@ script:
 
 <p>不过，实际上，单纯在CI上面打包，其实是没什么用处的，因为Travis CI每次任务完成之后，就会把所有生成的文件清掉，所以我们要把生成的APK传到Github Release上。</p>
 
-<h2 id="发布github-release:b639d5b4b149239dd3c7938b0bc65222">发布Github Release</h2>
+<h2 id="发布github-release">发布Github Release</h2>
 
 <p>Travis CI默认支持发布到Github Release上，不需要配置别的脚本，相应的<code>YAML</code>配置Tag是这样的：</p>
 
@@ -181,7 +191,7 @@ deploy:
 
 <p>等等，难道这样就结束了吗？当然不了，这只是单纯把APK发送到Github Release上去。但是构建APK过程中还有很多问题，比如你在CI构建Release版本的APK的时候，要用到自己签名的密钥，对吧。我们当然不能把密钥的信息公开，那么该怎么做呢？</p>
 
-<h2 id="隐藏签名密钥信息:b639d5b4b149239dd3c7938b0bc65222">隐藏签名密钥信息</h2>
+<h2 id="隐藏签名密钥信息">隐藏签名密钥信息</h2>
 
 <p>Travis CI是通过Android项目中的build.gradle的信息来构建apk的，自然我们通过配置build.gradle脚本来签名apk也是很正常的事。但是在公开项目中暴露签名密钥信息是不安全的，有个简单的方法是，让gradle在CI构建的时候从CI的环境变量中读取密钥信息，这样可以降低点风险。</p>
 
@@ -248,14 +258,41 @@ deploy:
         <p class="post-tags">
             <span>Tagged:</span>
             
-                 <a href="http://kescoode.com/tags/android/">Android</a>
             
-                 <a href="http://kescoode.com/tags/github/">Github</a>
+                <a href="http://kescoode.com/tags/android/">Android</a>, 
             
-                 <a href="http://kescoode.com/tags/travis-ci/">Travis CI</a>
+                <a href="http://kescoode.com/tags/github/">Github</a>, 
+            
+                <a href="http://kescoode.com/tags/travis-ci/">Travis CI</a>
             
         </p>
     
+
+    <div class="share">
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=%e7%94%a8Travis%20CI%e7%bb%99Android%e9%a1%b9%e7%9b%ae%e9%83%a8%e7%bd%b2Github%20Release&url=http%3a%2f%2fkescoode.com%2ftravis-ci-android-github-release%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
+
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkescoode.com%2ftravis-ci-android-github-release%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
+
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fkescoode.com%2ftravis-ci-android-github-release%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+    </div>
 </footer>
 
         
@@ -295,7 +332,7 @@ deploy:
                 </div>
 
                 <p class="footer-copyright">
-                    <span>&copy; 2016 / Powered by <a href="http://gohugo.io/">Hugo</a></span>
+                    <span>&copy; 2016 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
                 </p>
                 <p class="footer-copyright">
                     <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
@@ -305,7 +342,7 @@ deploy:
         </footer>
 
         <script src="http://kescoode.com/js/jquery-1.11.3.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
         <script src="http://kescoode.com/js/jquery.fitvids.js"></script>
         <script src="http://kescoode.com/js/scripts.js"></script>
     </body>

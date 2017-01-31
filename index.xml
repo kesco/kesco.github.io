@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kesco的编码世界</title>
-    <link>http://kescoode.com/</link>
+    <link>http://kescoode.com/index.xml</link>
     <description>Recent content on Kesco的编码世界</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
@@ -18,9 +18,9 @@
       <guid>http://kescoode.com/works/</guid>
       <description>
 
-&lt;h2 id=&#34;android:5581952c111a7bf1180b42c7df1ca3f2&#34;&gt;Android&lt;/h2&gt;
+&lt;h2 id=&#34;android&#34;&gt;Android&lt;/h2&gt;
 
-&lt;h3 id=&#34;slideback-xposed-0:5581952c111a7bf1180b42c7df1ca3f2&#34;&gt;&lt;a href=&#34;http://github.com/kesco/SlideBack-Xposed&#34;&gt;SlideBack-Xposed&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;slideback-xposed-0&#34;&gt;&lt;a href=&#34;http://github.com/kesco/SlideBack-Xposed&#34;&gt;SlideBack-Xposed&lt;/a&gt;&lt;/h3&gt;
 
 &lt;p&gt;SlideBack－Xposed是一个给Android应用加入拖拽手势关闭Activity页面功能的Xposed插件。&lt;/p&gt;
 
@@ -30,9 +30,9 @@
 
 &lt;p&gt;&lt;img src=&#34;http://7mnom1.com1.z0.glb.clouddn.com/slideback.gif&#34; alt=&#34;Demo&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;web:5581952c111a7bf1180b42c7df1ca3f2&#34;&gt;Web&lt;/h2&gt;
+&lt;h2 id=&#34;web&#34;&gt;Web&lt;/h2&gt;
 
-&lt;h3 id=&#34;whilepage-2:5581952c111a7bf1180b42c7df1ca3f2&#34;&gt;&lt;a href=&#34;https://github.com/kesco/whilepage&#34;&gt;WhilePage&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;whilepage-2&#34;&gt;&lt;a href=&#34;https://github.com/kesco/whilepage&#34;&gt;WhilePage&lt;/a&gt;&lt;/h3&gt;
 
 &lt;p&gt;之前博客在DO搭建Ghost博客的时候使用的主题。&lt;/p&gt;
 
@@ -56,7 +56,7 @@
 
 &lt;p&gt;其实在下只是一个路过的图样图森破的骚年罢了。&lt;/p&gt;
 
-&lt;h2 id=&#34;联系方式:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;联系方式&lt;/h2&gt;
+&lt;h2 id=&#34;联系方式&#34;&gt;联系方式&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;E-mail: &lt;a href=&#34;mailto:kesco915@gmail.com&#34;&gt;kesco915@gmail.com&lt;/a&gt;&lt;/li&gt;
@@ -69,11 +69,11 @@
 &lt;li&gt;V2EX: &lt;a href=&#34;http://www.v2ex.com/?r=bringwin808&#34;&gt;bringwin808&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;工作的地方:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;工作的地方&lt;/h2&gt;
+&lt;h2 id=&#34;工作的地方&#34;&gt;工作的地方&lt;/h2&gt;
 
 &lt;p&gt;宇宙地球亚洲中国，一个基层码农。&lt;/p&gt;
 
-&lt;h2 id=&#34;关于这个博客:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;关于这个博客&lt;/h2&gt;
+&lt;h2 id=&#34;关于这个博客&#34;&gt;关于这个博客&lt;/h2&gt;
 
 &lt;p&gt;记录自己以前、现在以及未来二逼的生活。&lt;/p&gt;
 </description>
@@ -138,7 +138,7 @@ add_subdirectory(thread)
 
 &lt;p&gt;重新用&lt;code&gt;cmake&lt;/code&gt;生成MakeFile构建就不会报错了。不过，&lt;code&gt;RPATH&lt;/code&gt;是啥呢？以前写C++的时候都是在Windows上开着VS来的，没遇到过这样的问题，现在遇到了，自然要查清楚。&lt;/p&gt;
 
-&lt;h2 id=&#34;什么是rpath:f0efe6952c0937671014fd6e01982033&#34;&gt;什么是RPATH?&lt;/h2&gt;
+&lt;h2 id=&#34;什么是rpath&#34;&gt;什么是RPATH?&lt;/h2&gt;
 
 &lt;p&gt;在Linux环境下，使用动态链接的程序在运行时会自动链接&lt;code&gt;ld.so&lt;/code&gt;这个库(OS X上是&lt;code&gt;dyld&lt;/code&gt;)，然后通过&lt;code&gt;ld.so&lt;/code&gt;来查找链接其它的库。而&lt;code&gt;RPATH&lt;/code&gt;就是编译的时候链接到执行文件的链接库路径。OS X在&lt;code&gt;RPATH&lt;/code&gt;的设置上和Linux还是有点出入的，OS X的&lt;code&gt;RPATH&lt;/code&gt;采用的是绝对路径。&lt;/p&gt;
 
@@ -148,11 +148,11 @@ add_subdirectory(thread)
 3. &lt;code&gt;/etc/ld.so.conf&lt;/code&gt;，系统对&lt;code&gt;ld.so&lt;/code&gt;的路径配置文件。
 4. &lt;code&gt;/usr/lib&lt;/code&gt;、&lt;code&gt;/lib&lt;/code&gt;和&lt;code&gt;/usr/local/lib&lt;/code&gt;，系统默认路径。&lt;/p&gt;
 
-&lt;h2 id=&#34;cmake和rpath:f0efe6952c0937671014fd6e01982033&#34;&gt;Cmake和RPATH&lt;/h2&gt;
+&lt;h2 id=&#34;cmake和rpath&#34;&gt;Cmake和RPATH&lt;/h2&gt;
 
 &lt;p&gt;在分发程序的时候，执行文件使用的链接库在系统内不一定会有，或者自带了的版本不对，一般都会在程序文件夹内都会附带相应的链接库，所以最好还是把&lt;code&gt;RPATH&lt;/code&gt;加上。Cmake对RPATH提供了很多选项支持，我们一般只关注这几个变量就好了：&lt;code&gt;CMAKE_SKIP_BUILD_RPATH&lt;/code&gt;、&lt;code&gt;CMAKE_BUILD_WITH_INSTALL_RPATH&lt;/code&gt;、&lt;code&gt;CMAKE_INSTALL_RPATH&lt;/code&gt;和&lt;code&gt;CMAKE_INSTALL_RPATH_USE_LINK_PATH&lt;/code&gt;。&lt;/p&gt;
 
-&lt;h3 id=&#34;默认rpath设置:f0efe6952c0937671014fd6e01982033&#34;&gt;默认RPATH设置&lt;/h3&gt;
+&lt;h3 id=&#34;默认rpath设置&#34;&gt;默认RPATH设置&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-cmake&#34;&gt;set(CMAKE_SKIP_BUILD_RPATH FALSE)                 # 编译时加上RPATH
 set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)         # 编译时RPATH不使用安装的RPATH
@@ -162,7 +162,7 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)      # 安装的执行文件不加�
 
 &lt;p&gt;Cmake在默认情况下，&lt;code&gt;make install&lt;/code&gt;会把安装的执行文件的&lt;code&gt;RPATH&lt;/code&gt;删掉的，所以就会出现上面我执行安装好的执行文件报错的问题。&lt;/p&gt;
 
-&lt;h3 id=&#34;加上完整的rpath:f0efe6952c0937671014fd6e01982033&#34;&gt;加上完整的RPATH&lt;/h3&gt;
+&lt;h3 id=&#34;加上完整的rpath&#34;&gt;加上完整的RPATH&lt;/h3&gt;
 
 &lt;p&gt;Cmake的默认设置我们肯定是不能使用的，我们需要一个安装的时候也要带上&lt;code&gt;RPATH&lt;/code&gt;的设置。&lt;/p&gt;
 
@@ -194,13 +194,13 @@ endif(&amp;quot;${isSystemDir}&amp;quot; STREQUAL &amp;quot;-1&amp;quot;)
 
 &lt;p&gt;岁数越来越大，感觉时间过得越来越快。不知不觉，从深大毕业，进入金蝶工作已经一年多了。工作匆匆忙忙，很多事发生都没来得及体会就溜过去了，实在有必要写一写，整理记录下过去一年发生过的事。&lt;/p&gt;
 
-&lt;h2 id=&#34;部门拆分-好友离职:6396a17d5d38ac61429fe7aaa16821ef&#34;&gt;部门拆分，好友离职&lt;/h2&gt;
+&lt;h2 id=&#34;部门拆分-好友离职&#34;&gt;部门拆分，好友离职&lt;/h2&gt;
 
 &lt;p&gt;现在云之家终于独立成金蝶的一个子公司了，对于我们这些底层开发人员来说，其实没什么两样，待遇内部职称都没变，唯一体会的到的好处是年终分两次发了，一半随六月工资发，一半随十二月工资发。&lt;/p&gt;
 
 &lt;p&gt;去年和我一同进来的几个应届生也在6月份拿完半年终就走了，文彪去创业了，伟豪回去广州多玩。虽然工作中这现象很正常，但是就有点像毕业各奔东西一样，有点失落，可能刚进职场就是这样吧。最近年底了，队长也准备离职去写Python了，没想到去年四个应届就只剩我一个，虽然我准备做完手头的项目也打算离职了。&lt;/p&gt;
 
-&lt;h2 id=&#34;技术成长:6396a17d5d38ac61429fe7aaa16821ef&#34;&gt;技术成长&lt;/h2&gt;
+&lt;h2 id=&#34;技术成长&#34;&gt;技术成长&lt;/h2&gt;
 
 &lt;p&gt;金蝶是一家传统软件企业，虽然目前正积极往互联网方向转，但是在技术的运用上还是比较保守的（就不说组内我们吐槽的认证协议还是用OAuth 1.0a了）。不过，做为一个大公司，代码水平和架构都是非常不错的，虽没什么新颖的技术，但是对于加强编程基本功来说还是很有益的。&lt;/p&gt;
 
@@ -208,7 +208,7 @@ endif(&amp;quot;${isSystemDir}&amp;quot; STREQUAL &amp;quot;-1&amp;quot;)
 
 &lt;p&gt;知识点方面，因为工作需要，经常接触到HTTP、Oauth和POP3协议那些内容，终于把大学里缺失的部分补回来了。&lt;/p&gt;
 
-&lt;h2 id=&#34;读书:6396a17d5d38ac61429fe7aaa16821ef&#34;&gt;读书&lt;/h2&gt;
+&lt;h2 id=&#34;读书&#34;&gt;读书&lt;/h2&gt;
 
 &lt;p&gt;这一年里，由于搬家麻烦，我买纸质书少了，买了个iPad Air 2来看电子书，大部分电子书我都是通过多看iPad App来看的，多看的应用做得确实不错。&lt;/p&gt;
 
@@ -226,13 +226,13 @@ endif(&amp;quot;${isSystemDir}&amp;quot; STREQUAL &amp;quot;-1&amp;quot;)
 
 &lt;p&gt;现在看书主要都是对某一个问题或者目标有针对性的去看了，不像以前那样全部浏览过一遍，这样比较有效率一点吧，不过电子书做笔记比较麻烦，重复查看的时候不太方便，这点还是比不上纸质书啊。&lt;/p&gt;
 
-&lt;h2 id=&#34;搬家的折腾:6396a17d5d38ac61429fe7aaa16821ef&#34;&gt;搬家的折腾&lt;/h2&gt;
+&lt;h2 id=&#34;搬家的折腾&#34;&gt;搬家的折腾&lt;/h2&gt;
 
 &lt;p&gt;这一年一共搬了三次家，三次家……6月底因为舍友工作变化，和大学几个好朋友分租了，然后10月房东要卖房又搬到姐姐家暂住，最近才搬出来。每一次搬家都累成狗，我终于体验到离家打工的辛苦。&lt;/p&gt;
 
 &lt;p&gt;然后，就是还没有找到女朋友……&lt;/p&gt;
 
-&lt;h2 id=&#34;2016年新冀望:6396a17d5d38ac61429fe7aaa16821ef&#34;&gt;2016年新冀望&lt;/h2&gt;
+&lt;h2 id=&#34;2016年新冀望&#34;&gt;2016年新冀望&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;多读书，不要太限制在技术方面&lt;/li&gt;
@@ -256,13 +256,13 @@ endif(&amp;quot;${isSystemDir}&amp;quot; STREQUAL &amp;quot;-1&amp;quot;)
 
 &lt;p&gt;Github Release是Github推出的一个帮助开发者发布Repo最终软件包给用户的功能。Github Release是根据其Repo的Git标签来排序的，而且目前Github还没有限制Github Release的存储大小，不需担心空间不够用，所以一般情况下，已经可以了。同时，我们利用Travis CI来自动根据我们打的Git Tag来构建APK并Push到自己的Github Release上。&lt;/p&gt;
 
-&lt;h2 id=&#34;启用travis-ci:b639d5b4b149239dd3c7938b0bc65222&#34;&gt;启用Travis CI&lt;/h2&gt;
+&lt;h2 id=&#34;启用travis-ci&#34;&gt;启用Travis CI&lt;/h2&gt;
 
 &lt;p&gt;Travis CI是比较流行的开源持续构建平台，与Github结合比较紧密，对Github上的开源Repo是免费的，私有Repo收费（Circle CI也不错，而且对Github私有Repo也是免费的）。我们首先在Travis CI上打开对自己项目的Hook开关，那么当你每次Commit Push的时候，CI就会自动运行了。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;http://7mnom1.com1.z0.glb.clouddn.com/travis-enable-project.png&#34; alt=&#34;travis-enable-project&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;基础构建脚本:b639d5b4b149239dd3c7938b0bc65222&#34;&gt;基础构建脚本&lt;/h2&gt;
+&lt;h2 id=&#34;基础构建脚本&#34;&gt;基础构建脚本&lt;/h2&gt;
 
 &lt;p&gt;Travis CI使用YAML文件作为构建脚本，以最简单Android项目构建APK为例，只需在项目根目录创建&lt;code&gt;.travis.yml&lt;/code&gt;文件：&lt;/p&gt;
 
@@ -287,7 +287,7 @@ script:
 
 &lt;p&gt;不过，实际上，单纯在CI上面打包，其实是没什么用处的，因为Travis CI每次任务完成之后，就会把所有生成的文件清掉，所以我们要把生成的APK传到Github Release上。&lt;/p&gt;
 
-&lt;h2 id=&#34;发布github-release:b639d5b4b149239dd3c7938b0bc65222&#34;&gt;发布Github Release&lt;/h2&gt;
+&lt;h2 id=&#34;发布github-release&#34;&gt;发布Github Release&lt;/h2&gt;
 
 &lt;p&gt;Travis CI默认支持发布到Github Release上，不需要配置别的脚本，相应的&lt;code&gt;YAML&lt;/code&gt;配置Tag是这样的：&lt;/p&gt;
 
@@ -339,7 +339,7 @@ deploy:
 
 &lt;p&gt;等等，难道这样就结束了吗？当然不了，这只是单纯把APK发送到Github Release上去。但是构建APK过程中还有很多问题，比如你在CI构建Release版本的APK的时候，要用到自己签名的密钥，对吧。我们当然不能把密钥的信息公开，那么该怎么做呢？&lt;/p&gt;
 
-&lt;h2 id=&#34;隐藏签名密钥信息:b639d5b4b149239dd3c7938b0bc65222&#34;&gt;隐藏签名密钥信息&lt;/h2&gt;
+&lt;h2 id=&#34;隐藏签名密钥信息&#34;&gt;隐藏签名密钥信息&lt;/h2&gt;
 
 &lt;p&gt;Travis CI是通过Android项目中的build.gradle的信息来构建apk的，自然我们通过配置build.gradle脚本来签名apk也是很正常的事。但是在公开项目中暴露签名密钥信息是不安全的，有个简单的方法是，让gradle在CI构建的时候从CI的环境变量中读取密钥信息，这样可以降低点风险。&lt;/p&gt;
 
@@ -415,7 +415,7 @@ deploy:
 
 &lt;p&gt;在这篇文档，主要是写下RxJava的用法。&lt;/p&gt;
 
-&lt;h2 id=&#34;基本概念:cfa8a1707a74560bca456d9e617ff266&#34;&gt;基本概念&lt;/h2&gt;
+&lt;h2 id=&#34;基本概念&#34;&gt;基本概念&lt;/h2&gt;
 
 &lt;p&gt;官方对Rx的表述是：&lt;/p&gt;
 
@@ -425,13 +425,13 @@ deploy:
 
 &lt;p&gt;而Rx的响应式编程概念以我的理解，我觉得可以简单的概括为“观察者模式+管道操作符”，而实际上，RxJava的操作过程就是： &amp;ldquo;Observable -&amp;gt; Operators -&amp;gt; Subscriber&amp;rdquo;。显而易见的，&lt;code&gt;Observable&lt;/code&gt;为模型中的目标对象，&lt;code&gt;Subscriber&lt;/code&gt;为观察者，而&lt;code&gt;Operators&lt;/code&gt;负责目标对象发出的信息给观察者们的分发，也就是管道。其中&lt;code&gt;Operators&lt;/code&gt;是Rx最关键的一部分，&lt;code&gt;Operators&lt;/code&gt;不仅可以分发信息，而且可以对信息数据进行各种处理，甚至可以把信息回馈到另外的目标对象中。这样做，可以完成&lt;code&gt;Subscriber&lt;/code&gt;和&lt;code&gt;Observable&lt;/code&gt;的解耦。&lt;/p&gt;
 
-&lt;h2 id=&#34;使用方法:cfa8a1707a74560bca456d9e617ff266&#34;&gt;使用方法&lt;/h2&gt;
+&lt;h2 id=&#34;使用方法&#34;&gt;使用方法&lt;/h2&gt;
 
 &lt;p&gt;根据上面的表述，RxJava的使用方法非常简单，也就是我们定义好工作目标Observable和观察者Subscriber，然后把他们组合在一起就可以了，如果有必要对中间的流程进行处理，则在中间加入相应的Operators。&lt;/p&gt;
 
 &lt;p&gt;不过，首先我们要在项目中引入RxJava库。&lt;/p&gt;
 
-&lt;h3 id=&#34;在android工程中引入rxjava:cfa8a1707a74560bca456d9e617ff266&#34;&gt;在Android工程中引入RxJava&lt;/h3&gt;
+&lt;h3 id=&#34;在android工程中引入rxjava&#34;&gt;在Android工程中引入RxJava&lt;/h3&gt;
 
 &lt;p&gt;随着ADT停止更新，现在绝大部分Android开发都是使用Android Studio或者Intellij Idea了，这两者都是基于Gradle来构建Android工程的，那么我们可以直接引入RxJava Maven Repo即可在项目中使用RxJava了：&lt;/p&gt;
 
@@ -442,7 +442,7 @@ deploy:
 
 &lt;p&gt;另外，虽然RxJava最低支持到Java 6，但是总所周知，Java是个纯面向对象语言，它并没有支持函数式编程，也只有在Java 8的时候，Java 8引入几个函数式编程元素(Lambda表达式、默认方法和函数式引用)。而Rx是个函数式编程框架库，在Java 7之前使用的话，代码看起来会非常别扭，所以最好是在Java 8的环境中使用。不过Android现在官方支持只到Java 7，没支持Java 8，要想在Android中使用Java 8，则必须加入第三方插件。&lt;/p&gt;
 
-&lt;h3 id=&#34;最简单的模式:cfa8a1707a74560bca456d9e617ff266&#34;&gt;最简单的模式&lt;/h3&gt;
+&lt;h3 id=&#34;最简单的模式&#34;&gt;最简单的模式&lt;/h3&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Observable -&amp;gt; Subscriber&lt;/p&gt;
@@ -540,7 +540,7 @@ Action1&amp;lt;List&amp;lt;User&amp;gt;&amp;gt; subscriber = new Action1&amp;lt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Observable.just(users).subscribe(args -&amp;gt; adapter.setDataSet(args));
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;加入operators:cfa8a1707a74560bca456d9e617ff266&#34;&gt;加入Operators&lt;/h3&gt;
+&lt;h3 id=&#34;加入operators&#34;&gt;加入Operators&lt;/h3&gt;
 
 &lt;p&gt;很多时候，我们需要针对处理过的事件做出响应，而不仅仅是Observable产生的原始事件。最明显的例子就是网络请求回来的数据往往是JSON数据，我们还要对此进行序列化成相应的业务操作才可以传递给前台，这里就需要引入operator来处理JSON数据。&lt;/p&gt;
 
@@ -565,7 +565,7 @@ Action1&amp;lt;List&amp;lt;User&amp;gt;&amp;gt; subscriber = new Action1&amp;lt;
 
 &lt;p&gt;RxJava中的Operator一共有二十几个，而且自己也可以自定义Operators，这正式RxJava比一般的异步框架优秀的地方，由于自带的Operators数量过多，这里就不一一讲述了，需要的可以查下&lt;a href=&#34;http://reactivex.io/documentation/operators.html&#34;&gt;文档&lt;/a&gt;。&lt;/p&gt;
 
-&lt;h3 id=&#34;任务订阅:cfa8a1707a74560bca456d9e617ff266&#34;&gt;任务订阅&lt;/h3&gt;
+&lt;h3 id=&#34;任务订阅&#34;&gt;任务订阅&lt;/h3&gt;
 
 &lt;p&gt;前面缺少了RxJava的一个细节，就是实际上执行Observable.subscribe()时，它会返回一个Subscrition,它代表了Observable和Subscriber之间的关系。我们可以通过Subscrition解除Observable和Subscriber之间的订阅关系，并立即停止执行整个订阅链，比如要取消上述显示用户列表操作，我们可以这样做：&lt;/p&gt;
 
@@ -576,7 +576,7 @@ subscription.unsubscribe();
 Log.d(&amp;quot;test&amp;quot;, &amp;quot;isSubscribed = &amp;quot; + subscription.isUnsubscribed());
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;多线程操作:cfa8a1707a74560bca456d9e617ff266&#34;&gt;多线程操作&lt;/h3&gt;
+&lt;h3 id=&#34;多线程操作&#34;&gt;多线程操作&lt;/h3&gt;
 
 &lt;p&gt;Android的多线程机制是UI渲染跑在Main Thread上的，也就是说主线程不能阻塞，不然App就会出现卡顿，所以我们一般都把业务逻辑处理放在后台线程进行。在RxJava中，你可以通过subscribeOn()来指定Observer的运行线程，通过observeOn()指定Subscriber的运行线程。这两个方法都是operator，因此它们可以像所有operator那样作用于任何的Observable。比如上面的例子，我们可以把JSON解析放在后台线程，然后在Main Thread中更新用户信息：&lt;/p&gt;
 
@@ -589,7 +589,7 @@ Log.d(&amp;quot;test&amp;quot;, &amp;quot;isSubscribed = &amp;quot; + subscripti
 
 &lt;p&gt;值得注意的是RxJava自带的&lt;code&gt;Schedulers.io&lt;/code&gt;和&lt;code&gt;Schedulers.compute&lt;/code&gt;两种异步多线程Scheduler开启的线程的级别都是与Main Thread一样的，这样后台线程占用的资源大的话，主线程还是会卡的，所以最好还是自己自定义一个Scheduler。&lt;/p&gt;
 
-&lt;h3 id=&#34;mvp:cfa8a1707a74560bca456d9e617ff266&#34;&gt;MVP&lt;/h3&gt;
+&lt;h3 id=&#34;mvp&#34;&gt;MVP&lt;/h3&gt;
 
 &lt;p&gt;RxJava中的Observable、Operators和Subcribers是各自独立的，所以我们可以很容易的针对不同场景复用不同部分的代码。&lt;/p&gt;
 
@@ -690,11 +690,11 @@ class AvailableAppPresenterImpl(val ctx: Context) : AvailableAppPresenter {
 
 &lt;p&gt;最近，开发团队内技术分享，我做了个简单的&lt;a href=&#34;http://kesco.github.io/kotlin_intrudction&#34;&gt;PPT&lt;/a&gt;，就是简单介绍下Kotlin的。&lt;/p&gt;
 
-&lt;h2 id=&#34;语法:264dc76c17987165debdd663a9ab017a&#34;&gt;语法&lt;/h2&gt;
+&lt;h2 id=&#34;语法&#34;&gt;语法&lt;/h2&gt;
 
 &lt;p&gt;Kotlin的语法非常简洁，熟悉Java的开发者可以快速上手。而且JetBrain系的IDE上还可以一键把已有的Java代码转换成Kotlin代码(不得不说一键傻瓜式操作系列真的非常人性化=_=)，有点像Groovy，开发者可以一开始以Java的风格写Kotlin代码，然后慢慢转成Kotlin自己的风格。详细的语法可参考&lt;a href=&#34;http://kotlinlang.org/docs/reference/&#34;&gt;Kotlin官方教程&lt;/a&gt;，这里做个简短介绍。&lt;/p&gt;
 
-&lt;h3 id=&#34;声明对象:264dc76c17987165debdd663a9ab017a&#34;&gt;声明对象&lt;/h3&gt;
+&lt;h3 id=&#34;声明对象&#34;&gt;声明对象&lt;/h3&gt;
 
 &lt;p&gt;Kotlin的一切变量都是对象，所以没有Java那样的基本类型。Kotlin声明对象有两种类型：&lt;/p&gt;
 
@@ -716,7 +716,7 @@ x += 1                          // 编译器会报错
 
 &lt;p&gt;从代码片段可以看出，Kotlin不需要在每行结束加分号。&lt;/p&gt;
 
-&lt;h3 id=&#34;区分非空类型:264dc76c17987165debdd663a9ab017a&#34;&gt;区分非空类型&lt;/h3&gt;
+&lt;h3 id=&#34;区分非空类型&#34;&gt;区分非空类型&lt;/h3&gt;
 
 &lt;p&gt;在Kotlin中，nullable对象和nullable对象是严格区分的，甚至在编译期解决了不少潜在的空指针问题。声明变量时，对变量的类型都是默认非空的，如果要允许变量为空，必须在定义类型后面加个&lt;code&gt;?&lt;/code&gt;：&lt;/p&gt;
 
@@ -732,7 +732,7 @@ b = null                        // OK!!!
 b?.length()                     // 如果b不为空对象，则取b的长度
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;智能类型转换:264dc76c17987165debdd663a9ab017a&#34;&gt;智能类型转换&lt;/h3&gt;
+&lt;h3 id=&#34;智能类型转换&#34;&gt;智能类型转换&lt;/h3&gt;
 
 &lt;p&gt;在Kotlin中，进行强制类型转换可以使用&lt;code&gt;as&lt;/code&gt;关键字，但有可能会抛出异常：&lt;/p&gt;
 
@@ -750,9 +750,9 @@ b?.length()                     // 如果b不为空对象，则取b的长度
 val d: String? = c as? String
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;流程控制:264dc76c17987165debdd663a9ab017a&#34;&gt;流程控制&lt;/h3&gt;
+&lt;h3 id=&#34;流程控制&#34;&gt;流程控制&lt;/h3&gt;
 
-&lt;h4 id=&#34;if:264dc76c17987165debdd663a9ab017a&#34;&gt;&lt;code&gt;if&lt;/code&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;if&#34;&gt;&lt;code&gt;if&lt;/code&gt;&lt;/h4&gt;
 
 &lt;p&gt;Kotlin的&lt;code&gt;if&lt;/code&gt;表达式与Java的一样，只是Kotlin中没有三目表达式，所以&lt;code&gt;if&lt;/code&gt;和&lt;code&gt;else&lt;/code&gt;可以这样写：&lt;/p&gt;
 
@@ -761,7 +761,7 @@ val b = 2
 val max = if (a &amp;gt; b) a else b   // 类似Java的: int max = a &amp;gt; b?a:b;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;when:264dc76c17987165debdd663a9ab017a&#34;&gt;&lt;code&gt;when&lt;/code&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;when&#34;&gt;&lt;code&gt;when&lt;/code&gt;&lt;/h4&gt;
 
 &lt;p&gt;Kotlin用&lt;code&gt;When&lt;/code&gt;表达式来替代Java的&lt;code&gt;Switch&lt;/code&gt;：&lt;/p&gt;
 
@@ -774,7 +774,7 @@ val max = if (a &amp;gt; b) a else b   // 类似Java的: int max = a &amp;gt; b?
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;for:264dc76c17987165debdd663a9ab017a&#34;&gt;&lt;code&gt;for&lt;/code&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;for&#34;&gt;&lt;code&gt;for&lt;/code&gt;&lt;/h4&gt;
 
 &lt;p&gt;Kotlin的&lt;code&gt;for&lt;/code&gt;表达式和Java的&lt;code&gt;foreach&lt;/code&gt;一致。&lt;/p&gt;
 
@@ -782,7 +782,7 @@ val max = if (a &amp;gt; b) a else b   // 类似Java的: int max = a &amp;gt; b?
   print(array[i])
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;while:264dc76c17987165debdd663a9ab017a&#34;&gt;&lt;code&gt;while&lt;/code&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;while&#34;&gt;&lt;code&gt;while&lt;/code&gt;&lt;/h4&gt;
 
 &lt;p&gt;&lt;code&gt;while&lt;/code&gt;表达式和Java的一样。&lt;/p&gt;
 
@@ -795,7 +795,7 @@ do {
 } while (y != null)     // 与Java不同
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;函数:264dc76c17987165debdd663a9ab017a&#34;&gt;函数&lt;/h3&gt;
+&lt;h3 id=&#34;函数&#34;&gt;函数&lt;/h3&gt;
 
 &lt;p&gt;与Java不同的是，Kotlin的函数是一等成员，不需要在类内定义，是可以脱离类存在的，而且Kotlin是不支持类静态方法的。&lt;/p&gt;
 
@@ -817,7 +817,7 @@ fun add(a: Int, b: Int):Int{
 
 &lt;p&gt;在这种情况下，函数默认返回最后计算的结果。&lt;/p&gt;
 
-&lt;h4 id=&#34;扩展类的函数:264dc76c17987165debdd663a9ab017a&#34;&gt;扩展类的函数&lt;/h4&gt;
+&lt;h4 id=&#34;扩展类的函数&#34;&gt;扩展类的函数&lt;/h4&gt;
 
 &lt;p&gt;通常开发中，我们往往要对提供的API类进行扩展，增加一些方法，如果是Java的话，要想这样做，则声明一个继承该API的子类。Kotlin采取了C#的办法，可以直接扩展类的方法：&lt;/p&gt;
 
@@ -835,7 +835,7 @@ fun add(a: Int, b: Int):Int{
 
 &lt;p&gt;这样，在旧的手机上，APP就可以用自定义的&lt;code&gt;setBackground&lt;/code&gt;的Wrapper，而在高版本的手机上APP会调用原生的&lt;code&gt;setBackground&lt;/code&gt;方法。&lt;/p&gt;
 
-&lt;h4 id=&#34;lambda表达式:264dc76c17987165debdd663a9ab017a&#34;&gt;Lambda表达式&lt;/h4&gt;
+&lt;h4 id=&#34;lambda表达式&#34;&gt;Lambda表达式&lt;/h4&gt;
 
 &lt;p&gt;Kotlin引入了Lambda表达式，而且Kotlin的Lambda表达式支持Android平台：&lt;/p&gt;
 
@@ -845,7 +845,7 @@ fun add(a: Int, b: Int):Int{
 &lt;p&gt;这样，我们就可以不用写那么多监听器对象了。
 ]&lt;/p&gt;
 
-&lt;h3 id=&#34;类:264dc76c17987165debdd663a9ab017a&#34;&gt;类&lt;/h3&gt;
+&lt;h3 id=&#34;类&#34;&gt;类&lt;/h3&gt;
 
 &lt;p&gt;Kotlin的类是这样声明的：&lt;/p&gt;
 
@@ -898,7 +898,7 @@ val user = User(1, &amp;quot;Kesco&amp;quot;)
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;getter和setter:264dc76c17987165debdd663a9ab017a&#34;&gt;Getter和Setter&lt;/h4&gt;
+&lt;h4 id=&#34;getter和setter&#34;&gt;Getter和Setter&lt;/h4&gt;
 
 &lt;p&gt;Kotlin的Setter和Getter编码风格与C#类似：&lt;/p&gt;
 
@@ -912,7 +912,7 @@ val user = User(1, &amp;quot;Kesco&amp;quot;)
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;data-class:264dc76c17987165debdd663a9ab017a&#34;&gt;Data Class&lt;/h4&gt;
+&lt;h4 id=&#34;data-class&#34;&gt;Data Class&lt;/h4&gt;
 
 &lt;p&gt;Kotlin的类可以申明&lt;code&gt;data&lt;/code&gt;关键字，相当与专用与存储数据的Pojo类：&lt;/p&gt;
 
@@ -926,7 +926,7 @@ val (id, name) = jane
 println(&amp;quot;$name id is $id&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;内部类:264dc76c17987165debdd663a9ab017a&#34;&gt;内部类&lt;/h4&gt;
+&lt;h4 id=&#34;内部类&#34;&gt;内部类&lt;/h4&gt;
 
 &lt;p&gt;Kotlin同样支持内部类，但是Kotlin的内部类是默认不带有外部类的引用的，也就是说默认的Kotlin内部类都是静态的。要想内部类带有外部类的引用，要在内部类声明上加入&lt;code&gt;inner&lt;/code&gt;关键字：&lt;/p&gt;
 
@@ -937,7 +937,7 @@ println(&amp;quot;$name id is $id&amp;quot;)
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;接口:264dc76c17987165debdd663a9ab017a&#34;&gt;接口&lt;/h3&gt;
+&lt;h3 id=&#34;接口&#34;&gt;接口&lt;/h3&gt;
 
 &lt;p&gt;Kotlin的接口和Java的类似，而且还支持Java 8的默认方法：&lt;/p&gt;
 
@@ -949,7 +949,7 @@ println(&amp;quot;$name id is $id&amp;quot;)
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;android工程中配置kotlin:264dc76c17987165debdd663a9ab017a&#34;&gt;Android工程中配置Kotlin&lt;/h2&gt;
+&lt;h2 id=&#34;android工程中配置kotlin&#34;&gt;Android工程中配置Kotlin&lt;/h2&gt;
 
 &lt;p&gt;在Android项目中使用Kotlin非常简单，而且Kotlin可以和Java混编，所以完全部分功能用Kotlin开发，部分功能用Java开发。&lt;/p&gt;
 
@@ -991,7 +991,7 @@ println(&amp;quot;$name id is $id&amp;quot;)
 
 &lt;p&gt;自从买了这个&lt;a href=&#34;http://kescoode.com&#34;&gt;kescoode&lt;/a&gt;域名，已经快有三年了。从最开始的WordPress，到Hexo，再到大学舍友写的一个静态博客Builder，博客程序换了一轮又一轮。最近，因为保存博文的那个移动硬盘坏了，以前写过的东西都没有了，加上我舍友毕业之后就不再维护那个生成器项目，所以我把博客最终迁移到Ghost来。&lt;/p&gt;
 
-&lt;h2 id=&#34;为什么用了ghost:c2b2574381e56fc6137f9463a71f9533&#34;&gt;为什么用了Ghost&lt;/h2&gt;
+&lt;h2 id=&#34;为什么用了ghost&#34;&gt;为什么用了Ghost&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;比WorkPress简单(从方面来说，这也是个不足之处，好在够用)。&lt;/li&gt;
@@ -999,7 +999,7 @@ println(&amp;quot;$name id is $id&amp;quot;)
 &lt;li&gt;用Node.js写的，我会Node.js，但是不会PHP，所以这点比WorkPress好。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;ghost的不足:c2b2574381e56fc6137f9463a71f9533&#34;&gt;Ghost的不足&lt;/h2&gt;
+&lt;h2 id=&#34;ghost的不足&#34;&gt;Ghost的不足&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;后台功能与WordPress相比还是太弱，很多改动都要改源码。&lt;/li&gt;
@@ -1026,7 +1026,7 @@ println(&amp;quot;$name id is $id&amp;quot;)
 
 &lt;p&gt;而且&lt;a href=&#34;https://github.com/vimwiki/vimwiki&#34;&gt;Vimwiki&lt;/a&gt;依赖于Vim，恰好解决了编辑器的问题，我本来就是Vim党^-^。通过私有Git仓库，同步笔记，笔记是纯文本的，转换也比较方便。&lt;/p&gt;
 
-&lt;h2 id=&#34;安装和配置vim:91b4e6b5595fa6d1d574f169088d9f40&#34;&gt;安装和配置Vim&lt;/h2&gt;
+&lt;h2 id=&#34;安装和配置vim&#34;&gt;安装和配置Vim&lt;/h2&gt;
 
 &lt;p&gt;Vimwiki使用Vim的第三方插件管理器非常方便，我平常使用Vim-plug来管理插件，感觉比Vundle好用点(UI做得漂亮点):&lt;/p&gt;
 
@@ -1057,13 +1057,13 @@ nmap &amp;lt;leader&amp;gt;wc :VimwikiAll2HTML&amp;lt;CR&amp;gt;
 
 &lt;p&gt;要注意的一点是Vimwiki自带的模板比较简单，所以如果想要漂亮点的样式的话，要自己写，上图就是我用Pure CSS渲染的笔记目录。遗憾的是，&lt;a href=&#34;https://github.com/vimwiki/vimwiki&#34;&gt;Vimwiki&lt;/a&gt;人气不高，我在Github上没找到什么好的样式，都是好几年前的了，不知道Emacs的Org-mode在这方面怎么样。&lt;/p&gt;
 
-&lt;h2 id=&#34;使用-vimwiki-0:91b4e6b5595fa6d1d574f169088d9f40&#34;&gt;使用&lt;a href=&#34;https://github.com/vimwiki/vimwiki&#34;&gt;Vimwiki&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&#34;使用-vimwiki-0&#34;&gt;使用&lt;a href=&#34;https://github.com/vimwiki/vimwiki&#34;&gt;Vimwiki&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/vimwiki/vimwiki&#34;&gt;Vimwiki&lt;/a&gt;文稿有自己一套标记语言，类似于Markdown。&lt;a href=&#34;https://github.com/vimwiki/vimwiki&#34;&gt;Vimwiki&lt;/a&gt;也支持Markdown，但是效果不好，有语法高亮不支持种种问题。下图就是用Vimwiki语法写的笔记。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;http://7mnom1.com1.z0.glb.clouddn.com/vimwiki-sample.png&#34; alt=&#34;Vimwiki-syntax&#34; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&#34;基本语法:91b4e6b5595fa6d1d574f169088d9f40&#34;&gt;基本语法&lt;/h3&gt;
+&lt;h3 id=&#34;基本语法&#34;&gt;基本语法&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code&gt;= 一级标题 =  
 == 二级标题 ==
@@ -1123,19 +1123,19 @@ http://ktmud.com/  外部URL会被自动转换成链接
 
 &lt;p&gt;最近做毕业设计，学校需要每人附一篇英文文档翻译，平时因为做数据通讯的时候用JSON做交换数据结构很多，所以干脆就翻译JSON RFC文档好了。下面是译文：&lt;/p&gt;
 
-&lt;h2 id=&#34;关于本文:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;关于本文&lt;/h2&gt;
+&lt;h2 id=&#34;关于本文&#34;&gt;关于本文&lt;/h2&gt;
 
 &lt;p&gt;本文讲述关于互联网通讯的信息，并不是准确形式上的标准。你可以随意传播这份文档。&lt;/p&gt;
 
-&lt;h2 id=&#34;版权提示:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;版权提示&lt;/h2&gt;
+&lt;h2 id=&#34;版权提示&#34;&gt;版权提示&lt;/h2&gt;
 
 &lt;p&gt;Copyright &amp;copy; The Internet Society (2006)&lt;/p&gt;
 
-&lt;h2 id=&#34;摘要:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;摘要&lt;/h2&gt;
+&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;
 
 &lt;p&gt;JavaScript Object Notation (JSON)是一个轻量级的，基于文本的，跨语言的数据交换格式。它衍生自ECMAScript编程语言标准（ECMAScript Programming Language Standard）。JSON定义了一组用于表示结构化数据的可移植的格式化规则。&lt;/p&gt;
 
-&lt;h2 id=&#34;1-简介:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;1. 简介&lt;/h2&gt;
+&lt;h2 id=&#34;1-简介&#34;&gt;1. 简介&lt;/h2&gt;
 
 &lt;p&gt;JavaScript Object Notation (JSON)是一种序列化结构化数据的文本格式。它派生自ECMAScript Programming Language Standard, Third Edition [ECMA]定义的JavaScript对象字面量。&lt;/p&gt;
 
@@ -1151,13 +1151,13 @@ http://ktmud.com/  外部URL会被自动转换成链接
 
 &lt;p&gt;JSON的设计目标是它应当是尽可能小的，可移植的，文本化的，并且可以作为JavaScript的一个子集。&lt;/p&gt;
 
-&lt;h3 id=&#34;1-1-语法约定:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;1.1 语法约定&lt;/h3&gt;
+&lt;h3 id=&#34;1-1-语法约定&#34;&gt;1.1 语法约定&lt;/h3&gt;
 
 &lt;p&gt;本文中的”MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”,”SHOULD NOT”, “RECOMMENDED”, “MAY”, 和 “OPTIONAL” 关键字意思遵循[RFC2119]中的定义。&lt;/p&gt;
 
 &lt;p&gt;本文中的语法规则遵循[RFC4234]中的定义。&lt;/p&gt;
 
-&lt;h2 id=&#34;2-json语法规则:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;2.  JSON语法规则&lt;/h2&gt;
+&lt;h2 id=&#34;2-json语法规则&#34;&gt;2.  JSON语法规则&lt;/h2&gt;
 
 &lt;p&gt;一个JSON文本是一串标记序列。JSON序列包括含6种结构字符，字符串，数字和3个字面量。&lt;/p&gt;
 
@@ -1191,14 +1191,14 @@ http://ktmud.com/  外部URL会被自动转换成链接
         )
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;2-1-值:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;2.1 值&lt;/h3&gt;
+&lt;h3 id=&#34;2-1-值&#34;&gt;2.1 值&lt;/h3&gt;
 
 &lt;p&gt;JSON值MUST是一个对象，数组，数字，字符串或下列三个字面量之一：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;    false null true
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;2-2-对象:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;2.2 对象&lt;/h3&gt;
+&lt;h3 id=&#34;2-2-对象&#34;&gt;2.2 对象&lt;/h3&gt;
 
 &lt;p&gt;一个对象的数据结构表示一个被大括号包裹的0个以上的键值对（或称为成员）。键值对中的键名必须是一个字符串，后面是一个冒号，用来分隔键和值。值后面是一个逗号用来分隔值和下一个名键值对的名称。一个对象内的名称SHOULD是唯一的。&lt;/p&gt;
 
@@ -1206,14 +1206,14 @@ http://ktmud.com/  外部URL会被自动转换成链接
     member = string name-separator value
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;2-3-数组:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;2.3 数组&lt;/h3&gt;
+&lt;h3 id=&#34;2-3-数组&#34;&gt;2.3 数组&lt;/h3&gt;
 
 &lt;p&gt;一个数组的数据结构表示一对被中括号包裹着0个以上的值（或者叫元素）。值之间用逗号分隔。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;    array = begin-array [ value *( value-separator value ) ] end-array
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;2-4-数字:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;2.4 数字&lt;/h3&gt;
+&lt;h3 id=&#34;2-4-数字&#34;&gt;2.4 数字&lt;/h3&gt;
 
 &lt;p&gt;数字的表示方法类似其他大部分语言。数字包含一个以可选的减号为前缀的整数部分，整数部分
 后面可以添加小数部分和/或指数部分。&lt;/p&gt;
@@ -1239,7 +1239,7 @@ http://ktmud.com/  外部URL会被自动转换成链接
     zero          = %x30                             ; 0
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;2-5-字符串:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;2.5 字符串&lt;/h3&gt;
+&lt;h3 id=&#34;2-5-字符串&#34;&gt;2.5 字符串&lt;/h3&gt;
 
 &lt;p&gt;JSON字符串的表示形式与源自C语言的编程语言的语法类似。一个字符串的开头和结尾都有引号，除了以下一些必须被转义的字符以外所有的Unicode字符都可以直接被放在字符串中：引号（”或’），反斜杠()和控制字符（U+0000 到 U+001F）。&lt;/p&gt;
 
@@ -1266,7 +1266,7 @@ http://ktmud.com/  外部URL会被自动转换成链接
     unescaped = %x20-21 / %x23-5B / %x5D-10FFFF
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;3-编码:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;3. 编码&lt;/h2&gt;
+&lt;h2 id=&#34;3-编码&#34;&gt;3. 编码&lt;/h2&gt;
 
 &lt;p&gt;JSON文本必须以Unicode编码编码，默认的编码格式为UTF-8。&lt;/p&gt;
 
@@ -1279,17 +1279,17 @@ http://ktmud.com/  外部URL会被自动转换成链接
     xx xx xx xx UTF-8
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;4-解析:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;4. 解析&lt;/h2&gt;
+&lt;h2 id=&#34;4-解析&#34;&gt;4. 解析&lt;/h2&gt;
 
 &lt;p&gt;一个JSON解析器可以转换JSON文本到其它形式。一个JSON解释器MUST能接受符合JSON语法的所有文本。一个JSON解析器MAY能接受非JSON形式的文本或扩展。&lt;/p&gt;
 
 &lt;p&gt;JSON解析器的实现必须告知用户它接受文本大小的限制，同时必须告知用户递归对象层数的深度，和相应数字字符串的限制。&lt;/p&gt;
 
-&lt;h2 id=&#34;5-生成器:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;5. 生成器&lt;/h2&gt;
+&lt;h2 id=&#34;5-生成器&#34;&gt;5. 生成器&lt;/h2&gt;
 
 &lt;p&gt;JSON生成器能够生成JSON文本，生成结果MUST严格符合JSON的语法。&lt;/p&gt;
 
-&lt;h2 id=&#34;6-iana方面的考虑:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;6. IANA方面的考虑&lt;/h2&gt;
+&lt;h2 id=&#34;6-iana方面的考虑&#34;&gt;6. IANA方面的考虑&lt;/h2&gt;
 
 &lt;p&gt;JSON文本的MIME媒体类型是application/json。&lt;/p&gt;
 
@@ -1357,11 +1357,11 @@ http://ktmud.com/  外部URL会被自动转换成链接
 &lt;li&gt;douglas@crockford.com&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;7-安全方面的考虑:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;7. 安全方面的考虑&lt;/h2&gt;
+&lt;h2 id=&#34;7-安全方面的考虑&#34;&gt;7. 安全方面的考虑&lt;/h2&gt;
 
 &lt;p&gt;参照第六节的“安全方面的考虑”。&lt;/p&gt;
 
-&lt;h2 id=&#34;8-例子:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;8. 例子&lt;/h2&gt;
+&lt;h2 id=&#34;8-例子&#34;&gt;8. 例子&lt;/h2&gt;
 
 &lt;p&gt;下面是一个JSON对象：&lt;/p&gt;
 
@@ -1408,9 +1408,9 @@ http://ktmud.com/  外部URL会被自动转换成链接
     ]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;9-参考:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;9. 参考&lt;/h2&gt;
+&lt;h2 id=&#34;9-参考&#34;&gt;9. 参考&lt;/h2&gt;
 
-&lt;h3 id=&#34;9-1-参考的规范:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;9.1 参考的规范&lt;/h3&gt;
+&lt;h3 id=&#34;9-1-参考的规范&#34;&gt;9.1 参考的规范&lt;/h3&gt;
 
 &lt;ol&gt;
 &lt;li&gt;[ECMA]    European Computer Manufacturers Association, &amp;ldquo;ECMAScript Language Specification 3rd Edition&amp;rdquo;, December 1999,&lt;a href=&#34;http://www.ecma-international.org/publications/files/ecma-st/ECMA-262.pdf&#34;&gt;http://www.ecma-international.org/publications/files/ecma-st/ECMA-262.pdf&lt;/a&gt;.&lt;/li&gt;
@@ -1473,7 +1473,7 @@ http://ktmud.com/  外部URL会被自动转换成链接
 
 &lt;p&gt;为了避免这种情况的出现，业界现在有几种编程范式。如CommonJS提出的Promise模式，就是个不错的解决方案。jQuery的deferred对象就是jQuery的Promise范式回调函数解决方案。&lt;/p&gt;
 
-&lt;h2 id=&#34;deferred对象与传统回调函数的对比:35c3dc2859e3f9afd72a997b35722946&#34;&gt;deferred对象与传统回调函数的对比&lt;/h2&gt;
+&lt;h2 id=&#34;deferred对象与传统回调函数的对比&#34;&gt;deferred对象与传统回调函数的对比&lt;/h2&gt;
 
 &lt;p&gt;这里用AJAX请求做示列，传统写法：&lt;/p&gt;
 
@@ -1497,7 +1497,7 @@ http://ktmud.com/  外部URL会被自动转换成链接
 
 &lt;p&gt;这里，实际上&lt;code&gt;.done&lt;/code&gt;方法相当与&lt;code&gt;success&lt;/code&gt;方法，&lt;code&gt;.fail&lt;/code&gt;方法相当于&lt;code&gt;error&lt;/code&gt;方法。从这里可以看出，deferred对象对于整个代码结构来说会更清晰明了，同时更可以采用链式写法，&lt;code&gt;$.ajax(&#39;test.html&#39;).done(...).fail(...).done(...)&lt;/code&gt;，操作起来是非常方便的。&lt;/p&gt;
 
-&lt;h2 id=&#34;同时为多个异步操作指定回调函数:35c3dc2859e3f9afd72a997b35722946&#34;&gt;同时为多个异步操作指定回调函数&lt;/h2&gt;
+&lt;h2 id=&#34;同时为多个异步操作指定回调函数&#34;&gt;同时为多个异步操作指定回调函数&lt;/h2&gt;
 
 &lt;p&gt;jQuery提供&lt;code&gt;$.when&lt;/code&gt;方法来为多个事件指定一个回调函数，写法如下：&lt;/p&gt;
 
@@ -1508,7 +1508,7 @@ http://ktmud.com/  外部URL会被自动转换成链接
 
 &lt;p&gt;当两个请求都成功后会执行&lt;code&gt;.done&lt;/code&gt;方法，失败则会执行&lt;code&gt;.fail&lt;/code&gt;方法，实际上，&lt;code&gt;$.when&lt;/code&gt;返回的就是一个deferred对象。&lt;/p&gt;
 
-&lt;h2 id=&#34;deferred对象方法:35c3dc2859e3f9afd72a997b35722946&#34;&gt;Deferred对象方法&lt;/h2&gt;
+&lt;h2 id=&#34;deferred对象方法&#34;&gt;Deferred对象方法&lt;/h2&gt;
 
 &lt;p&gt;初步了解deferred对象的操作后，我们可以看下deferred包含的一些方法：&lt;/p&gt;
 
@@ -1524,7 +1524,7 @@ http://ktmud.com/  外部URL会被自动转换成链接
 &lt;li&gt;&lt;code&gt;deferred.always&lt;/code&gt;这个方法也是用来指定回调函数的，它的作用是，不管调用的是&lt;code&gt;deferred.resolve&lt;/code&gt;还是&lt;code&gt;deferred.reject&lt;/code&gt;，最后总是执行。&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&#34;自定义的回调函数:35c3dc2859e3f9afd72a997b35722946&#34;&gt;自定义的回调函数&lt;/h2&gt;
+&lt;h2 id=&#34;自定义的回调函数&#34;&gt;自定义的回调函数&lt;/h2&gt;
 
 &lt;p&gt;有了上面的deferred方法后，我们可以这样定义自己的异步操作：&lt;/p&gt;
 
@@ -1574,7 +1574,7 @@ http://ktmud.com/  外部URL会被自动转换成链接
 
 &lt;p&gt;Activty是Android四大组件中负责与用户交互的部件，Activity承担了大量的显示和交互工作，从某种角度上将，我们看见的应用程序就是许多个Activity的组合。&lt;/p&gt;
 
-&lt;h2 id=&#34;task-stack:de99083b228db0b2805fc70b0da6e031&#34;&gt;Task Stack&lt;/h2&gt;
+&lt;h2 id=&#34;task-stack&#34;&gt;Task Stack&lt;/h2&gt;
 
 &lt;p&gt;为了让这许多Activity协同工作而不至于产生混乱，Android平台设计了一种堆栈机制用于管理Activity，其遵循先进后出的原则，系统总是显示位于栈顶的Activity，从逻辑上将，位于栈顶的Activity也就是最后打开的Activity，这也是符合逻辑的。这个栈也可以叫做Task Stack，因为一个Task Stack里的Activity是可以属于不同的Application的。例如：你想在发送短信时，拍一张照并作为彩信发出去，这时你首先停留在短信应用程序的的Acitivity上，然后跳转到Camera应用程序的Activity上，当完成拍照功能后，再返回到短信应用程序的Activity。这实际上是两个Android Application协同合作后完成的工作，但为了更好的用户体验，Android平台加入了Task这么一种机制，让用户没有感觉到应用的中断，让用户感觉在一“应用程序”里就完成了想完成的工作。&lt;/p&gt;
 
@@ -1584,11 +1584,11 @@ http://ktmud.com/  外部URL会被自动转换成链接
 
 &lt;p&gt;&lt;code&gt;值得注意点的时候，一个系统里可以有很多的Task Stack，当后台的Task过多的时候，系统可能会去除栈底的Activity，释放多余的内存。&lt;/code&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;保存activity状态:de99083b228db0b2805fc70b0da6e031&#34;&gt;保存Activity状态&lt;/h2&gt;
+&lt;h2 id=&#34;保存activity状态&#34;&gt;保存Activity状态&lt;/h2&gt;
 
 &lt;p&gt;当Task Stack中的Activity返回前台的时候，可能已经是被系统释放点重新创建的，为了用户的操纵信息得到保留，我们最好重写&lt;a href=&#34;http://developer.android.com/reference/android/app/Activity.html#onSaveInstanceState(android.os.Bundle)&#34;&gt;onSaveInstanceState()&lt;/a&gt;方法。&lt;/p&gt;
 
-&lt;h2 id=&#34;managing-tasks:de99083b228db0b2805fc70b0da6e031&#34;&gt;Managing Tasks&lt;/h2&gt;
+&lt;h2 id=&#34;managing-tasks&#34;&gt;Managing Tasks&lt;/h2&gt;
 
 &lt;p&gt;我们在平常写程序的时候，Activity的启动方式保持默认就已经够用了。但是遇到特定场合，我们可以通过对启动方式的更改来修改Activity在Task中的运行状态。&lt;/p&gt;
 

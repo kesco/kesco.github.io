@@ -4,17 +4,26 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>JQuery异步编程 &middot; Kesco Lin</title>
-        <meta name="description" content="">
+        <meta name="description" content="JavaScript异步编程通常的方法是指定一个回调函数，当操作结束之后，自动执行回调函数。但是这样有个不好的一点，也就是容易造成回调函数嵌套，比如下面一个搞笑的情况：
+ ...... ...... ...... } } } } } } } ...... ......  为了避免这种情况的出现，业界现在有几种编程范式。如CommonJS提出的Promise模式，就是个不错的解决方案。jQuery的deferred对象就是jQuery的Promise范式回调函数解决方案。
+deferred对象与传统回调函数的对比 这里用AJAX请求做示列，传统写法：
+$.ajax({ url: &quot;test.html&quot;, success: function(){ alert(&quot;哈哈，成功了！&quot;); }, error:function(){ alert(&quot;出错啦！&quot;); } });  deferred对象写法：
+$.ajax(&quot;test.html&quot;) .done(function(){ alert(&quot;哈哈，成功了！&quot;); }) .fail(function(){ alert(&quot;出错啦！&quot;); });  这里，实际上.done方法相当与success方法，.fail方法相当于error方法。从这里可以看出，deferred对象对于整个代码结构来说会更清晰明了，同时更可以采用链式写法，$.ajax(&#39;test.html&#39;).done(...).fail(...).done(...)，操作起来是非常方便的。
+同时为多个异步操作指定回调函数 jQuery提供$.when方法来为多个事件指定一个回调函数，写法如下：
+$.when($.ajax(&quot;test1.html&quot;), $.ajax(&quot;test2.html&quot;)) .done(function(){ alert(&quot;哈哈，成功了！&quot;); }) .fail(function(){ alert(&quot;出错啦！&quot;); });  当两个请求都成功后会执行.done方法，失败则会执行.fail方法，实际上，$.when返回的就是一个deferred对象。
+Deferred对象方法 初步了解deferred对象的操作后，我们可以看下deferred包含的一些方法：
+ $.Deferred生成一个deferred对象。 deferred.done指定操作成功时的回调函数 deferred.fail指定操作失败时的回调函数 deferred.promise没有参数时，返回一个新的deferred对象，该对象的运行状态无法被改变；接受参数时，作用为在参数对象上部署deferred接口。 deferred.resolve手动改变deferred对象的运行状态为&rdquo;已完成&rdquo;，从而立即触发.done方法。 deferred.reject这个方法与deferred.resolve正好相反，调用后将deferred对象的运行状态变为&rdquo;已失败&rdquo;，从而立即触发.fail方法。 $.when为多个操作指定回调函数。 deferred.then有时为了省事，可以把.done和.fail合在一起写，这就是.then方法。 deferred.always这个方法也是用来指定回调函数的，它的作用是，不管调用的是deferred.resolve还是deferred.reject，最后总是执行。  自定义的回调函数 有了上面的deferred方法后，我们可以这样定义自己的异步操作：
+var wait = function(dtd){ var dtd = $.">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.16-DEV" />
+        <meta name="generator" content="Hugo 0.18.1" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="http://kescoode.com/css/normalize.css">
-        <link rel="stylesheet" href="http://kescoode.com/css/highlight.css">
-        <link rel="stylesheet" href="http://kescoode.com/css/style.css">
+        
+        <link rel="stylesheet" href="http://kescoode.com/dist/styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        
     </head>
     <body>
         
@@ -41,9 +50,11 @@ ga('send', 'pageview');
                         <a class="button-square" href="http://kescoode.com/index.xml"><i class="fa fa-rss"></i></a>
                         
                         
+                        
                             <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kesco">
                                 <i class="fa fa-github-alt"></i>
                             </a>
+                        
                         
                         
                         
@@ -79,7 +90,7 @@ ga('send', 'pageview');
     <p class="post-date">
         <span>发布于 <time datetime="2014-03-02" itemprop="datePublished">2014年03月02</time></span>
         <span>by</span>
-        <span itemscope="" itemprop="author" itemtype="http://schema.org/Person">
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
             <span itemprop="name">
                 <a href="http://kescoode.com" itemprop="url" rel="author">Kesco Lin</a>
             </span>
@@ -110,7 +121,7 @@ ga('send', 'pageview');
 
 <p>为了避免这种情况的出现，业界现在有几种编程范式。如CommonJS提出的Promise模式，就是个不错的解决方案。jQuery的deferred对象就是jQuery的Promise范式回调函数解决方案。</p>
 
-<h2 id="deferred对象与传统回调函数的对比:35c3dc2859e3f9afd72a997b35722946">deferred对象与传统回调函数的对比</h2>
+<h2 id="deferred对象与传统回调函数的对比">deferred对象与传统回调函数的对比</h2>
 
 <p>这里用AJAX请求做示列，传统写法：</p>
 
@@ -134,7 +145,7 @@ ga('send', 'pageview');
 
 <p>这里，实际上<code>.done</code>方法相当与<code>success</code>方法，<code>.fail</code>方法相当于<code>error</code>方法。从这里可以看出，deferred对象对于整个代码结构来说会更清晰明了，同时更可以采用链式写法，<code>$.ajax('test.html').done(...).fail(...).done(...)</code>，操作起来是非常方便的。</p>
 
-<h2 id="同时为多个异步操作指定回调函数:35c3dc2859e3f9afd72a997b35722946">同时为多个异步操作指定回调函数</h2>
+<h2 id="同时为多个异步操作指定回调函数">同时为多个异步操作指定回调函数</h2>
 
 <p>jQuery提供<code>$.when</code>方法来为多个事件指定一个回调函数，写法如下：</p>
 
@@ -145,7 +156,7 @@ ga('send', 'pageview');
 
 <p>当两个请求都成功后会执行<code>.done</code>方法，失败则会执行<code>.fail</code>方法，实际上，<code>$.when</code>返回的就是一个deferred对象。</p>
 
-<h2 id="deferred对象方法:35c3dc2859e3f9afd72a997b35722946">Deferred对象方法</h2>
+<h2 id="deferred对象方法">Deferred对象方法</h2>
 
 <p>初步了解deferred对象的操作后，我们可以看下deferred包含的一些方法：</p>
 
@@ -161,7 +172,7 @@ ga('send', 'pageview');
 <li><code>deferred.always</code>这个方法也是用来指定回调函数的，它的作用是，不管调用的是<code>deferred.resolve</code>还是<code>deferred.reject</code>，最后总是执行。</li>
 </ol>
 
-<h2 id="自定义的回调函数:35c3dc2859e3f9afd72a997b35722946">自定义的回调函数</h2>
+<h2 id="自定义的回调函数">自定义的回调函数</h2>
 
 <p>有了上面的deferred方法后，我们可以这样定义自己的异步操作：</p>
 
@@ -187,10 +198,37 @@ ga('send', 'pageview');
         <p class="post-tags">
             <span>Tagged:</span>
             
-                 <a href="http://kescoode.com/tags/javascript/">JavaScript</a>
+            
+                <a href="http://kescoode.com/tags/javascript/">JavaScript</a>
             
         </p>
     
+
+    <div class="share">
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=JQuery%e5%bc%82%e6%ad%a5%e7%bc%96%e7%a8%8b&url=http%3a%2f%2fkescoode.com%2fjavascript-async-program%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
+
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkescoode.com%2fjavascript-async-program%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
+
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fkescoode.com%2fjavascript-async-program%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+    </div>
 </footer>
 
         
@@ -230,7 +268,7 @@ ga('send', 'pageview');
                 </div>
 
                 <p class="footer-copyright">
-                    <span>&copy; 2016 / Powered by <a href="http://gohugo.io/">Hugo</a></span>
+                    <span>&copy; 2016 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
                 </p>
                 <p class="footer-copyright">
                     <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
@@ -240,7 +278,7 @@ ga('send', 'pageview');
         </footer>
 
         <script src="http://kescoode.com/js/jquery-1.11.3.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
         <script src="http://kescoode.com/js/jquery.fitvids.js"></script>
         <script src="http://kescoode.com/js/scripts.js"></script>
     </body>

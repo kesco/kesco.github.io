@@ -2,12 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Json on Kesco的编码世界</title>
-    <link>http://kescoode.com/tags/json/</link>
+    <link>http://kescoode.com/tags/json/index.xml</link>
     <description>Recent content in Json on Kesco的编码世界</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>Copyright (c) 2015. All rights reserved.</copyright>
-    <lastBuildDate>Thu, 24 Apr 2014 20:56:35 +0800</lastBuildDate>
     <atom:link href="http://kescoode.com/tags/json/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -20,19 +19,19 @@
 
 &lt;p&gt;最近做毕业设计，学校需要每人附一篇英文文档翻译，平时因为做数据通讯的时候用JSON做交换数据结构很多，所以干脆就翻译JSON RFC文档好了。下面是译文：&lt;/p&gt;
 
-&lt;h2 id=&#34;关于本文:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;关于本文&lt;/h2&gt;
+&lt;h2 id=&#34;关于本文&#34;&gt;关于本文&lt;/h2&gt;
 
 &lt;p&gt;本文讲述关于互联网通讯的信息，并不是准确形式上的标准。你可以随意传播这份文档。&lt;/p&gt;
 
-&lt;h2 id=&#34;版权提示:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;版权提示&lt;/h2&gt;
+&lt;h2 id=&#34;版权提示&#34;&gt;版权提示&lt;/h2&gt;
 
 &lt;p&gt;Copyright &amp;copy; The Internet Society (2006)&lt;/p&gt;
 
-&lt;h2 id=&#34;摘要:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;摘要&lt;/h2&gt;
+&lt;h2 id=&#34;摘要&#34;&gt;摘要&lt;/h2&gt;
 
 &lt;p&gt;JavaScript Object Notation (JSON)是一个轻量级的，基于文本的，跨语言的数据交换格式。它衍生自ECMAScript编程语言标准（ECMAScript Programming Language Standard）。JSON定义了一组用于表示结构化数据的可移植的格式化规则。&lt;/p&gt;
 
-&lt;h2 id=&#34;1-简介:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;1. 简介&lt;/h2&gt;
+&lt;h2 id=&#34;1-简介&#34;&gt;1. 简介&lt;/h2&gt;
 
 &lt;p&gt;JavaScript Object Notation (JSON)是一种序列化结构化数据的文本格式。它派生自ECMAScript Programming Language Standard, Third Edition [ECMA]定义的JavaScript对象字面量。&lt;/p&gt;
 
@@ -48,13 +47,13 @@
 
 &lt;p&gt;JSON的设计目标是它应当是尽可能小的，可移植的，文本化的，并且可以作为JavaScript的一个子集。&lt;/p&gt;
 
-&lt;h3 id=&#34;1-1-语法约定:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;1.1 语法约定&lt;/h3&gt;
+&lt;h3 id=&#34;1-1-语法约定&#34;&gt;1.1 语法约定&lt;/h3&gt;
 
 &lt;p&gt;本文中的”MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”,”SHOULD NOT”, “RECOMMENDED”, “MAY”, 和 “OPTIONAL” 关键字意思遵循[RFC2119]中的定义。&lt;/p&gt;
 
 &lt;p&gt;本文中的语法规则遵循[RFC4234]中的定义。&lt;/p&gt;
 
-&lt;h2 id=&#34;2-json语法规则:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;2.  JSON语法规则&lt;/h2&gt;
+&lt;h2 id=&#34;2-json语法规则&#34;&gt;2.  JSON语法规则&lt;/h2&gt;
 
 &lt;p&gt;一个JSON文本是一串标记序列。JSON序列包括含6种结构字符，字符串，数字和3个字面量。&lt;/p&gt;
 
@@ -88,14 +87,14 @@
         )
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;2-1-值:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;2.1 值&lt;/h3&gt;
+&lt;h3 id=&#34;2-1-值&#34;&gt;2.1 值&lt;/h3&gt;
 
 &lt;p&gt;JSON值MUST是一个对象，数组，数字，字符串或下列三个字面量之一：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;    false null true
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;2-2-对象:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;2.2 对象&lt;/h3&gt;
+&lt;h3 id=&#34;2-2-对象&#34;&gt;2.2 对象&lt;/h3&gt;
 
 &lt;p&gt;一个对象的数据结构表示一个被大括号包裹的0个以上的键值对（或称为成员）。键值对中的键名必须是一个字符串，后面是一个冒号，用来分隔键和值。值后面是一个逗号用来分隔值和下一个名键值对的名称。一个对象内的名称SHOULD是唯一的。&lt;/p&gt;
 
@@ -103,14 +102,14 @@
     member = string name-separator value
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;2-3-数组:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;2.3 数组&lt;/h3&gt;
+&lt;h3 id=&#34;2-3-数组&#34;&gt;2.3 数组&lt;/h3&gt;
 
 &lt;p&gt;一个数组的数据结构表示一对被中括号包裹着0个以上的值（或者叫元素）。值之间用逗号分隔。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;    array = begin-array [ value *( value-separator value ) ] end-array
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;2-4-数字:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;2.4 数字&lt;/h3&gt;
+&lt;h3 id=&#34;2-4-数字&#34;&gt;2.4 数字&lt;/h3&gt;
 
 &lt;p&gt;数字的表示方法类似其他大部分语言。数字包含一个以可选的减号为前缀的整数部分，整数部分
 后面可以添加小数部分和/或指数部分。&lt;/p&gt;
@@ -136,7 +135,7 @@
     zero          = %x30                             ; 0
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;2-5-字符串:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;2.5 字符串&lt;/h3&gt;
+&lt;h3 id=&#34;2-5-字符串&#34;&gt;2.5 字符串&lt;/h3&gt;
 
 &lt;p&gt;JSON字符串的表示形式与源自C语言的编程语言的语法类似。一个字符串的开头和结尾都有引号，除了以下一些必须被转义的字符以外所有的Unicode字符都可以直接被放在字符串中：引号（”或’），反斜杠()和控制字符（U+0000 到 U+001F）。&lt;/p&gt;
 
@@ -163,7 +162,7 @@
     unescaped = %x20-21 / %x23-5B / %x5D-10FFFF
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;3-编码:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;3. 编码&lt;/h2&gt;
+&lt;h2 id=&#34;3-编码&#34;&gt;3. 编码&lt;/h2&gt;
 
 &lt;p&gt;JSON文本必须以Unicode编码编码，默认的编码格式为UTF-8。&lt;/p&gt;
 
@@ -176,17 +175,17 @@
     xx xx xx xx UTF-8
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;4-解析:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;4. 解析&lt;/h2&gt;
+&lt;h2 id=&#34;4-解析&#34;&gt;4. 解析&lt;/h2&gt;
 
 &lt;p&gt;一个JSON解析器可以转换JSON文本到其它形式。一个JSON解释器MUST能接受符合JSON语法的所有文本。一个JSON解析器MAY能接受非JSON形式的文本或扩展。&lt;/p&gt;
 
 &lt;p&gt;JSON解析器的实现必须告知用户它接受文本大小的限制，同时必须告知用户递归对象层数的深度，和相应数字字符串的限制。&lt;/p&gt;
 
-&lt;h2 id=&#34;5-生成器:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;5. 生成器&lt;/h2&gt;
+&lt;h2 id=&#34;5-生成器&#34;&gt;5. 生成器&lt;/h2&gt;
 
 &lt;p&gt;JSON生成器能够生成JSON文本，生成结果MUST严格符合JSON的语法。&lt;/p&gt;
 
-&lt;h2 id=&#34;6-iana方面的考虑:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;6. IANA方面的考虑&lt;/h2&gt;
+&lt;h2 id=&#34;6-iana方面的考虑&#34;&gt;6. IANA方面的考虑&lt;/h2&gt;
 
 &lt;p&gt;JSON文本的MIME媒体类型是application/json。&lt;/p&gt;
 
@@ -254,11 +253,11 @@
 &lt;li&gt;douglas@crockford.com&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&#34;7-安全方面的考虑:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;7. 安全方面的考虑&lt;/h2&gt;
+&lt;h2 id=&#34;7-安全方面的考虑&#34;&gt;7. 安全方面的考虑&lt;/h2&gt;
 
 &lt;p&gt;参照第六节的“安全方面的考虑”。&lt;/p&gt;
 
-&lt;h2 id=&#34;8-例子:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;8. 例子&lt;/h2&gt;
+&lt;h2 id=&#34;8-例子&#34;&gt;8. 例子&lt;/h2&gt;
 
 &lt;p&gt;下面是一个JSON对象：&lt;/p&gt;
 
@@ -305,9 +304,9 @@
     ]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;9-参考:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;9. 参考&lt;/h2&gt;
+&lt;h2 id=&#34;9-参考&#34;&gt;9. 参考&lt;/h2&gt;
 
-&lt;h3 id=&#34;9-1-参考的规范:4d7cda1a3fc6e8c2e5b851563d1a4c36&#34;&gt;9.1 参考的规范&lt;/h3&gt;
+&lt;h3 id=&#34;9-1-参考的规范&#34;&gt;9.1 参考的规范&lt;/h3&gt;
 
 &lt;ol&gt;
 &lt;li&gt;[ECMA]    European Computer Manufacturers Association, &amp;ldquo;ECMAScript Language Specification 3rd Edition&amp;rdquo;, December 1999,&lt;a href=&#34;http://www.ecma-international.org/publications/files/ecma-st/ECMA-262.pdf&#34;&gt;http://www.ecma-international.org/publications/files/ecma-st/ECMA-262.pdf&lt;/a&gt;.&lt;/li&gt;

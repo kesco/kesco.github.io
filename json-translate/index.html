@@ -4,17 +4,33 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>JSON技术规格翻译 &middot; Kesco Lin</title>
-        <meta name="description" content="">
+        <meta name="description" content="最近做毕业设计，学校需要每人附一篇英文文档翻译，平时因为做数据通讯的时候用JSON做交换数据结构很多，所以干脆就翻译JSON RFC文档好了。下面是译文：
+关于本文 本文讲述关于互联网通讯的信息，并不是准确形式上的标准。你可以随意传播这份文档。
+版权提示 Copyright &copy; The Internet Society (2006)
+摘要 JavaScript Object Notation (JSON)是一个轻量级的，基于文本的，跨语言的数据交换格式。它衍生自ECMAScript编程语言标准（ECMAScript Programming Language Standard）。JSON定义了一组用于表示结构化数据的可移植的格式化规则。
+1. 简介 JavaScript Object Notation (JSON)是一种序列化结构化数据的文本格式。它派生自ECMAScript Programming Language Standard, Third Edition [ECMA]定义的JavaScript对象字面量。
+JSON包含4种基础数据类型（字符串，数字，布尔和null）和两种结构类型（对象和数组）。
+JSON字符串是一个由零或者多个Unicode字符组成的序列。
+JSON对象是一个由零或者多个键值对组成的无序集合，其中键值对键名是字符串类型，值则可以是字符串，数字，布尔，null，对象或数组类型。
+JSON数组是一个由零或者多个值组成的有序序列。
+术语“对象”和“数组”的叫法来源于JavaScript的习惯叫法。
+JSON的设计目标是它应当是尽可能小的，可移植的，文本化的，并且可以作为JavaScript的一个子集。
+1.1 语法约定 本文中的”MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”,”SHOULD NOT”, “RECOMMENDED”, “MAY”, 和 “OPTIONAL” 关键字意思遵循[RFC2119]中的定义。
+本文中的语法规则遵循[RFC4234]中的定义。
+2. JSON语法规则 一个JSON文本是一串标记序列。JSON序列包括含6种结构字符，字符串，数字和3个字面量。
+一个JSON文本可以是对象或者数字的一个序列化字符串。
+ JSON-text = object / array  下面是6种结构字符：
+ begin-array = ws %x5B ws ; [ 左中括号 begin-object = ws %x7B ws ; { 左大括号 end-array = ws %x5D ws ; ] 右中括号 end-object = ws %x7D ws ; } 右大扩号 name-separator = ws %x3A ws ; : 冒号 value-separator = ws %x2C ws ; , 逗号  所有的六种数据结构字符都允许在前面添加空白字符。">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.16-DEV" />
+        <meta name="generator" content="Hugo 0.18.1" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="http://kescoode.com/css/normalize.css">
-        <link rel="stylesheet" href="http://kescoode.com/css/highlight.css">
-        <link rel="stylesheet" href="http://kescoode.com/css/style.css">
+        
+        <link rel="stylesheet" href="http://kescoode.com/dist/styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        
     </head>
     <body>
         
@@ -41,9 +57,11 @@ ga('send', 'pageview');
                         <a class="button-square" href="http://kescoode.com/index.xml"><i class="fa fa-rss"></i></a>
                         
                         
+                        
                             <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/kesco">
                                 <i class="fa fa-github-alt"></i>
                             </a>
+                        
                         
                         
                         
@@ -79,7 +97,7 @@ ga('send', 'pageview');
     <p class="post-date">
         <span>发布于 <time datetime="2014-04-24" itemprop="datePublished">2014年04月24</time></span>
         <span>by</span>
-        <span itemscope="" itemprop="author" itemtype="http://schema.org/Person">
+        <span itemscope="" itemprop="author" itemtype="https://schema.org/Person">
             <span itemprop="name">
                 <a href="http://kescoode.com" itemprop="url" rel="author">Kesco Lin</a>
             </span>
@@ -94,19 +112,19 @@ ga('send', 'pageview');
 
 <p>最近做毕业设计，学校需要每人附一篇英文文档翻译，平时因为做数据通讯的时候用JSON做交换数据结构很多，所以干脆就翻译JSON RFC文档好了。下面是译文：</p>
 
-<h2 id="关于本文:4d7cda1a3fc6e8c2e5b851563d1a4c36">关于本文</h2>
+<h2 id="关于本文">关于本文</h2>
 
 <p>本文讲述关于互联网通讯的信息，并不是准确形式上的标准。你可以随意传播这份文档。</p>
 
-<h2 id="版权提示:4d7cda1a3fc6e8c2e5b851563d1a4c36">版权提示</h2>
+<h2 id="版权提示">版权提示</h2>
 
 <p>Copyright &copy; The Internet Society (2006)</p>
 
-<h2 id="摘要:4d7cda1a3fc6e8c2e5b851563d1a4c36">摘要</h2>
+<h2 id="摘要">摘要</h2>
 
 <p>JavaScript Object Notation (JSON)是一个轻量级的，基于文本的，跨语言的数据交换格式。它衍生自ECMAScript编程语言标准（ECMAScript Programming Language Standard）。JSON定义了一组用于表示结构化数据的可移植的格式化规则。</p>
 
-<h2 id="1-简介:4d7cda1a3fc6e8c2e5b851563d1a4c36">1. 简介</h2>
+<h2 id="1-简介">1. 简介</h2>
 
 <p>JavaScript Object Notation (JSON)是一种序列化结构化数据的文本格式。它派生自ECMAScript Programming Language Standard, Third Edition [ECMA]定义的JavaScript对象字面量。</p>
 
@@ -122,13 +140,13 @@ ga('send', 'pageview');
 
 <p>JSON的设计目标是它应当是尽可能小的，可移植的，文本化的，并且可以作为JavaScript的一个子集。</p>
 
-<h3 id="1-1-语法约定:4d7cda1a3fc6e8c2e5b851563d1a4c36">1.1 语法约定</h3>
+<h3 id="1-1-语法约定">1.1 语法约定</h3>
 
 <p>本文中的”MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”,”SHOULD NOT”, “RECOMMENDED”, “MAY”, 和 “OPTIONAL” 关键字意思遵循[RFC2119]中的定义。</p>
 
 <p>本文中的语法规则遵循[RFC4234]中的定义。</p>
 
-<h2 id="2-json语法规则:4d7cda1a3fc6e8c2e5b851563d1a4c36">2.  JSON语法规则</h2>
+<h2 id="2-json语法规则">2.  JSON语法规则</h2>
 
 <p>一个JSON文本是一串标记序列。JSON序列包括含6种结构字符，字符串，数字和3个字面量。</p>
 
@@ -162,14 +180,14 @@ ga('send', 'pageview');
         )
 </code></pre>
 
-<h3 id="2-1-值:4d7cda1a3fc6e8c2e5b851563d1a4c36">2.1 值</h3>
+<h3 id="2-1-值">2.1 值</h3>
 
 <p>JSON值MUST是一个对象，数组，数字，字符串或下列三个字面量之一：</p>
 
 <pre><code>    false null true
 </code></pre>
 
-<h3 id="2-2-对象:4d7cda1a3fc6e8c2e5b851563d1a4c36">2.2 对象</h3>
+<h3 id="2-2-对象">2.2 对象</h3>
 
 <p>一个对象的数据结构表示一个被大括号包裹的0个以上的键值对（或称为成员）。键值对中的键名必须是一个字符串，后面是一个冒号，用来分隔键和值。值后面是一个逗号用来分隔值和下一个名键值对的名称。一个对象内的名称SHOULD是唯一的。</p>
 
@@ -177,14 +195,14 @@ ga('send', 'pageview');
     member = string name-separator value
 </code></pre>
 
-<h3 id="2-3-数组:4d7cda1a3fc6e8c2e5b851563d1a4c36">2.3 数组</h3>
+<h3 id="2-3-数组">2.3 数组</h3>
 
 <p>一个数组的数据结构表示一对被中括号包裹着0个以上的值（或者叫元素）。值之间用逗号分隔。</p>
 
 <pre><code>    array = begin-array [ value *( value-separator value ) ] end-array
 </code></pre>
 
-<h3 id="2-4-数字:4d7cda1a3fc6e8c2e5b851563d1a4c36">2.4 数字</h3>
+<h3 id="2-4-数字">2.4 数字</h3>
 
 <p>数字的表示方法类似其他大部分语言。数字包含一个以可选的减号为前缀的整数部分，整数部分
 后面可以添加小数部分和/或指数部分。</p>
@@ -210,7 +228,7 @@ ga('send', 'pageview');
     zero          = %x30                             ; 0
 </code></pre>
 
-<h3 id="2-5-字符串:4d7cda1a3fc6e8c2e5b851563d1a4c36">2.5 字符串</h3>
+<h3 id="2-5-字符串">2.5 字符串</h3>
 
 <p>JSON字符串的表示形式与源自C语言的编程语言的语法类似。一个字符串的开头和结尾都有引号，除了以下一些必须被转义的字符以外所有的Unicode字符都可以直接被放在字符串中：引号（”或’），反斜杠()和控制字符（U+0000 到 U+001F）。</p>
 
@@ -237,7 +255,7 @@ ga('send', 'pageview');
     unescaped = %x20-21 / %x23-5B / %x5D-10FFFF
 </code></pre>
 
-<h2 id="3-编码:4d7cda1a3fc6e8c2e5b851563d1a4c36">3. 编码</h2>
+<h2 id="3-编码">3. 编码</h2>
 
 <p>JSON文本必须以Unicode编码编码，默认的编码格式为UTF-8。</p>
 
@@ -250,17 +268,17 @@ ga('send', 'pageview');
     xx xx xx xx UTF-8
 </code></pre>
 
-<h2 id="4-解析:4d7cda1a3fc6e8c2e5b851563d1a4c36">4. 解析</h2>
+<h2 id="4-解析">4. 解析</h2>
 
 <p>一个JSON解析器可以转换JSON文本到其它形式。一个JSON解释器MUST能接受符合JSON语法的所有文本。一个JSON解析器MAY能接受非JSON形式的文本或扩展。</p>
 
 <p>JSON解析器的实现必须告知用户它接受文本大小的限制，同时必须告知用户递归对象层数的深度，和相应数字字符串的限制。</p>
 
-<h2 id="5-生成器:4d7cda1a3fc6e8c2e5b851563d1a4c36">5. 生成器</h2>
+<h2 id="5-生成器">5. 生成器</h2>
 
 <p>JSON生成器能够生成JSON文本，生成结果MUST严格符合JSON的语法。</p>
 
-<h2 id="6-iana方面的考虑:4d7cda1a3fc6e8c2e5b851563d1a4c36">6. IANA方面的考虑</h2>
+<h2 id="6-iana方面的考虑">6. IANA方面的考虑</h2>
 
 <p>JSON文本的MIME媒体类型是application/json。</p>
 
@@ -328,11 +346,11 @@ ga('send', 'pageview');
 <li>douglas@crockford.com</li>
 </ul>
 
-<h2 id="7-安全方面的考虑:4d7cda1a3fc6e8c2e5b851563d1a4c36">7. 安全方面的考虑</h2>
+<h2 id="7-安全方面的考虑">7. 安全方面的考虑</h2>
 
 <p>参照第六节的“安全方面的考虑”。</p>
 
-<h2 id="8-例子:4d7cda1a3fc6e8c2e5b851563d1a4c36">8. 例子</h2>
+<h2 id="8-例子">8. 例子</h2>
 
 <p>下面是一个JSON对象：</p>
 
@@ -379,9 +397,9 @@ ga('send', 'pageview');
     ]
 </code></pre>
 
-<h2 id="9-参考:4d7cda1a3fc6e8c2e5b851563d1a4c36">9. 参考</h2>
+<h2 id="9-参考">9. 参考</h2>
 
-<h3 id="9-1-参考的规范:4d7cda1a3fc6e8c2e5b851563d1a4c36">9.1 参考的规范</h3>
+<h3 id="9-1-参考的规范">9.1 参考的规范</h3>
 
 <ol>
 <li>[ECMA]    European Computer Manufacturers Association, &ldquo;ECMAScript Language Specification 3rd Edition&rdquo;, December 1999,<a href="http://www.ecma-international.org/publications/files/ecma-st/ECMA-262.pdf">http://www.ecma-international.org/publications/files/ecma-st/ECMA-262.pdf</a>.</li>
@@ -397,10 +415,37 @@ ga('send', 'pageview');
         <p class="post-tags">
             <span>Tagged:</span>
             
-                 <a href="http://kescoode.com/tags/json/">JSON</a>
+            
+                <a href="http://kescoode.com/tags/json/">JSON</a>
             
         </p>
     
+
+    <div class="share">
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=JSON%e6%8a%80%e6%9c%af%e8%a7%84%e6%a0%bc%e7%bf%bb%e8%af%91&url=http%3a%2f%2fkescoode.com%2fjson-translate%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
+
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fkescoode.com%2fjson-translate%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
+
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=http%3a%2f%2fkescoode.com%2fjson-translate%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+    </div>
 </footer>
 
         
@@ -440,7 +485,7 @@ ga('send', 'pageview');
                 </div>
 
                 <p class="footer-copyright">
-                    <span>&copy; 2016 / Powered by <a href="http://gohugo.io/">Hugo</a></span>
+                    <span>&copy; 2016 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
                 </p>
                 <p class="footer-copyright">
                     <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
@@ -450,7 +495,7 @@ ga('send', 'pageview');
         </footer>
 
         <script src="http://kescoode.com/js/jquery-1.11.3.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
         <script src="http://kescoode.com/js/jquery.fitvids.js"></script>
         <script src="http://kescoode.com/js/scripts.js"></script>
     </body>

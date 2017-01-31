@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Cmake on Kesco的编码世界</title>
-    <link>http://kescoode.com/tags/cmake/index.xml</link>
-    <description>Recent content in Cmake on Kesco的编码世界</description>
+    <title>C&#43;&#43; on Kesco的编码世界</title>
+    <link>http://kescoode.com/tags/c&#43;&#43;/index.xml</link>
+    <description>Recent content in C&#43;&#43; on Kesco的编码世界</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>Copyright (c) 2015. All rights reserved.</copyright>
-    <atom:link href="http://kescoode.com/tags/cmake/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://kescoode.com/tags/c&#43;&#43;/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>CMake解决动态链接库RPATH错误问题</title>

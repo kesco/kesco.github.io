@@ -2,12 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Github on Kesco的编码世界</title>
-    <link>http://kescoode.com/tags/github/</link>
+    <link>http://kescoode.com/tags/github/index.xml</link>
     <description>Recent content in Github on Kesco的编码世界</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>Copyright (c) 2015. All rights reserved.</copyright>
-    <lastBuildDate>Thu, 15 Oct 2015 14:29:53 +0800</lastBuildDate>
     <atom:link href="http://kescoode.com/tags/github/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -24,13 +23,13 @@
 
 &lt;p&gt;Github Release是Github推出的一个帮助开发者发布Repo最终软件包给用户的功能。Github Release是根据其Repo的Git标签来排序的，而且目前Github还没有限制Github Release的存储大小，不需担心空间不够用，所以一般情况下，已经可以了。同时，我们利用Travis CI来自动根据我们打的Git Tag来构建APK并Push到自己的Github Release上。&lt;/p&gt;
 
-&lt;h2 id=&#34;启用travis-ci:b639d5b4b149239dd3c7938b0bc65222&#34;&gt;启用Travis CI&lt;/h2&gt;
+&lt;h2 id=&#34;启用travis-ci&#34;&gt;启用Travis CI&lt;/h2&gt;
 
 &lt;p&gt;Travis CI是比较流行的开源持续构建平台，与Github结合比较紧密，对Github上的开源Repo是免费的，私有Repo收费（Circle CI也不错，而且对Github私有Repo也是免费的）。我们首先在Travis CI上打开对自己项目的Hook开关，那么当你每次Commit Push的时候，CI就会自动运行了。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;http://7mnom1.com1.z0.glb.clouddn.com/travis-enable-project.png&#34; alt=&#34;travis-enable-project&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;基础构建脚本:b639d5b4b149239dd3c7938b0bc65222&#34;&gt;基础构建脚本&lt;/h2&gt;
+&lt;h2 id=&#34;基础构建脚本&#34;&gt;基础构建脚本&lt;/h2&gt;
 
 &lt;p&gt;Travis CI使用YAML文件作为构建脚本，以最简单Android项目构建APK为例，只需在项目根目录创建&lt;code&gt;.travis.yml&lt;/code&gt;文件：&lt;/p&gt;
 
@@ -55,7 +54,7 @@ script:
 
 &lt;p&gt;不过，实际上，单纯在CI上面打包，其实是没什么用处的，因为Travis CI每次任务完成之后，就会把所有生成的文件清掉，所以我们要把生成的APK传到Github Release上。&lt;/p&gt;
 
-&lt;h2 id=&#34;发布github-release:b639d5b4b149239dd3c7938b0bc65222&#34;&gt;发布Github Release&lt;/h2&gt;
+&lt;h2 id=&#34;发布github-release&#34;&gt;发布Github Release&lt;/h2&gt;
 
 &lt;p&gt;Travis CI默认支持发布到Github Release上，不需要配置别的脚本，相应的&lt;code&gt;YAML&lt;/code&gt;配置Tag是这样的：&lt;/p&gt;
 
@@ -107,7 +106,7 @@ deploy:
 
 &lt;p&gt;等等，难道这样就结束了吗？当然不了，这只是单纯把APK发送到Github Release上去。但是构建APK过程中还有很多问题，比如你在CI构建Release版本的APK的时候，要用到自己签名的密钥，对吧。我们当然不能把密钥的信息公开，那么该怎么做呢？&lt;/p&gt;
 
-&lt;h2 id=&#34;隐藏签名密钥信息:b639d5b4b149239dd3c7938b0bc65222&#34;&gt;隐藏签名密钥信息&lt;/h2&gt;
+&lt;h2 id=&#34;隐藏签名密钥信息&#34;&gt;隐藏签名密钥信息&lt;/h2&gt;
 
 &lt;p&gt;Travis CI是通过Android项目中的build.gradle的信息来构建apk的，自然我们通过配置build.gradle脚本来签名apk也是很正常的事。但是在公开项目中暴露签名密钥信息是不安全的，有个简单的方法是，让gradle在CI构建的时候从CI的环境变量中读取密钥信息，这样可以降低点风险。&lt;/p&gt;
 

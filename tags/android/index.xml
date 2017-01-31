@@ -2,12 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Android on Kesco的编码世界</title>
-    <link>http://kescoode.com/tags/android/</link>
+    <link>http://kescoode.com/tags/android/index.xml</link>
     <description>Recent content in Android on Kesco的编码世界</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>Copyright (c) 2015. All rights reserved.</copyright>
-    <lastBuildDate>Thu, 15 Oct 2015 14:29:53 +0800</lastBuildDate>
     <atom:link href="http://kescoode.com/tags/android/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -24,13 +23,13 @@
 
 &lt;p&gt;Github Release是Github推出的一个帮助开发者发布Repo最终软件包给用户的功能。Github Release是根据其Repo的Git标签来排序的，而且目前Github还没有限制Github Release的存储大小，不需担心空间不够用，所以一般情况下，已经可以了。同时，我们利用Travis CI来自动根据我们打的Git Tag来构建APK并Push到自己的Github Release上。&lt;/p&gt;
 
-&lt;h2 id=&#34;启用travis-ci:b639d5b4b149239dd3c7938b0bc65222&#34;&gt;启用Travis CI&lt;/h2&gt;
+&lt;h2 id=&#34;启用travis-ci&#34;&gt;启用Travis CI&lt;/h2&gt;
 
 &lt;p&gt;Travis CI是比较流行的开源持续构建平台，与Github结合比较紧密，对Github上的开源Repo是免费的，私有Repo收费（Circle CI也不错，而且对Github私有Repo也是免费的）。我们首先在Travis CI上打开对自己项目的Hook开关，那么当你每次Commit Push的时候，CI就会自动运行了。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;http://7mnom1.com1.z0.glb.clouddn.com/travis-enable-project.png&#34; alt=&#34;travis-enable-project&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;基础构建脚本:b639d5b4b149239dd3c7938b0bc65222&#34;&gt;基础构建脚本&lt;/h2&gt;
+&lt;h2 id=&#34;基础构建脚本&#34;&gt;基础构建脚本&lt;/h2&gt;
 
 &lt;p&gt;Travis CI使用YAML文件作为构建脚本，以最简单Android项目构建APK为例，只需在项目根目录创建&lt;code&gt;.travis.yml&lt;/code&gt;文件：&lt;/p&gt;
 
@@ -55,7 +54,7 @@ script:
 
 &lt;p&gt;不过，实际上，单纯在CI上面打包，其实是没什么用处的，因为Travis CI每次任务完成之后，就会把所有生成的文件清掉，所以我们要把生成的APK传到Github Release上。&lt;/p&gt;
 
-&lt;h2 id=&#34;发布github-release:b639d5b4b149239dd3c7938b0bc65222&#34;&gt;发布Github Release&lt;/h2&gt;
+&lt;h2 id=&#34;发布github-release&#34;&gt;发布Github Release&lt;/h2&gt;
 
 &lt;p&gt;Travis CI默认支持发布到Github Release上，不需要配置别的脚本，相应的&lt;code&gt;YAML&lt;/code&gt;配置Tag是这样的：&lt;/p&gt;
 
@@ -107,7 +106,7 @@ deploy:
 
 &lt;p&gt;等等，难道这样就结束了吗？当然不了，这只是单纯把APK发送到Github Release上去。但是构建APK过程中还有很多问题，比如你在CI构建Release版本的APK的时候，要用到自己签名的密钥，对吧。我们当然不能把密钥的信息公开，那么该怎么做呢？&lt;/p&gt;
 
-&lt;h2 id=&#34;隐藏签名密钥信息:b639d5b4b149239dd3c7938b0bc65222&#34;&gt;隐藏签名密钥信息&lt;/h2&gt;
+&lt;h2 id=&#34;隐藏签名密钥信息&#34;&gt;隐藏签名密钥信息&lt;/h2&gt;
 
 &lt;p&gt;Travis CI是通过Android项目中的build.gradle的信息来构建apk的，自然我们通过配置build.gradle脚本来签名apk也是很正常的事。但是在公开项目中暴露签名密钥信息是不安全的，有个简单的方法是，让gradle在CI构建的时候从CI的环境变量中读取密钥信息，这样可以降低点风险。&lt;/p&gt;
 
@@ -183,7 +182,7 @@ deploy:
 
 &lt;p&gt;在这篇文档，主要是写下RxJava的用法。&lt;/p&gt;
 
-&lt;h2 id=&#34;基本概念:cfa8a1707a74560bca456d9e617ff266&#34;&gt;基本概念&lt;/h2&gt;
+&lt;h2 id=&#34;基本概念&#34;&gt;基本概念&lt;/h2&gt;
 
 &lt;p&gt;官方对Rx的表述是：&lt;/p&gt;
 
@@ -193,13 +192,13 @@ deploy:
 
 &lt;p&gt;而Rx的响应式编程概念以我的理解，我觉得可以简单的概括为“观察者模式+管道操作符”，而实际上，RxJava的操作过程就是： &amp;ldquo;Observable -&amp;gt; Operators -&amp;gt; Subscriber&amp;rdquo;。显而易见的，&lt;code&gt;Observable&lt;/code&gt;为模型中的目标对象，&lt;code&gt;Subscriber&lt;/code&gt;为观察者，而&lt;code&gt;Operators&lt;/code&gt;负责目标对象发出的信息给观察者们的分发，也就是管道。其中&lt;code&gt;Operators&lt;/code&gt;是Rx最关键的一部分，&lt;code&gt;Operators&lt;/code&gt;不仅可以分发信息，而且可以对信息数据进行各种处理，甚至可以把信息回馈到另外的目标对象中。这样做，可以完成&lt;code&gt;Subscriber&lt;/code&gt;和&lt;code&gt;Observable&lt;/code&gt;的解耦。&lt;/p&gt;
 
-&lt;h2 id=&#34;使用方法:cfa8a1707a74560bca456d9e617ff266&#34;&gt;使用方法&lt;/h2&gt;
+&lt;h2 id=&#34;使用方法&#34;&gt;使用方法&lt;/h2&gt;
 
 &lt;p&gt;根据上面的表述，RxJava的使用方法非常简单，也就是我们定义好工作目标Observable和观察者Subscriber，然后把他们组合在一起就可以了，如果有必要对中间的流程进行处理，则在中间加入相应的Operators。&lt;/p&gt;
 
 &lt;p&gt;不过，首先我们要在项目中引入RxJava库。&lt;/p&gt;
 
-&lt;h3 id=&#34;在android工程中引入rxjava:cfa8a1707a74560bca456d9e617ff266&#34;&gt;在Android工程中引入RxJava&lt;/h3&gt;
+&lt;h3 id=&#34;在android工程中引入rxjava&#34;&gt;在Android工程中引入RxJava&lt;/h3&gt;
 
 &lt;p&gt;随着ADT停止更新，现在绝大部分Android开发都是使用Android Studio或者Intellij Idea了，这两者都是基于Gradle来构建Android工程的，那么我们可以直接引入RxJava Maven Repo即可在项目中使用RxJava了：&lt;/p&gt;
 
@@ -210,7 +209,7 @@ deploy:
 
 &lt;p&gt;另外，虽然RxJava最低支持到Java 6，但是总所周知，Java是个纯面向对象语言，它并没有支持函数式编程，也只有在Java 8的时候，Java 8引入几个函数式编程元素(Lambda表达式、默认方法和函数式引用)。而Rx是个函数式编程框架库，在Java 7之前使用的话，代码看起来会非常别扭，所以最好是在Java 8的环境中使用。不过Android现在官方支持只到Java 7，没支持Java 8，要想在Android中使用Java 8，则必须加入第三方插件。&lt;/p&gt;
 
-&lt;h3 id=&#34;最简单的模式:cfa8a1707a74560bca456d9e617ff266&#34;&gt;最简单的模式&lt;/h3&gt;
+&lt;h3 id=&#34;最简单的模式&#34;&gt;最简单的模式&lt;/h3&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Observable -&amp;gt; Subscriber&lt;/p&gt;
@@ -308,7 +307,7 @@ Action1&amp;lt;List&amp;lt;User&amp;gt;&amp;gt; subscriber = new Action1&amp;lt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;Observable.just(users).subscribe(args -&amp;gt; adapter.setDataSet(args));
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;加入operators:cfa8a1707a74560bca456d9e617ff266&#34;&gt;加入Operators&lt;/h3&gt;
+&lt;h3 id=&#34;加入operators&#34;&gt;加入Operators&lt;/h3&gt;
 
 &lt;p&gt;很多时候，我们需要针对处理过的事件做出响应，而不仅仅是Observable产生的原始事件。最明显的例子就是网络请求回来的数据往往是JSON数据，我们还要对此进行序列化成相应的业务操作才可以传递给前台，这里就需要引入operator来处理JSON数据。&lt;/p&gt;
 
@@ -333,7 +332,7 @@ Action1&amp;lt;List&amp;lt;User&amp;gt;&amp;gt; subscriber = new Action1&amp;lt;
 
 &lt;p&gt;RxJava中的Operator一共有二十几个，而且自己也可以自定义Operators，这正式RxJava比一般的异步框架优秀的地方，由于自带的Operators数量过多，这里就不一一讲述了，需要的可以查下&lt;a href=&#34;http://reactivex.io/documentation/operators.html&#34;&gt;文档&lt;/a&gt;。&lt;/p&gt;
 
-&lt;h3 id=&#34;任务订阅:cfa8a1707a74560bca456d9e617ff266&#34;&gt;任务订阅&lt;/h3&gt;
+&lt;h3 id=&#34;任务订阅&#34;&gt;任务订阅&lt;/h3&gt;
 
 &lt;p&gt;前面缺少了RxJava的一个细节，就是实际上执行Observable.subscribe()时，它会返回一个Subscrition,它代表了Observable和Subscriber之间的关系。我们可以通过Subscrition解除Observable和Subscriber之间的订阅关系，并立即停止执行整个订阅链，比如要取消上述显示用户列表操作，我们可以这样做：&lt;/p&gt;
 
@@ -344,7 +343,7 @@ subscription.unsubscribe();
 Log.d(&amp;quot;test&amp;quot;, &amp;quot;isSubscribed = &amp;quot; + subscription.isUnsubscribed());
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;多线程操作:cfa8a1707a74560bca456d9e617ff266&#34;&gt;多线程操作&lt;/h3&gt;
+&lt;h3 id=&#34;多线程操作&#34;&gt;多线程操作&lt;/h3&gt;
 
 &lt;p&gt;Android的多线程机制是UI渲染跑在Main Thread上的，也就是说主线程不能阻塞，不然App就会出现卡顿，所以我们一般都把业务逻辑处理放在后台线程进行。在RxJava中，你可以通过subscribeOn()来指定Observer的运行线程，通过observeOn()指定Subscriber的运行线程。这两个方法都是operator，因此它们可以像所有operator那样作用于任何的Observable。比如上面的例子，我们可以把JSON解析放在后台线程，然后在Main Thread中更新用户信息：&lt;/p&gt;
 
@@ -357,7 +356,7 @@ Log.d(&amp;quot;test&amp;quot;, &amp;quot;isSubscribed = &amp;quot; + subscripti
 
 &lt;p&gt;值得注意的是RxJava自带的&lt;code&gt;Schedulers.io&lt;/code&gt;和&lt;code&gt;Schedulers.compute&lt;/code&gt;两种异步多线程Scheduler开启的线程的级别都是与Main Thread一样的，这样后台线程占用的资源大的话，主线程还是会卡的，所以最好还是自己自定义一个Scheduler。&lt;/p&gt;
 
-&lt;h3 id=&#34;mvp:cfa8a1707a74560bca456d9e617ff266&#34;&gt;MVP&lt;/h3&gt;
+&lt;h3 id=&#34;mvp&#34;&gt;MVP&lt;/h3&gt;
 
 &lt;p&gt;RxJava中的Observable、Operators和Subcribers是各自独立的，所以我们可以很容易的针对不同场景复用不同部分的代码。&lt;/p&gt;
 
@@ -458,11 +457,11 @@ class AvailableAppPresenterImpl(val ctx: Context) : AvailableAppPresenter {
 
 &lt;p&gt;最近，开发团队内技术分享，我做了个简单的&lt;a href=&#34;http://kesco.github.io/kotlin_intrudction&#34;&gt;PPT&lt;/a&gt;，就是简单介绍下Kotlin的。&lt;/p&gt;
 
-&lt;h2 id=&#34;语法:264dc76c17987165debdd663a9ab017a&#34;&gt;语法&lt;/h2&gt;
+&lt;h2 id=&#34;语法&#34;&gt;语法&lt;/h2&gt;
 
 &lt;p&gt;Kotlin的语法非常简洁，熟悉Java的开发者可以快速上手。而且JetBrain系的IDE上还可以一键把已有的Java代码转换成Kotlin代码(不得不说一键傻瓜式操作系列真的非常人性化=_=)，有点像Groovy，开发者可以一开始以Java的风格写Kotlin代码，然后慢慢转成Kotlin自己的风格。详细的语法可参考&lt;a href=&#34;http://kotlinlang.org/docs/reference/&#34;&gt;Kotlin官方教程&lt;/a&gt;，这里做个简短介绍。&lt;/p&gt;
 
-&lt;h3 id=&#34;声明对象:264dc76c17987165debdd663a9ab017a&#34;&gt;声明对象&lt;/h3&gt;
+&lt;h3 id=&#34;声明对象&#34;&gt;声明对象&lt;/h3&gt;
 
 &lt;p&gt;Kotlin的一切变量都是对象，所以没有Java那样的基本类型。Kotlin声明对象有两种类型：&lt;/p&gt;
 
@@ -484,7 +483,7 @@ x += 1                          // 编译器会报错
 
 &lt;p&gt;从代码片段可以看出，Kotlin不需要在每行结束加分号。&lt;/p&gt;
 
-&lt;h3 id=&#34;区分非空类型:264dc76c17987165debdd663a9ab017a&#34;&gt;区分非空类型&lt;/h3&gt;
+&lt;h3 id=&#34;区分非空类型&#34;&gt;区分非空类型&lt;/h3&gt;
 
 &lt;p&gt;在Kotlin中，nullable对象和nullable对象是严格区分的，甚至在编译期解决了不少潜在的空指针问题。声明变量时，对变量的类型都是默认非空的，如果要允许变量为空，必须在定义类型后面加个&lt;code&gt;?&lt;/code&gt;：&lt;/p&gt;
 
@@ -500,7 +499,7 @@ b = null                        // OK!!!
 b?.length()                     // 如果b不为空对象，则取b的长度
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;智能类型转换:264dc76c17987165debdd663a9ab017a&#34;&gt;智能类型转换&lt;/h3&gt;
+&lt;h3 id=&#34;智能类型转换&#34;&gt;智能类型转换&lt;/h3&gt;
 
 &lt;p&gt;在Kotlin中，进行强制类型转换可以使用&lt;code&gt;as&lt;/code&gt;关键字，但有可能会抛出异常：&lt;/p&gt;
 
@@ -518,9 +517,9 @@ b?.length()                     // 如果b不为空对象，则取b的长度
 val d: String? = c as? String
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;流程控制:264dc76c17987165debdd663a9ab017a&#34;&gt;流程控制&lt;/h3&gt;
+&lt;h3 id=&#34;流程控制&#34;&gt;流程控制&lt;/h3&gt;
 
-&lt;h4 id=&#34;if:264dc76c17987165debdd663a9ab017a&#34;&gt;&lt;code&gt;if&lt;/code&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;if&#34;&gt;&lt;code&gt;if&lt;/code&gt;&lt;/h4&gt;
 
 &lt;p&gt;Kotlin的&lt;code&gt;if&lt;/code&gt;表达式与Java的一样，只是Kotlin中没有三目表达式，所以&lt;code&gt;if&lt;/code&gt;和&lt;code&gt;else&lt;/code&gt;可以这样写：&lt;/p&gt;
 
@@ -529,7 +528,7 @@ val b = 2
 val max = if (a &amp;gt; b) a else b   // 类似Java的: int max = a &amp;gt; b?a:b;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;when:264dc76c17987165debdd663a9ab017a&#34;&gt;&lt;code&gt;when&lt;/code&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;when&#34;&gt;&lt;code&gt;when&lt;/code&gt;&lt;/h4&gt;
 
 &lt;p&gt;Kotlin用&lt;code&gt;When&lt;/code&gt;表达式来替代Java的&lt;code&gt;Switch&lt;/code&gt;：&lt;/p&gt;
 
@@ -542,7 +541,7 @@ val max = if (a &amp;gt; b) a else b   // 类似Java的: int max = a &amp;gt; b?
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;for:264dc76c17987165debdd663a9ab017a&#34;&gt;&lt;code&gt;for&lt;/code&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;for&#34;&gt;&lt;code&gt;for&lt;/code&gt;&lt;/h4&gt;
 
 &lt;p&gt;Kotlin的&lt;code&gt;for&lt;/code&gt;表达式和Java的&lt;code&gt;foreach&lt;/code&gt;一致。&lt;/p&gt;
 
@@ -550,7 +549,7 @@ val max = if (a &amp;gt; b) a else b   // 类似Java的: int max = a &amp;gt; b?
   print(array[i])
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;while:264dc76c17987165debdd663a9ab017a&#34;&gt;&lt;code&gt;while&lt;/code&gt;&lt;/h4&gt;
+&lt;h4 id=&#34;while&#34;&gt;&lt;code&gt;while&lt;/code&gt;&lt;/h4&gt;
 
 &lt;p&gt;&lt;code&gt;while&lt;/code&gt;表达式和Java的一样。&lt;/p&gt;
 
@@ -563,7 +562,7 @@ do {
 } while (y != null)     // 与Java不同
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;函数:264dc76c17987165debdd663a9ab017a&#34;&gt;函数&lt;/h3&gt;
+&lt;h3 id=&#34;函数&#34;&gt;函数&lt;/h3&gt;
 
 &lt;p&gt;与Java不同的是，Kotlin的函数是一等成员，不需要在类内定义，是可以脱离类存在的，而且Kotlin是不支持类静态方法的。&lt;/p&gt;
 
@@ -585,7 +584,7 @@ fun add(a: Int, b: Int):Int{
 
 &lt;p&gt;在这种情况下，函数默认返回最后计算的结果。&lt;/p&gt;
 
-&lt;h4 id=&#34;扩展类的函数:264dc76c17987165debdd663a9ab017a&#34;&gt;扩展类的函数&lt;/h4&gt;
+&lt;h4 id=&#34;扩展类的函数&#34;&gt;扩展类的函数&lt;/h4&gt;
 
 &lt;p&gt;通常开发中，我们往往要对提供的API类进行扩展，增加一些方法，如果是Java的话，要想这样做，则声明一个继承该API的子类。Kotlin采取了C#的办法，可以直接扩展类的方法：&lt;/p&gt;
 
@@ -603,7 +602,7 @@ fun add(a: Int, b: Int):Int{
 
 &lt;p&gt;这样，在旧的手机上，APP就可以用自定义的&lt;code&gt;setBackground&lt;/code&gt;的Wrapper，而在高版本的手机上APP会调用原生的&lt;code&gt;setBackground&lt;/code&gt;方法。&lt;/p&gt;
 
-&lt;h4 id=&#34;lambda表达式:264dc76c17987165debdd663a9ab017a&#34;&gt;Lambda表达式&lt;/h4&gt;
+&lt;h4 id=&#34;lambda表达式&#34;&gt;Lambda表达式&lt;/h4&gt;
 
 &lt;p&gt;Kotlin引入了Lambda表达式，而且Kotlin的Lambda表达式支持Android平台：&lt;/p&gt;
 
@@ -613,7 +612,7 @@ fun add(a: Int, b: Int):Int{
 &lt;p&gt;这样，我们就可以不用写那么多监听器对象了。
 ]&lt;/p&gt;
 
-&lt;h3 id=&#34;类:264dc76c17987165debdd663a9ab017a&#34;&gt;类&lt;/h3&gt;
+&lt;h3 id=&#34;类&#34;&gt;类&lt;/h3&gt;
 
 &lt;p&gt;Kotlin的类是这样声明的：&lt;/p&gt;
 
@@ -666,7 +665,7 @@ val user = User(1, &amp;quot;Kesco&amp;quot;)
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;getter和setter:264dc76c17987165debdd663a9ab017a&#34;&gt;Getter和Setter&lt;/h4&gt;
+&lt;h4 id=&#34;getter和setter&#34;&gt;Getter和Setter&lt;/h4&gt;
 
 &lt;p&gt;Kotlin的Setter和Getter编码风格与C#类似：&lt;/p&gt;
 
@@ -680,7 +679,7 @@ val user = User(1, &amp;quot;Kesco&amp;quot;)
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;data-class:264dc76c17987165debdd663a9ab017a&#34;&gt;Data Class&lt;/h4&gt;
+&lt;h4 id=&#34;data-class&#34;&gt;Data Class&lt;/h4&gt;
 
 &lt;p&gt;Kotlin的类可以申明&lt;code&gt;data&lt;/code&gt;关键字，相当与专用与存储数据的Pojo类：&lt;/p&gt;
 
@@ -694,7 +693,7 @@ val (id, name) = jane
 println(&amp;quot;$name id is $id&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h4 id=&#34;内部类:264dc76c17987165debdd663a9ab017a&#34;&gt;内部类&lt;/h4&gt;
+&lt;h4 id=&#34;内部类&#34;&gt;内部类&lt;/h4&gt;
 
 &lt;p&gt;Kotlin同样支持内部类，但是Kotlin的内部类是默认不带有外部类的引用的，也就是说默认的Kotlin内部类都是静态的。要想内部类带有外部类的引用，要在内部类声明上加入&lt;code&gt;inner&lt;/code&gt;关键字：&lt;/p&gt;
 
@@ -705,7 +704,7 @@ println(&amp;quot;$name id is $id&amp;quot;)
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;接口:264dc76c17987165debdd663a9ab017a&#34;&gt;接口&lt;/h3&gt;
+&lt;h3 id=&#34;接口&#34;&gt;接口&lt;/h3&gt;
 
 &lt;p&gt;Kotlin的接口和Java的类似，而且还支持Java 8的默认方法：&lt;/p&gt;
 
@@ -717,7 +716,7 @@ println(&amp;quot;$name id is $id&amp;quot;)
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;android工程中配置kotlin:264dc76c17987165debdd663a9ab017a&#34;&gt;Android工程中配置Kotlin&lt;/h2&gt;
+&lt;h2 id=&#34;android工程中配置kotlin&#34;&gt;Android工程中配置Kotlin&lt;/h2&gt;
 
 &lt;p&gt;在Android项目中使用Kotlin非常简单，而且Kotlin可以和Java混编，所以完全部分功能用Kotlin开发，部分功能用Java开发。&lt;/p&gt;
 
@@ -778,7 +777,7 @@ println(&amp;quot;$name id is $id&amp;quot;)
 
 &lt;p&gt;Activty是Android四大组件中负责与用户交互的部件，Activity承担了大量的显示和交互工作，从某种角度上将，我们看见的应用程序就是许多个Activity的组合。&lt;/p&gt;
 
-&lt;h2 id=&#34;task-stack:de99083b228db0b2805fc70b0da6e031&#34;&gt;Task Stack&lt;/h2&gt;
+&lt;h2 id=&#34;task-stack&#34;&gt;Task Stack&lt;/h2&gt;
 
 &lt;p&gt;为了让这许多Activity协同工作而不至于产生混乱，Android平台设计了一种堆栈机制用于管理Activity，其遵循先进后出的原则，系统总是显示位于栈顶的Activity，从逻辑上将，位于栈顶的Activity也就是最后打开的Activity，这也是符合逻辑的。这个栈也可以叫做Task Stack，因为一个Task Stack里的Activity是可以属于不同的Application的。例如：你想在发送短信时，拍一张照并作为彩信发出去，这时你首先停留在短信应用程序的的Acitivity上，然后跳转到Camera应用程序的Activity上，当完成拍照功能后，再返回到短信应用程序的Activity。这实际上是两个Android Application协同合作后完成的工作，但为了更好的用户体验，Android平台加入了Task这么一种机制，让用户没有感觉到应用的中断，让用户感觉在一“应用程序”里就完成了想完成的工作。&lt;/p&gt;
 
@@ -788,11 +787,11 @@ println(&amp;quot;$name id is $id&amp;quot;)
 
 &lt;p&gt;&lt;code&gt;值得注意点的时候，一个系统里可以有很多的Task Stack，当后台的Task过多的时候，系统可能会去除栈底的Activity，释放多余的内存。&lt;/code&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;保存activity状态:de99083b228db0b2805fc70b0da6e031&#34;&gt;保存Activity状态&lt;/h2&gt;
+&lt;h2 id=&#34;保存activity状态&#34;&gt;保存Activity状态&lt;/h2&gt;
 
 &lt;p&gt;当Task Stack中的Activity返回前台的时候，可能已经是被系统释放点重新创建的，为了用户的操纵信息得到保留，我们最好重写&lt;a href=&#34;http://developer.android.com/reference/android/app/Activity.html#onSaveInstanceState(android.os.Bundle)&#34;&gt;onSaveInstanceState()&lt;/a&gt;方法。&lt;/p&gt;
 
-&lt;h2 id=&#34;managing-tasks:de99083b228db0b2805fc70b0da6e031&#34;&gt;Managing Tasks&lt;/h2&gt;
+&lt;h2 id=&#34;managing-tasks&#34;&gt;Managing Tasks&lt;/h2&gt;
 
 &lt;p&gt;我们在平常写程序的时候，Activity的启动方式保持默认就已经够用了。但是遇到特定场合，我们可以通过对启动方式的更改来修改Activity在Task中的运行状态。&lt;/p&gt;
 
