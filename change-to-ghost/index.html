@@ -8,7 +8,7 @@
 为什么用了Ghost  比WorkPress简单(从方面来说，这也是个不足之处，好在够用)。 内部集成Markdown编辑器，我不用再为在Mac\Linux平台切换不同的MK编辑器烦恼了。 用Node.js写的，我会Node.js，但是不会PHP，所以这点比WorkPress好。  Ghost的不足  后台功能与WordPress相比还是太弱，很多改动都要改源码。 开发文档还不是很完善。 项目毕竟太年轻，插件和资源都比WorkPress少。 Ghost对Tag的支持还比较简单，只能给文章添加Tag，不能单独显示加Tag的文章列表。  目前，Ghost版本还不到1.0，仍处于快速开发中，不断有新功能加进来。不过，如果只用于写Blog的话，已经足够稳定，够用了。">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.18.1" />
+        <meta name="generator" content="Hugo 0.19" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="博客飘到Ghost上去了">
@@ -27,7 +27,7 @@
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
 ga('create', 'UA-75600240-1', 'auto');
 ga('send', 'pageview');
@@ -166,25 +166,22 @@ ga('send', 'pageview');
 
         
     <div class="comments">
-      
-      <div class="ds-thread" data-thread-key="/change-to-ghost/" data-title="博客飘到Ghost上去了" data-url="http://kescoode.com/change-to-ghost/"></div>
-      
-      
-      <script type="text/javascript">
-        var duoshuoQuery = {short_name:"kescoode"};
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'kescoodecom';
+    var disqus_identifier = 'http:\/\/kescoode.com\/change-to-ghost\/';
+    var disqus_title = '博客飘到Ghost上去了';
+    var disqus_url = 'http:\/\/kescoode.com\/change-to-ghost\/';
 
-        (function() {
-          var ds = document.createElement('script');
-          ds.type = 'text/javascript';ds.async = true;
-          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-          ds.charset = 'UTF-8';
-          (document.getElementsByTagName('head')[0]
-            || document.getElementsByTagName('body')[0]).appendChild(ds);
-        })();
-      </script>
-      
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
-
 
     </article>
 </div>

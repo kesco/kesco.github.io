@@ -23,7 +23,7 @@ JSON的设计目标是它应当是尽可能小的，可移植的，文本化的�
  begin-array = ws %x5B ws ; [ 左中括号 begin-object = ws %x7B ws ; { 左大括号 end-array = ws %x5D ws ; ] 右中括号 end-object = ws %x7D ws ; } 右大扩号 name-separator = ws %x3A ws ; : 冒号 value-separator = ws %x2C ws ; , 逗号  所有的六种数据结构字符都允许在前面添加空白字符。">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
-        <meta name="generator" content="Hugo 0.18.1" />
+        <meta name="generator" content="Hugo 0.19" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta property="og:title" content="JSON技术规格翻译">
@@ -57,7 +57,7 @@ JSON的设计目标是它应当是尽可能小的，可移植的，文本化的�
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
 ga('create', 'UA-75600240-1', 'auto');
 ga('send', 'pageview');
@@ -473,25 +473,22 @@ ga('send', 'pageview');
 
         
     <div class="comments">
-      
-      <div class="ds-thread" data-thread-key="/json-translate/" data-title="JSON技术规格翻译" data-url="http://kescoode.com/json-translate/"></div>
-      
-      
-      <script type="text/javascript">
-        var duoshuoQuery = {short_name:"kescoode"};
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'kescoodecom';
+    var disqus_identifier = 'http:\/\/kescoode.com\/json-translate\/';
+    var disqus_title = 'JSON技术规格翻译';
+    var disqus_url = 'http:\/\/kescoode.com\/json-translate\/';
 
-        (function() {
-          var ds = document.createElement('script');
-          ds.type = 'text/javascript';ds.async = true;
-          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-          ds.charset = 'UTF-8';
-          (document.getElementsByTagName('head')[0]
-            || document.getElementsByTagName('body')[0]).appendChild(ds);
-        })();
-      </script>
-      
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
-
 
     </article>
 </div>
